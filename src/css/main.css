@@ -73,15 +73,15 @@ a {
   align-items: center;
   flex-flow: column nowrap;
   position: relative;
-}
-.main__main-m > * {
-  width: 100%;
+  width: 560px;
+  background-color: #d8d8d8;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 .header {
+  background-color: #ffffff;
   position: fixed;
   inset: 0 0 auto 0;
   padding-block: 15px;
@@ -99,9 +99,7 @@ a {
 }
 .header__title {
   letter-spacing: 2px;
-}
-.header__title span {
-  color: #9e9e9e;
+  text-transform: uppercase;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -150,7 +148,8 @@ a {
 /* -------------------------------------------------------------------------- */
 .display-form {
   flex-grow: 1;
-  background-color: #f4f4f7;
+  width: 100%;
+  margin-top: 50px;
 }
 .display-form input,
 .display-form textarea {
@@ -207,9 +206,28 @@ a {
   background-color: #ffffff;
   border-inline: 2px solid #d1d1d1;
   border-bottom: 2px dashed #d1d1d1;
+  transition: all 0.3s;
+}
+.display-form__item:hover {
+  background-color: #f1f1f1;
+}
+.display-form__item:hover .display-form__item-icon {
+  color: #464646;
+}
+.display-form__item-icon {
+  color: #adadad;
+  transition: all 0.3s;
+}
+.display-form__item .delete-icon {
+  all: unset;
+}
+.display-form__item .delete-icon:hover {
+  z-index: 50;
+  cursor: pointer;
+  color: #e06c75;
 }
 .display-form__item-main {
-  flex: 1 0 auto;
+  width: 100%;
   margin-inline: 25px;
 }
 .display-form__item-header {
@@ -261,14 +279,37 @@ a {
 }
 
 /* -------------------------------------------------------------------------- */
+/*                               Generate Button                              */
+/* -------------------------------------------------------------------------- */
+.generate-button {
+  all: unset;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  color: #adadad;
+  transition: all 0.3s;
+  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 7px;
+}
+.generate-button:hover, .generate-button:focus {
+  cursor: pointer;
+  color: #464646;
+}
+
+/* -------------------------------------------------------------------------- */
 /*                                   Options                                  */
 /* -------------------------------------------------------------------------- */
 .display-options {
-  background-color: #e9e9e9;
-  border-bottom: 1px dashed #d1d1d1;
+  background-color: #ffffff;
+  border-bottom: 1px solid #d1d1d1;
   padding: clamp(10px, 2.5vw, 15px);
   position: fixed;
-  width: 590px;
+  width: 560px;
+  height: 50px;
 }
 
 /* -------------------------------------------------------------------------- */

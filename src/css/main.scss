@@ -4,7 +4,7 @@ $bgc-accent: #f1f1f1;
 $clr-main: #464646;
 $clr-sub: #adadad;
 $clr-accent: #f1f1f1;
-$clr-accent: #f9f9f9;
+// $clr-accent: #f9f9f9;
 $clr-red: #e06c75;
 $clr-code-bg: #ffffff;
 $clr-config-bg: #ffffff;
@@ -98,13 +98,10 @@ a {
     justify-content: flex-start;
     align-items: center;
     flex-flow: column nowrap;
-
     position: relative;
-    // margin-top: 73px;
-
-    & > * {
-      width: 100%;
-    }
+    width: calc(1050px - 490px);
+    // margin-top:73px;
+    background-color: darken($bgc-accent, 10%);
   }
 }
 
@@ -112,7 +109,7 @@ a {
 /*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 .header {
-  // background-color: $bgc-main;
+  background-color: $bgc-main;
   position: fixed;
   inset: 0 0 auto 0;
   padding-block: 15px;
@@ -132,10 +129,7 @@ a {
 
   &__title {
     letter-spacing: 2px;
-
-    span {
-      color: #9e9e9e;
-    }
+    text-transform: uppercase;
   }
 }
 
@@ -201,7 +195,9 @@ a {
 /* -------------------------------------------------------------------------- */
 .display-form {
   flex-grow: 1;
-  background-color: #f4f4f7;
+  width: 100%;
+  margin-top: 50px;
+  // background-color: darken($bgc-accent, 10%);
 
   input,
   textarea {
@@ -211,6 +207,7 @@ a {
   &__content {
     border-radius: 15px;
     margin: 20px;
+    // width: min(100%, 605px);
   }
 
   &__header {
@@ -259,6 +256,7 @@ a {
   }
 
   &__item {
+    $this: &;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -267,9 +265,34 @@ a {
     background-color: $bgc-main;
     border-inline: 2px solid $bdc;
     border-bottom: 2px dashed $bdc;
+    transition: $transition;
+
+    &:hover {
+      background-color: $bgc-accent;
+
+      #{$this}-icon {
+        color: $clr-main;
+      }
+    }
+
+    &-icon {
+      color: $clr-sub;
+      transition: $transition;
+    }
+
+    .delete-icon {
+      all: unset;
+
+      &:hover {
+        z-index: 50;
+        cursor: pointer;
+        color: $clr-red;
+      }
+    }
 
     &-main {
-      flex: 1 0 auto;
+      // flex: 1 0 auto;
+      width: 100%;
       margin-inline: 25px;
     }
 
@@ -337,14 +360,39 @@ a {
 }
 
 /* -------------------------------------------------------------------------- */
+/*                               Generate Button                              */
+/* -------------------------------------------------------------------------- */
+.generate-button {
+  all: unset;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  color: $clr-sub;
+  transition: $transition;
+  font-family: $ff-mono;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 7px;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: $clr-main;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
 /*                                   Options                                  */
 /* -------------------------------------------------------------------------- */
 .display-options {
-  background-color: #e9e9e9;
-  border-bottom: 1px dashed $bdc;
+  background-color: $bgc-main;
+  border-bottom: 1px solid $bdc;
   padding: clamp(10px, 2.5vw, 15px);
   position: fixed;
-  width: calc(1080px - 490px);
+  width: calc(1050px - 490px);
+  height: 50px;
 }
 
 /* -------------------------------------------------------------------------- */

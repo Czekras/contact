@@ -5,7 +5,7 @@ export default function Header() {
     <header className="header">
       <div className="header__wrapper">
         <a className="header__logo" href={currentPage}>
-          <h1 className="header__title">APP<span>ZEN</span></h1>
+          <h1 className="header__title">contact</h1>
         </a>
       </div>
     </header>

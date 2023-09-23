@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
+
 import Formlist from './Formlist';
 import FormDisplay from './FormDisplay';
 import DisplayOptions from './DisplayOptions';
-
 import form from '../data/form.json';
 
 export default function Main() {
   const [userFormList, setUserFormList] = useState([]);
+  const initalList = [
+    'name',
+    'furigana',
+    // 'phone number',
+    // 'mail address',
+    // 'mail address (confirm)',
+    'content',
+  ];
 
   useEffect(() => {
     const localData = localStorage.getItem('userFormList');
@@ -16,14 +24,6 @@ export default function Main() {
   const loadInitialList = (localData, list) => {
     if (!localData) {
       const initialLocalList = [];
-      const initalList = [
-        'name',
-        'furigana',
-        'phone number',
-        'mail address',
-        'mail address (confirm)',
-        'content',
-      ];
 
       list.map((item) => {
         if (initalList.includes(item.nameEN)) {
@@ -59,17 +59,58 @@ export default function Main() {
     });
   };
 
+  /* ------------------------------ Reorder List ------------------------------ */
+  const handleUpdateList = (list) => {
+    console.log('Update: List');
+    setUserFormList(list);
+    const newList = JSON.stringify(list);
+    localStorage.setItem('userFormList', newList);
+  };
+
+  /* -------------------------- Delete Item from List ------------------------- */
+  const handleDeleteItem = (name, index) => {
+    const updatedList = [
+      ...userFormList.slice(0, index),
+      ...userFormList.slice(index + 1),
+    ];
+    handleUpdateList(updatedList);
+  };
+
+  /* -------------------------- Generate Initial List ------------------------- */
+  const generateInitList = () => {
+    const initialLocalList = [];
+
+    form.map((item) => {
+      if (initalList.includes(item.nameEN)) {
+        const updatedItem = addUniqueID(item);
+        initialLocalList.push(updatedItem);
+      }
+    });
+
+    handleUpdateList(initialLocalList);
+  };
+
+  /* -------------------------------------------------------------------------- */
   return (
     <div className="main">
       <div className="main__main-l">
         <Formlist
-          func={{ handleAddItem: handleAddItem }}
+          func={{
+            handleAddItem: handleAddItem,
+          }}
           data={{ userFormList: userFormList }}
         />
       </div>
       <div className="main__main-m">
         <DisplayOptions />
-        <FormDisplay data={{ userFormList: userFormList }} />
+        <FormDisplay
+          func={{
+            handleUpdateList: handleUpdateList,
+            handleDeleteItem: handleDeleteItem,
+            generateInitList: generateInitList,
+          }}
+          data={{ userFormList: userFormList }}
+        />
       </div>
       <div className="main__main-r"></div>
     </div>

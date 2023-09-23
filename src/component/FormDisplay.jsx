@@ -1,11 +1,24 @@
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useState } from 'react';
 
-export default function FormDisplay({ data }) {
+export default function FormDisplay({ func, data }) {
+  // const [userFormListData, setUserFormListData] = useState([]);
   const [showError, setShowError] = useState(false);
 
   const handleShowError = () => {
     setShowError(!showError);
   };
+
+  const generateButton = (
+    <li className="display-form__item">
+      <button
+        className="generate-button"
+        onClick={() => func.generateInitList()}
+      >
+        初期リストを作成する
+      </button>
+    </li>
+  );
 
   const displayItem = data.userFormList.map((item, index) => {
     /* ----------------------------- Display Options ---------------------------- */
@@ -61,6 +74,7 @@ export default function FormDisplay({ data }) {
       if (inputType1.includes(name)) {
         return (
           <input
+            id={item.configuration.inputId}
             className="item-input"
             name={item.configuration.inputName}
             type={item.configuration.inputType}
@@ -72,6 +86,7 @@ export default function FormDisplay({ data }) {
       if (inputType2.includes(name)) {
         return (
           <textarea
+            id={item.configuration.inputId}
             className="item-input"
             name={item.configuration.inputName}
             cols={0}
@@ -90,18 +105,22 @@ export default function FormDisplay({ data }) {
                 className="item-input item-input--small"
                 type={item.configuration.inputPostalType1}
                 placeholder={item.configuration.inputPostalPlaceholder1}
+                name={item.configuration.inputPostalName1}
               />
               -
               <input
                 className="item-input item-input--small"
                 type={item.configuration.inputPostalType2}
                 placeholder={item.configuration.inputPostalPlaceholder2}
+                name={item.configuration.inputPostalName2}
               />
             </div>
             <input
+              id={item.configuration.inputId}
               className="item-input"
               type={item.configuration.inputType}
               placeholder={item.configuration.placeholder}
+              name={item.configuration.inputName}
             />
           </div>
         );
@@ -117,79 +136,43 @@ export default function FormDisplay({ data }) {
         {displayNote}
       </div>
     );
-
-    // if (rowType2.includes(item.nameEN)) {
-    //   const inputItem =
-    //     item.configuration.inputType === 'textarea' ? (
-    //       <textarea
-    //         cols={0}
-    //         rows={2}
-    //         disabled={true}
-    //         placeholder={item.configuration.inputPlaceholder}
-    //       ></textarea>
-    //     ) : (
-    //       <input
-    //         type={item.configuration.inputType}
-    //         placeholder={item.configuration.inputPlaceholder}
-    //         disabled={true}
-    //       />
-    //     );
-
-    //   return (
-    //     <tr key={item.id}>
-    //       <th>
-    //         {/* <span className="material-symbols-outlined">drag_handle</span> */}
-    //         <div className="th-box">
-    //           <label htmlFor={item.configuration.labelFor}>{item.nameJA}</label>
-    //           {displayConfiguration}
-    //         </div>
-    //       </th>
-    //       <td>
-    //         {inputItem}
-    //         {displayNote}
-    //         {displayDelete}
-    //       </td>
-    //     </tr>
-    //   );
-    // }
-
-    // if (rowType3.includes(item.nameEN)) {
-    //   return (
-    //     <tr key={item.id}>
-    //       <th>
-    //         {/* <span className="material-symbols-outlined">drag_handle</span> */}
-    //         <div className="th-box">
-    //           <label htmlFor={item.configuration.labelFor}>{item.nameJA}</label>
-    //           {displayConfiguration}
-    //         </div>
-    //       </th>
-    //       <td>
-    //         <div className="td-address">
-    //           〒
-    //           <input
-    //             type={item.configuration.inputPostalType1}
-    //             placeholder={item.configuration.inputPostalPlaceholder1}
-    //             disabled={true}
-    //           />
-    //           -
-    //           <input
-    //             type={item.configuration.inputPostalType2}
-    //             placeholder={item.configuration.inputPostalPlaceholder2}
-    //             disabled={true}
-    //           />
-    //         </div>
-    //         <input
-    //           type={item.configuration.inputType}
-    //           placeholder={item.configuration.placeholder}
-    //           disabled={true}
-    //         />
-    //         {displayNote}
-    //         {displayDelete}
-    //       </td>
-    //     </tr>
-    //   );
-    // }
   });
+
+  /* -------------------------------------------------------------------------- */
+  /*                               Drag Functions                               */
+  /* -------------------------------------------------------------------------- */
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
+
+  const getItemStyle = (isDragging, draggableStyle) => ({
+    userSelect: 'none',
+    background: isDragging ? '#f1f1f1' : '',
+    ...draggableStyle,
+  });
+
+  const getListStyle = (isDraggingOver) => ({
+    background: isDraggingOver ? '#ccc' : '#ccc',
+  });
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      data.userFormList,
+      result.source.index,
+      result.destination.index
+    );
+
+    func.handleUpdateList(items);
+  };
+
+  /* -------------------------------------------------------------------------- */
 
   return (
     <div className="display-form">
@@ -214,23 +197,61 @@ export default function FormDisplay({ data }) {
             アイテム数：{data.userFormList.length}コ
           </p>
         </div>
-        <div className="display-form__list">
-          {data.userFormList.map((item, index) => {
-            return (
-              <li key={item.id} className="display-form__item">
-                <div className="display-form__item-icon">
-                  <span className="material-symbols-outlined">
-                    drag_indicator
-                  </span>
-                </div>
-                {displayItem[index]}
-                <div className="display-form__item-icon">
-                  <span className="material-symbols-outlined">delete</span>
-                </div>
-              </li>
-            );
-          })}
-        </div>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <ul
+                className="display-form__list"
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}
+              >
+                {data.userFormList.length >= 1
+                  ? data.userFormList.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <li
+                            className="display-form__item"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <div className="display-form__item-icon">
+                              <span className="material-symbols-outlined">
+                                drag_indicator
+                              </span>
+                            </div>
+                            {displayItem[index]}
+                            <div className="display-form__item-icon">
+                              <button
+                                className="delete-icon"
+                                onClick={() =>
+                                  func.handleDeleteItem(item.nameJA, index)
+                                }
+                              >
+                                <span className="material-symbols-outlined">
+                                  delete
+                                </span>
+                              </button>
+                            </div>
+                          </li>
+                        )}
+                      </Draggable>
+                    ))
+                  : generateButton}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
         <div className="display-form__footer"></div>
       </div>
     </div>
