@@ -1,0 +1,296 @@
+/* -------------------------------------------------------------------------- */
+/*                                    Base                                    */
+/* -------------------------------------------------------------------------- */
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  color: #464646;
+  background-color: #ffffff;
+  font-size: clamp(12px, 1.5vw, 14px);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.pc-none {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.cmn-py {
+  padding-block: 20px;
+}
+.cmn-py--output {
+  padding-block: 20px clamp(0px, 1vw, 10px);
+}
+
+.cmn-mb {
+  margin-bottom: 10px;
+}
+
+a {
+  color: inherit;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    Main                                    */
+/* -------------------------------------------------------------------------- */
+.main {
+  width: min(100%, 1080px);
+  margin-inline: auto;
+  padding-inline: 15px;
+  background-color: #ffffff;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.main > * {
+  padding-block: 73px 29px;
+  overflow: auto;
+}
+.main__main-l, .main__main-r {
+  height: 100dvh;
+  position: sticky;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-flow: column nowrap;
+  transition: all 0.3s;
+  scrollbar-gutter: stable;
+  width: 245px;
+}
+.main__main-l {
+  border-right: 1px solid #d1d1d1;
+}
+.main__main-r {
+  border-left: 1px solid #d1d1d1;
+}
+.main__main-m {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column nowrap;
+  position: relative;
+}
+.main__main-m > * {
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Header                                   */
+/* -------------------------------------------------------------------------- */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  padding-block: 15px;
+  border-bottom: 1px solid #d1d1d1;
+  font-size: 14px;
+  z-index: 100;
+}
+.header__wrapper {
+  padding-inline: calc(50% - 540px);
+  margin-inline: 15px;
+}
+.header__logo {
+  width: fit-content;
+  display: block;
+}
+.header__title {
+  letter-spacing: 2px;
+}
+.header__title span {
+  color: #9e9e9e;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  Form List                                 */
+/* -------------------------------------------------------------------------- */
+.form-list__item:not(:last-child) {
+  border-bottom: 1px dotted #d1d1d1;
+}
+.form-list__item--active .form-list__title,
+.form-list__item--active .form-list__icon {
+  color: #464646;
+}
+.form-list__button {
+  all: unset;
+  width: 100%;
+  padding: 13px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-flow: row nowrap;
+  gap: 15px;
+  transition: all 0.3s;
+}
+.form-list__button:hover {
+  cursor: pointer;
+}
+.form-list__button:hover .form-list__title,
+.form-list__button:hover .form-list__icon {
+  color: #464646;
+}
+.form-list__title {
+  font-size: 14px;
+  color: #adadad;
+  transition: all 0.3s;
+}
+.form-list__subtitle, .form-list__icon {
+  transition: all 0.3s;
+  color: #adadad;
+}
+.form-list__icon {
+  margin-bottom: 5px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Form Display                                */
+/* -------------------------------------------------------------------------- */
+.display-form {
+  flex-grow: 1;
+  background-color: #f4f4f7;
+}
+.display-form input,
+.display-form textarea {
+  font-family: "Kosugi Maru", sans-serif;
+}
+.display-form__content {
+  border-radius: 15px;
+  margin: 20px;
+}
+.display-form__header {
+  background-color: #ffffff;
+  text-align: center;
+  padding-block: 25px 12px;
+  border-radius: 15px 15px 0 0;
+  border: 2px solid #d1d1d1;
+  border-bottom: none;
+}
+.display-form__subtitle, .display-form__option {
+  color: #adadad;
+}
+.display-form__option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  padding: 0 20px 10px 20px;
+  text-align: right;
+  background-color: #ffffff;
+  border-inline: 2px solid #d1d1d1;
+  border-bottom: 2px dashed #d1d1d1;
+  font-size: 13px;
+}
+.display-form__option-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.display-form__option-item input[type=checkbox] {
+  margin-right: 5px;
+}
+.display-form__footer {
+  height: 35px;
+  background-color: #ffffff;
+  border-radius: 0 0 15px 15px;
+  border: 2px solid #d1d1d1;
+  border-top: none;
+}
+.display-form__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  padding: 20px 25px;
+  background-color: #ffffff;
+  border-inline: 2px solid #d1d1d1;
+  border-bottom: 2px dashed #d1d1d1;
+}
+.display-form__item-main {
+  flex: 1 0 auto;
+  margin-inline: 25px;
+}
+.display-form__item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  margin-bottom: 4px;
+}
+.display-form__item-title {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.display-form__item-require, .display-form__item-note, .display-form__item-error {
+  font-size: 12px;
+}
+.display-form__item-error {
+  color: #e06c75;
+  margin-bottom: 4px;
+}
+.display-form__item-require {
+  margin: 0 5px 4px 5px;
+  color: #e06c75;
+}
+.display-form__item-note {
+  color: #adadad;
+  margin-top: 4px;
+}
+.display-form__item .item-input {
+  outline: none;
+  border: 1px solid #d1d1d1;
+  padding: 1px 5px;
+  width: 100%;
+  resize: none;
+}
+.display-form__item .item-input--small {
+  width: 25%;
+}
+.display-form__item .item-input::placeholder {
+  color: #adadad;
+}
+.display-form__item .address-input-box__post {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Options                                  */
+/* -------------------------------------------------------------------------- */
+.display-options {
+  background-color: #e9e9e9;
+  border-bottom: 1px dashed #d1d1d1;
+  padding: clamp(10px, 2.5vw, 15px);
+  position: fixed;
+  width: 590px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Footer                                   */
+/* -------------------------------------------------------------------------- */
+.footer {
+  background-color: #ffffff;
+  position: fixed;
+  inset: auto 0 0 0;
+  padding-block: 4px;
+  text-align: center;
+  border-top: 1px solid #d1d1d1;
+  z-index: 100;
+}
+.footer small {
+  margin-inline: 15px;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                    Icons                                   */
+/* -------------------------------------------------------------------------- */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
