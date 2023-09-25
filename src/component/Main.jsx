@@ -3,10 +3,14 @@ import { useEffect, useState } from 'react';
 import Formlist from './Items';
 import FormDisplay from './Form';
 import DisplayOptions from './Option';
+import Config from './Config';
 import form from '../data/form.json';
 
 export default function Main() {
   const [userFormList, setUserFormList] = useState([]);
+  const [activeItem, setActiveItem] = useState([{ id: 'startPage' }]);
+  const [activeItemID, setActiveItemID] = useState('');
+
   const initalList = [
     'name',
     'furigana',
@@ -90,6 +94,12 @@ export default function Main() {
     handleUpdateList(initialLocalList);
   };
 
+  /* -------------------------- Click to Show Config -------------------------- */
+  const handleActivateItem = (id, index) => {
+    setActiveItem([userFormList[index]]);
+    setActiveItemID(id);
+  };
+
   /* -------------------------------------------------------------------------- */
   return (
     <div className="main">
@@ -108,11 +118,14 @@ export default function Main() {
             handleUpdateList: handleUpdateList,
             handleDeleteItem: handleDeleteItem,
             generateInitList: generateInitList,
+            handleActivateItem: handleActivateItem,
           }}
-          data={{ userFormList: userFormList }}
+          data={{ userFormList: userFormList, activeItemID: activeItemID }}
         />
       </div>
-      <div className="main__main-r"></div>
+      <div className="main__main-r">
+        <Config data={{ activeItem: activeItem }} />
+      </div>
     </div>
   );
 }

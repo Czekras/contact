@@ -90,6 +90,7 @@ a {
 
   &__main-r {
     border-left: 1px solid $bdc;
+    border-inline: 1px solid $bdc;
   }
 
   &__main-m {
@@ -102,7 +103,7 @@ a {
     width: calc(1050px - 490px);
     // margin-top:73px;
     // background-color: darken($bgc-accent, 10%);
-    background-color: #f9f9f9;
+    background-color: $bgc-accent;
   }
 }
 
@@ -195,6 +196,8 @@ a {
 /*                                Form Display                                */
 /* -------------------------------------------------------------------------- */
 .display-form {
+  $bdr: 8px;
+
   flex-grow: 1;
   width: 100%;
   margin-top: 50px;
@@ -206,7 +209,7 @@ a {
   }
 
   &__content {
-    border-radius: 15px;
+    border-radius: $bdr;
     margin: 20px;
     // width: min(100%, 605px);
   }
@@ -215,7 +218,7 @@ a {
     background-color: $bgc-main;
     text-align: center;
     padding-block: 25px 12px;
-    border-radius: 15px 15px 0 0;
+    border-radius: $bdr $bdr 0 0;
     border: 1px solid $bdc;
     border-bottom: none;
   }
@@ -251,7 +254,7 @@ a {
   &__footer {
     height: 35px;
     background-color: $bgc-main;
-    border-radius: 0 0 15px 15px;
+    border-radius: 0 0 $bdr $bdr;
     border: 1px solid $bdc;
     border-top: none;
   }
@@ -262,7 +265,7 @@ a {
     justify-content: space-between;
     align-items: center;
     flex-flow: row nowrap;
-    padding: 20px 25px;
+    padding: 20px 20px 20px 25px;
     background-color: $bgc-main;
     border-inline: 1px solid $bdc;
     border-bottom: 1px dashed $bdc;
@@ -272,23 +275,42 @@ a {
       background-color: $bgc-accent;
       background-color: #f9f9f9;
 
-      #{$this}-icon {
+      #{$this}-icon:nth-child(1) {
         color: $clr-main;
       }
     }
 
     &-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: row nowrap;
+      gap: 15px;
       color: $clr-sub;
       transition: $transition;
     }
 
-    .delete-icon {
+    .delete-icon,
+    .setting-icon {
       all: unset;
+      height: 24px;
+      transition: $transition;
 
       &:hover {
         z-index: 50;
         cursor: pointer;
+      }
+    }
+
+    .delete-icon {
+      &:hover {
         color: $clr-red;
+      }
+    }
+
+    .setting-icon {
+      &:hover {
+        color: $clr-main;
       }
     }
 
@@ -324,7 +346,8 @@ a {
 
     &-require {
       margin: 0 5px 4px 5px;
-      color: $clr-red;
+      // color: $clr-rrd;
+      color: $clr-sub;
     }
 
     &-note {
@@ -356,6 +379,14 @@ a {
         flex-flow: row nowrap;
         gap: 5px;
         margin-bottom: 10px;
+      }
+    }
+
+    &--active {
+      background-color: #f9f9f9;
+
+      #{$this}-icon {
+        color: $clr-main;
       }
     }
   }
@@ -395,6 +426,62 @@ a {
   position: fixed;
   width: calc(1050px - 490px);
   height: 50px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Configuration                               */
+/* -------------------------------------------------------------------------- */
+.config {
+  padding: 15px 10px;
+
+  &__box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  &__icon {
+    font-size: 24px;
+  }
+
+  &__title {
+    &-note {
+      color: $clr-sub;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    .item-label, .item-title {
+      display: block;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .item-input {
+      outline: none;
+      border: 1px solid $bdc;
+      padding: 1px 5px;
+      width: 100%;
+      resize: none;
+
+      &--small {
+        width: 25%;
+      }
+
+      &::placeholder {
+        color: $clr-sub;
+      }
+    }
+  }
 }
 
 /* -------------------------------------------------------------------------- */

@@ -1,4 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Tooltip } from 'react-tooltip';
 import { useState } from 'react';
 
 export default function FormDisplay({ func, data }) {
@@ -58,20 +59,20 @@ export default function FormDisplay({ func, data }) {
 
     /* ----------------------------- Input Selection ---------------------------- */
 
-    const displayInput = (name) => {
-      const inputType1 = [
-        'name',
-        'furigana',
-        'mail address',
-        'mail address (confirm)',
-        'phone number',
-        'fax number',
-        'url',
-      ];
-      const inputType2 = ['content'];
-      const inputType3 = ['address'];
-
-      if (inputType1.includes(name)) {
+    const displayInput = (type) => {
+      //       const inputType1 = [
+      //   'name',
+      //   'furigana',
+      //   'mail address',
+      //   'mail address (confirm)',
+      //   'phone number',
+      //   'fax number',
+      //   'url',
+      // ];
+      // const inputType2 = ['content'];
+      // const inputType3 = ['address'];
+      
+      if (type === 1) {
         return (
           <input
             id={item.configuration.inputId}
@@ -83,7 +84,7 @@ export default function FormDisplay({ func, data }) {
         );
       }
 
-      if (inputType2.includes(name)) {
+      if (type === 2) {
         return (
           <textarea
             id={item.configuration.inputId}
@@ -96,7 +97,7 @@ export default function FormDisplay({ func, data }) {
         );
       }
 
-      if (inputType3.includes(name)) {
+      if (type === 3) {
         return (
           <div className="address-input-box">
             <div className="address-input-box__post">
@@ -132,7 +133,7 @@ export default function FormDisplay({ func, data }) {
       <div className="display-form__item-main">
         {displayHeader}
         {displayError}
-        {displayInput(item.nameEN)}
+        {displayInput(item.type)}
         {displayNote}
       </div>
     );
@@ -179,10 +180,10 @@ export default function FormDisplay({ func, data }) {
       <div className="display-form__content">
         <header className="display-form__header">
           <h2 className="display-form__title">お問い合わせ</h2>
-          <p className="display-form__subtitle">並び替え・追加してください</p>
+          {/* <p className="display-form__subtitle">並び替え・追加してください</p> */}
         </header>
         <div className="display-form__option">
-          <div className="display-form__option-item">
+          {/* <div className="display-form__option-item">
             <input
               type="checkbox"
               name="option-show-error"
@@ -192,7 +193,7 @@ export default function FormDisplay({ func, data }) {
             <label htmlFor="option-show-error">
               エラーメッセージを表示する
             </label>
-          </div>
+          </div> */}
           <p className="display-form__note">
             アイテム数：{data.userFormList.length}コ
           </p>
@@ -207,47 +208,71 @@ export default function FormDisplay({ func, data }) {
                 style={getListStyle(snapshot.isDraggingOver)}
               >
                 {data.userFormList.length >= 1
-                  ? data.userFormList.map((item, index) => (
-                      <Draggable
-                        key={item.id}
-                        draggableId={item.id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => (
-                          <li
-                            className="display-form__item"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            style={getItemStyle(
-                              snapshot.isDragging,
-                              provided.draggableProps.style
-                            )}
-                          >
-                            <div className="display-form__item-icon">
-                              <span className="material-symbols-outlined">
-                                drag_indicator
-                              </span>
-                            </div>
-                            {displayItem[index]}
-                            <div className="display-form__item-icon">
-                              <button
-                                className="delete-icon"
-                                onClick={() =>
-                                  func.handleDeleteItem(item.nameJA, index)
-                                }
-                              >
-                                <span className="material-symbols-outlined">
-                                  delete
+                  ? data.userFormList.map((item, index) => {
+                      const displayClassname =
+                        item.id === data.activeItemID
+                          ? 'display-form__item display-form__item--active'
+                          : 'display-form__item';
+
+                      return (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <li
+                              className={displayClassname}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={getItemStyle(
+                                snapshot.isDragging,
+                                provided.draggableProps.style
+                              )}
+                            >
+                              <div className="display-form__item-icon">
+                                <span className="drag-icon material-symbols-outlined">
+                                  drag_indicator
                                 </span>
-                              </button>
-                            </div>
-                          </li>
-                        )}
-                      </Draggable>
-                    ))
+                              </div>
+                              {displayItem[index]}
+                              <div className="display-form__item-icon">
+                                <button
+                                  className="setting-icon"
+                                  onClick={() =>
+                                    func.handleActivateItem(item.id, index)
+                                  }
+                                  data-tooltip-id="form-icon-tooltip"
+                                  data-tooltip-content="アイテム設定"
+                                  data-tooltip-place="left"
+                                >
+                                  <span className="material-symbols-outlined">
+                                    settings
+                                  </span>
+                                </button>
+                                <button
+                                  className="delete-icon"
+                                  onClick={() =>
+                                    func.handleDeleteItem(item.nameJA, index)
+                                  }
+                                  data-tooltip-id="form-icon-tooltip"
+                                  data-tooltip-content="アイテム消す"
+                                  data-tooltip-place="left"
+                                >
+                                  <span className="material-symbols-outlined">
+                                    delete
+                                  </span>
+                                </button>
+                              </div>
+                            </li>
+                          )}
+                        </Draggable>
+                      );
+                    })
                   : generateButton}
                 {provided.placeholder}
+                <Tooltip id="form-icon-tooltip" />
               </ul>
             )}
           </Droppable>

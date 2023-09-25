@@ -3,6 +3,8 @@
     "nameEN": "name",
     "nameJA": "名前",
     "icon": "person",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "name",
       "required": true,
@@ -18,6 +20,8 @@
     "nameEN": "furigana",
     "nameJA": "ふりがな",
     "icon": "record_voice_over",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "ruby",
       "required": true,
@@ -33,6 +37,8 @@
     "nameEN": "mail address",
     "nameJA": "メールアドレス",
     "icon": "mail",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "mail",
       "required": true,
@@ -48,6 +54,8 @@
     "nameEN": "mail address (confirm)",
     "nameJA": "メールアドレス（確認用）",
     "icon": "mark_email_read",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "mail_conf",
       "required": true,
@@ -63,6 +71,8 @@
     "nameEN": "phone number",
     "nameJA": "電話番号",
     "icon": "call",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "tel",
       "required": true,
@@ -79,6 +89,8 @@
     "nameEN": "fax number",
     "nameJA": "FAX番号",
     "icon": "fax",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "fax",
       "required": true,
@@ -95,6 +107,8 @@
     "nameEN": "address",
     "nameJA": "ご住所",
     "icon": "near_me",
+    "type": 3,
+    "isDefault": true,
     "configuration": {
       "labelFor": "address",
       "required": true,
@@ -120,6 +134,8 @@
     "nameEN": "url",
     "nameJA": "URL",
     "icon": "link",
+    "type": 1,
+    "isDefault": true,
     "configuration": {
       "labelFor": "url",
       "required": true,
@@ -135,6 +151,8 @@
     "nameEN": "content",
     "nameJA": "お問い合わせ内容",
     "icon": "chat",
+    "type": 2,
+    "isDefault": true,
     "configuration": {
       "labelFor": "comment",
       "required": true,

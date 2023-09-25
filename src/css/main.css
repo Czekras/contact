@@ -65,6 +65,7 @@ a {
 }
 .main__main-r {
   border-left: 1px solid #d1d1d1;
+  border-inline: 1px solid #d1d1d1;
 }
 .main__main-m {
   flex-grow: 1;
@@ -74,7 +75,7 @@ a {
   flex-flow: column nowrap;
   position: relative;
   width: 560px;
-  background-color: #f9f9f9;
+  background-color: #f1f1f1;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -156,14 +157,14 @@ a {
   font-family: "Kosugi Maru", sans-serif;
 }
 .display-form__content {
-  border-radius: 15px;
+  border-radius: 8px;
   margin: 20px;
 }
 .display-form__header {
   background-color: #ffffff;
   text-align: center;
   padding-block: 25px 12px;
-  border-radius: 15px 15px 0 0;
+  border-radius: 8px 8px 0 0;
   border: 1px solid #d1d1d1;
   border-bottom: none;
 }
@@ -193,7 +194,7 @@ a {
 .display-form__footer {
   height: 35px;
   background-color: #ffffff;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 8px 8px;
   border: 1px solid #d1d1d1;
   border-top: none;
 }
@@ -202,7 +203,7 @@ a {
   justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
-  padding: 20px 25px;
+  padding: 20px 20px 20px 25px;
   background-color: #ffffff;
   border-inline: 1px solid #d1d1d1;
   border-bottom: 1px dashed #d1d1d1;
@@ -212,20 +213,34 @@ a {
   background-color: #f1f1f1;
   background-color: #f9f9f9;
 }
-.display-form__item:hover .display-form__item-icon {
+.display-form__item:hover .display-form__item-icon:nth-child(1) {
   color: #464646;
 }
 .display-form__item-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 15px;
   color: #adadad;
   transition: all 0.3s;
 }
-.display-form__item .delete-icon {
+.display-form__item .delete-icon,
+.display-form__item .setting-icon {
   all: unset;
+  height: 24px;
+  transition: all 0.3s;
 }
-.display-form__item .delete-icon:hover {
+.display-form__item .delete-icon:hover,
+.display-form__item .setting-icon:hover {
   z-index: 50;
   cursor: pointer;
+}
+.display-form__item .delete-icon:hover {
   color: #e06c75;
+}
+.display-form__item .setting-icon:hover {
+  color: #464646;
 }
 .display-form__item-main {
   width: 100%;
@@ -251,7 +266,7 @@ a {
 }
 .display-form__item-require {
   margin: 0 5px 4px 5px;
-  color: #e06c75;
+  color: #adadad;
 }
 .display-form__item-note {
   color: #adadad;
@@ -277,6 +292,12 @@ a {
   flex-flow: row nowrap;
   gap: 5px;
   margin-bottom: 10px;
+}
+.display-form__item--active {
+  background-color: #f9f9f9;
+}
+.display-form__item--active .display-form__item-icon {
+  color: #464646;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -311,6 +332,50 @@ a {
   position: fixed;
   width: 560px;
   height: 50px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Configuration                               */
+/* -------------------------------------------------------------------------- */
+.config {
+  padding: 15px 10px;
+}
+.config__box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.config__icon {
+  font-size: 24px;
+}
+.config__title-note {
+  color: #adadad;
+  margin-bottom: 15px;
+}
+.config__item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.config__item .item-label, .config__item .item-title {
+  display: block;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.config__item .item-input {
+  outline: none;
+  border: 1px solid #d1d1d1;
+  padding: 1px 5px;
+  width: 100%;
+  resize: none;
+}
+.config__item .item-input--small {
+  width: 25%;
+}
+.config__item .item-input::placeholder {
+  color: #adadad;
 }
 
 /* -------------------------------------------------------------------------- */
