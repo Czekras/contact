@@ -101,7 +101,8 @@ a {
     position: relative;
     width: calc(1050px - 490px);
     // margin-top:73px;
-    background-color: darken($bgc-accent, 10%);
+    // background-color: darken($bgc-accent, 10%);
+    background-color: #f9f9f9;
   }
 }
 
@@ -215,7 +216,7 @@ a {
     text-align: center;
     padding-block: 25px 12px;
     border-radius: 15px 15px 0 0;
-    border: 2px solid $bdc;
+    border: 1px solid $bdc;
     border-bottom: none;
   }
 
@@ -232,8 +233,8 @@ a {
     padding: 0 20px 10px 20px;
     text-align: right;
     background-color: $bgc-main;
-    border-inline: 2px solid $bdc;
-    border-bottom: 2px dashed $bdc;
+    border-inline: 1px solid $bdc;
+    border-bottom: 1px dashed $bdc;
     font-size: 13px;
 
     &-item {
@@ -251,7 +252,7 @@ a {
     height: 35px;
     background-color: $bgc-main;
     border-radius: 0 0 15px 15px;
-    border: 2px solid $bdc;
+    border: 1px solid $bdc;
     border-top: none;
   }
 
@@ -263,12 +264,13 @@ a {
     flex-flow: row nowrap;
     padding: 20px 25px;
     background-color: $bgc-main;
-    border-inline: 2px solid $bdc;
-    border-bottom: 2px dashed $bdc;
+    border-inline: 1px solid $bdc;
+    border-bottom: 1px dashed $bdc;
     transition: $transition;
 
     &:hover {
       background-color: $bgc-accent;
+      background-color: #f9f9f9;
 
       #{$this}-icon {
         color: $clr-main;

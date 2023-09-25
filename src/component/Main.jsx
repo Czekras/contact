@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import Formlist from './Formlist';
-import FormDisplay from './FormDisplay';
-import DisplayOptions from './DisplayOptions';
+import Formlist from './Items';
+import FormDisplay from './Form';
+import DisplayOptions from './Option';
 import form from '../data/form.json';
 
 export default function Main() {
@@ -10,9 +10,9 @@ export default function Main() {
   const initalList = [
     'name',
     'furigana',
-    // 'phone number',
-    // 'mail address',
+    'mail address',
     // 'mail address (confirm)',
+    'phone number',
     'content',
   ];
 
