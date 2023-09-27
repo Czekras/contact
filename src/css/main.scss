@@ -90,7 +90,6 @@ a {
 
   &__main-r {
     border-left: 1px solid $bdc;
-    border-inline: 1px solid $bdc;
   }
 
   &__main-m {
@@ -432,7 +431,7 @@ a {
 /*                                Configuration                               */
 /* -------------------------------------------------------------------------- */
 .config {
-  padding: 15px 10px;
+  padding: 15px 0 15px 10px;
 
   &__box {
     display: flex;
@@ -456,14 +455,26 @@ a {
 
   &__item {
     &:not(:last-child) {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
-    .item-label, .item-title {
+    &:last-child {
+      margin-bottom: 25px;
+    }
+
+    &--cb {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-flow: row nowrap;
+      gap: 4px;
+    }
+
+    .item-label {
       display: block;
       font-weight: 700;
       letter-spacing: 1px;
-      margin-bottom: 4px;
+      // margin-bottom: 4px;
     }
 
     .item-input {
@@ -481,6 +492,15 @@ a {
         color: $clr-sub;
       }
     }
+
+    .item-memo {
+      color: $clr-sub;
+      font-size: 12px;
+    }
+  }
+
+  &__button {
+    width: 100%;
   }
 }
 

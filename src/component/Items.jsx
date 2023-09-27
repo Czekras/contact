@@ -18,7 +18,7 @@ export default function Formlist({ func, data }) {
       >
         <button
           className="form-list__button"
-          onClick={(e) => func.handleAddItem(e, item)}
+          onClick={(e) => func.handleAddItem(e, item, index)}
         >
           <span className="form-list__icon material-symbols-outlined">
             {item.icon}

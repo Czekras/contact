@@ -8,14 +8,14 @@ import form from '../data/form.json';
 
 export default function Main() {
   const [userFormList, setUserFormList] = useState([]);
-  const [activeItem, setActiveItem] = useState([{ id: 'startPage' }]);
-  const [activeItemID, setActiveItemID] = useState('');
+  const [activeItemID, setActiveItemID] = useState(['initialID', -1]);
+  const [activeItem, setActiveItem] = useState(Object);
+  const [initialConfig, setInitialConfig] = useState(true);
 
   const initalList = [
     'name',
     'furigana',
     'mail address',
-    // 'mail address (confirm)',
     'phone number',
     'content',
   ];
@@ -29,9 +29,9 @@ export default function Main() {
     if (!localData) {
       const initialLocalList = [];
 
-      list.map((item) => {
+      list.map((item, index) => {
         if (initalList.includes(item.nameEN)) {
-          const updatedItem = addUniqueID(item);
+          const updatedItem = addUniqueID(item, index);
           initialLocalList.push(updatedItem);
         }
       });
@@ -44,14 +44,14 @@ export default function Main() {
   };
 
   /* ------------------------------ Add Unique ID ----------------------------- */
-  const addUniqueID = (item) => {
-    return { id: crypto.randomUUID(), ...item };
+  const addUniqueID = (item, index) => {
+    return { id: crypto.randomUUID(), formIndex: index, ...item };
   };
 
   /* -------------------------------- Add Item -------------------------------- */
-  const handleAddItem = (e, item) => {
+  const handleAddItem = (e, item, index) => {
     e.preventDefault();
-    const updatedItem = addUniqueID(item);
+    const updatedItem = addUniqueID(item, index);
     const localData = JSON.parse(localStorage.getItem('userFormList'));
 
     const updatedUserFormList = [...localData, updatedItem];
@@ -72,7 +72,9 @@ export default function Main() {
   };
 
   /* -------------------------- Delete Item from List ------------------------- */
-  const handleDeleteItem = (name, index) => {
+  const handleDeleteItem = (id, index) => {
+    if (id === activeItemID[0]) setInitialConfig(true);
+
     const updatedList = [
       ...userFormList.slice(0, index),
       ...userFormList.slice(index + 1),
@@ -95,9 +97,28 @@ export default function Main() {
   };
 
   /* -------------------------- Click to Show Config -------------------------- */
-  const handleActivateItem = (id, index) => {
-    setActiveItem([userFormList[index]]);
-    setActiveItemID(id);
+  const handleActivateItem = (index, id, item) => {
+    setActiveItem(item);
+    setActiveItemID([id, index]);
+    setInitialConfig(false);
+  };
+
+  /* ------------------------------- Update Item ------------------------------ */
+  const findConfigurationKey = (inputID) => {
+    if (inputID === 'config-name') return 'nameJA';
+    if (inputID === 'config-placeholder') return 'inputPlaceholder';
+    if (inputID === 'config-note') return 'inputNote';
+  };
+
+  const handleUpdateItem = (inputID, inputValue, formIndex) => {
+    console.log(activeItemID[1], inputID, inputValue, formIndex);
+
+    const configKey = findConfigurationKey(inputID);
+    const newItem = {
+      [configKey]: inputValue,
+      ...activeItem,
+    };
+    console.log(newItem);
   };
 
   /* -------------------------------------------------------------------------- */
@@ -124,7 +145,16 @@ export default function Main() {
         />
       </div>
       <div className="main__main-r">
-        <Config data={{ activeItem: activeItem }} />
+        <Config
+          func={{
+            handleUpdateItem: handleUpdateItem,
+          }}
+          data={{
+            // activeItemID: activeItemID,
+            activeItem: activeItem,
+            initialConfig: initialConfig,
+          }}
+        />
       </div>
     </div>
   );

@@ -23,14 +23,14 @@ export default function FormDisplay({ func, data }) {
 
   const displayItem = data.userFormList.map((item, index) => {
     /* ----------------------------- Display Options ---------------------------- */
-    const displayRequire = item.configuration.required ? (
+    const displayRequire = item.required ? (
       <p className="display-form__item-require">必要</p>
     ) : (
       ''
     );
 
-    const displayNote = item.configuration.inputNote ? (
-      <p className="display-form__item-note">※{item.configuration.inputNote}</p>
+    const displayNote = item.inputNote ? (
+      <p className="display-form__item-note">※{item.inputNote}</p>
     ) : (
       ''
     );
@@ -49,7 +49,7 @@ export default function FormDisplay({ func, data }) {
       <div className="display-form__item-header">
         <label
           className="display-form__item-title"
-          htmlFor={item.configuration.labelFor}
+          htmlFor={item.labelFor}
         >
           {item.nameJA}
         </label>
@@ -71,15 +71,15 @@ export default function FormDisplay({ func, data }) {
       // ];
       // const inputType2 = ['content'];
       // const inputType3 = ['address'];
-      
+
       if (type === 1) {
         return (
           <input
-            id={item.configuration.inputId}
+            id={item.inputId}
             className="item-input"
-            name={item.configuration.inputName}
-            type={item.configuration.inputType}
-            placeholder={item.configuration.inputPlaceholder}
+            name={item.inputName}
+            type={item.inputType}
+            placeholder={item.inputPlaceholder}
           />
         );
       }
@@ -87,12 +87,12 @@ export default function FormDisplay({ func, data }) {
       if (type === 2) {
         return (
           <textarea
-            id={item.configuration.inputId}
+            id={item.inputId}
             className="item-input"
-            name={item.configuration.inputName}
+            name={item.inputName}
             cols={0}
             rows={2}
-            placeholder={item.configuration.inputPlaceholder}
+            placeholder={item.inputPlaceholder}
           ></textarea>
         );
       }
@@ -104,24 +104,24 @@ export default function FormDisplay({ func, data }) {
               〒
               <input
                 className="item-input item-input--small"
-                type={item.configuration.inputPostalType1}
-                placeholder={item.configuration.inputPostalPlaceholder1}
-                name={item.configuration.inputPostalName1}
+                type={item.inputPostalType1}
+                placeholder={item.inputPostalPlaceholder1}
+                name={item.inputPostalName1}
               />
               -
               <input
                 className="item-input item-input--small"
-                type={item.configuration.inputPostalType2}
-                placeholder={item.configuration.inputPostalPlaceholder2}
-                name={item.configuration.inputPostalName2}
+                type={item.inputPostalType2}
+                placeholder={item.inputPostalPlaceholder2}
+                name={item.inputPostalName2}
               />
             </div>
             <input
-              id={item.configuration.inputId}
+              id={item.inputId}
               className="item-input"
-              type={item.configuration.inputType}
-              placeholder={item.configuration.placeholder}
-              name={item.configuration.inputName}
+              type={item.inputType}
+              placeholder={item.placeholder}
+              name={item.inputName}
             />
           </div>
         );
@@ -210,7 +210,7 @@ export default function FormDisplay({ func, data }) {
                 {data.userFormList.length >= 1
                   ? data.userFormList.map((item, index) => {
                       const displayClassname =
-                        item.id === data.activeItemID
+                        item.id === data.activeItemID[0]
                           ? 'display-form__item display-form__item--active'
                           : 'display-form__item';
 
@@ -241,7 +241,11 @@ export default function FormDisplay({ func, data }) {
                                 <button
                                   className="setting-icon"
                                   onClick={() =>
-                                    func.handleActivateItem(item.id, index)
+                                    func.handleActivateItem(
+                                      index,
+                                      item.id,
+                                      item
+                                    )
                                   }
                                   data-tooltip-id="form-icon-tooltip"
                                   data-tooltip-content="アイテム設定"
@@ -254,7 +258,7 @@ export default function FormDisplay({ func, data }) {
                                 <button
                                   className="delete-icon"
                                   onClick={() =>
-                                    func.handleDeleteItem(item.nameJA, index)
+                                    func.handleDeleteItem(item.id, index)
                                   }
                                   data-tooltip-id="form-icon-tooltip"
                                   data-tooltip-content="アイテム消す"

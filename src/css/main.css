@@ -65,7 +65,6 @@ a {
 }
 .main__main-r {
   border-left: 1px solid #d1d1d1;
-  border-inline: 1px solid #d1d1d1;
 }
 .main__main-m {
   flex-grow: 1;
@@ -338,7 +337,7 @@ a {
 /*                                Configuration                               */
 /* -------------------------------------------------------------------------- */
 .config {
-  padding: 15px 10px;
+  padding: 15px 0 15px 10px;
 }
 .config__box {
   display: flex;
@@ -356,13 +355,22 @@ a {
   margin-bottom: 15px;
 }
 .config__item:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
-.config__item .item-label, .config__item .item-title {
+.config__item:last-child {
+  margin-bottom: 25px;
+}
+.config__item--cb {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 4px;
+}
+.config__item .item-label {
   display: block;
   font-weight: 700;
   letter-spacing: 1px;
-  margin-bottom: 4px;
 }
 .config__item .item-input {
   outline: none;
@@ -376,6 +384,13 @@ a {
 }
 .config__item .item-input::placeholder {
   color: #adadad;
+}
+.config__item .item-memo {
+  color: #adadad;
+  font-size: 12px;
+}
+.config__button {
+  width: 100%;
 }
 
 /* -------------------------------------------------------------------------- */
