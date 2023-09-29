@@ -81,14 +81,15 @@ a {
     flex-flow: column nowrap;
     transition: $transition;
     scrollbar-gutter: stable;
-    width: 245px;
   }
 
   &__main-l {
+    width: 245px;
     // border-right: 1px solid $bdc;
   }
 
   &__main-r {
+    width: 260px;
     // border-left: 1px solid $bdc;
   }
 
@@ -99,7 +100,7 @@ a {
     align-items: center;
     flex-flow: column nowrap;
     position: relative;
-    width: calc(1050px - 490px);
+    width: calc(1050px - (245px + 260px));
     // margin-top:73px;
     // background-color: darken($bgc-accent, 10%);
     background-color: $bgc-accent;
@@ -399,6 +400,14 @@ a {
       }
     }
 
+    .radio-input-box {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-flow: row wrap;
+      gap: 5px;
+    }
+
     &--active {
       background-color: #f9f9f9;
 
@@ -449,7 +458,7 @@ a {
 /*                                Configuration                               */
 /* -------------------------------------------------------------------------- */
 .config {
-  padding: 15px 0 15px 15px;
+  padding: 15px;
 
   &__box {
     display: flex;

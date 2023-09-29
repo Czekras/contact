@@ -131,7 +131,6 @@
     "labelFor": "comment",
     "required": true,
     "inputType": "textarea",
-    "inputcomment": "comment",
     "inputId": "comment",
     "inputCols": 45,
     "inpuRows": 10,
@@ -143,11 +142,26 @@
     "nameJA": "プライバシーポリシー",
     "icon": "admin_panel_settings",
     "type": 4,
-    "labelFor": "agree",
+    "labelFor": "",
     "required": true,
     "inputType": "checkbox",
-    "inputcomment": "agree",
     "inputId": "agree",
     "inputNote": ""
+  },
+  {
+    "nameEN": "radio sample",
+    "nameJA": "ラジオボタンサンプル",
+    "icon": "radio_button_checked",
+    "type": 5,
+    "labelFor": "",
+    "required": true,
+    "inputType": "radio",
+    "inputId": "radiosample",
+    "inputNote": "",
+    "itemList": [
+      { "label": "ラジオ１" },
+      { "label": "ラジオ２" },
+      { "label": "ラジオ３" }
+    ]
   }
 ]

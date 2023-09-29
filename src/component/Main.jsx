@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+// import { nanoid } from 'nanoid';
 
 import Formlist from './Items';
 import FormDisplay from './Form';
@@ -17,7 +18,7 @@ export default function Main() {
     'furigana',
     'mail address',
     'phone number',
-    'content',
+    'comment area',
   ];
 
   useEffect(() => {
@@ -45,13 +46,31 @@ export default function Main() {
 
   /* ------------------------------ Add Unique ID ----------------------------- */
   const addUniqueID = (item, index) => {
-    return { id: crypto.randomUUID(), formIndex: index, ...item };
+    const newID = crypto.randomUUID();
+
+    if ([5].includes(item.type)) {
+      const updatedInnerItem = item.itemList.map((innerItem, index) => {
+        // return { id: nanoid(), ...innerItem };
+        const newIndex = index + 1;
+        const innerItemID = item.inputId + newIndex.toString().padStart(2, '0');
+        return { id: innerItemID, ...innerItem };
+      });
+      return {
+        id: newID,
+        formIndex: index,
+        ...item,
+        itemList: updatedInnerItem,
+      };
+    }
+
+    return { id: newID, formIndex: index, ...item };
   };
 
   /* -------------------------------- Add Item -------------------------------- */
   const handleAddItem = (e, item, index) => {
     e.preventDefault();
     const updatedItem = addUniqueID(item, index);
+
     const localData = JSON.parse(localStorage.getItem('userFormList'));
 
     const updatedUserFormList = [...localData, updatedItem];
@@ -116,6 +135,10 @@ export default function Main() {
     setActiveItem(newItem);
   };
 
+  const handleUpdateInnerItem = (inputID, inputValue, itemID) => {
+    console.log(inputID, inputValue, itemID);
+  };
+
   const handleSubmitItem = (e) => {
     e.preventDefault();
     const indexOfItem = userFormList.findIndex(
@@ -128,7 +151,7 @@ export default function Main() {
       ...userFormList.slice(indexOfItem + 1),
     ];
 
-    handleUpdateList(newList)
+    handleUpdateList(newList);
   };
   /* -------------------------------------------------------------------------- */
   return (
@@ -158,6 +181,7 @@ export default function Main() {
           func={{
             handleUpdateItem: handleUpdateItem,
             handleSubmitItem: handleSubmitItem,
+            handleUpdateInnerItem: handleUpdateInnerItem,
           }}
           data={{
             // activeItemID: activeItemID,

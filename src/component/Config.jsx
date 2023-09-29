@@ -18,6 +18,12 @@ export default function Config({ func, data }) {
     func.handleUpdateItem(id, value, formIndex);
   };
 
+  const updateInnerItem = (e, itemID) => {
+    const {id, value } = e.target;
+    // const formIndex = data.activeItem.formIndex;
+    func.handleUpdateInnerItem( id, value, itemID);
+  };
+
   /* --------------------------------- Initial -------------------------------- */
   const initialDisplay = () => {
     return <div className="config-start">{/* <p>START PAGE</p> */}</div>;
@@ -113,6 +119,29 @@ export default function Config({ func, data }) {
       </li>
     );
 
+    let radio = '';
+    if (item.type === 5) {
+      const radioList = item.itemList.map((innerItem, index) => {
+        return (
+          <div key={innerItem.id} className="config__item">
+            <label className="item-label">
+              {item.inputType} name {index + 1}
+            </label>
+            <input
+              type="text"
+              id={innerItem.id}
+              name={innerItem.id}
+              className="item-input"
+              value={innerItem.label}
+              onChange={(e) => updateInnerItem(e, item.id)}
+            />
+          </div>
+        );
+      });
+
+      radio = <li className="config__item">{radioList}</li>;
+    }
+
     const divider = <hr className="divider" />;
 
     return (
@@ -134,8 +163,10 @@ export default function Config({ func, data }) {
           <ul className="config__List">
             {require}
             {name}
-            {![4].includes(item.type) ? placeholder : ''}
+            {![4, 5].includes(item.type) ? placeholder : ''}
             {note}
+            {divider}
+            {item.type === 5 ? radio : ''}
           </ul>
           <button
             className="config__button"
@@ -143,7 +174,7 @@ export default function Config({ func, data }) {
           >
             保存
           </button>
-          {/* <p className="test">{JSON.stringify(item)}</p> */}
+          <p className="test">{JSON.stringify(item)}</p>
         </form>
       </section>
     );

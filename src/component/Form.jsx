@@ -1,5 +1,6 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Tooltip } from 'react-tooltip';
+// import { nanoid } from 'nanoid';
 import { useState } from 'react';
 
 export default function FormDisplay({ func, data }) {
@@ -131,15 +132,30 @@ export default function FormDisplay({ func, data }) {
       if (type === 4) {
         return (
           <div className="privacy-input-box">
-            <input
-              id={item.inputId}
-              type={item.inputType}
-            />
+            <input id={item.inputId} type={item.inputType} />
             <label htmlFor={item.labelFor} name={item.inputName}>
               プライバシーポリシーに同意する
             </label>
           </div>
         );
+      }
+
+      if (type === 5) {
+        const items = item.itemList.map((innerItem, index) => {
+          // const innerItemID = item.inputId + index.toString().padStart(2, '0');
+          return (
+            <li key={innerItem.id}>
+              <input
+                type={item.inputType}
+                name={item.inputId}
+                id={innerItem.id}
+              />
+              <label htmlFor={innerItem.id}>{innerItem.label}</label>
+            </li>
+          );
+        });
+
+        return <ul className="radio-input-box">{items}</ul>;
       }
     };
 
