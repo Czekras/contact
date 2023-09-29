@@ -1,78 +1,75 @@
 import { useState } from 'react';
 
 export default function Config({ func, data }) {
-  // const [itemChange, setItemChange] = useState(false)
+  // const [itemChange, setItemChange] = useState(false);
+  const [requireCB, setRequireCB] = useState(data.activeItem.required);
 
   // const [itemID, itemIndex] = data.activeItemID;
   // console.log(itemID, itemIndex);
 
-  const submitItem = (e) => {
-    e.preventDefault();
-    console.log('click');
-    // console.log('id: ', e.target.id);
-    // console.log('value: ', e.target.value);
-  };
-
   const updateItem = (e) => {
     // setItemChange(true)
-    e.preventDefault()
-    const id = e.target.id;
-    const value = e.target.value
-    const formIndex = data.activeItem.formIndex
-    func.handleUpdateItem(id, value, formIndex)
+    // e.preventDefault();
+    let { name, id, value } = e.target;
+    const formIndex = data.activeItem.formIndex;
+
+    if (name === 'required') value = requireCB;
+
+    func.handleUpdateItem(id, value, formIndex);
   };
 
   /* --------------------------------- Initial -------------------------------- */
   const initialDisplay = () => {
-    return (
-      <div className="config-start">
-        <p>START PAGE</p>
-      </div>
-    );
+    return <div className="config-start">{/* <p>START PAGE</p> */}</div>;
   };
 
   /* --------------------------------- Updated -------------------------------- */
   const loadDisplay = () => {
     const item = data.activeItem;
 
-    const inputSetting = (type) => {
-      if ([1, 2, 3].includes(type)) {
-        return (
-          <p className="config__title-note">
-            &lt;input&gt;タイプ: {item.inputType}
-          </p>
-        );
-      }
-    };
+    // const inputSetting = (type) => {
+    //   if ([1, 2, 3].includes(type)) {
+    //     return (
+    //       <p className="config__title-note">
+    //         &lt;input&gt;タイプ: {item.inputType}
+    //       </p>
+    //     );
+    //   }
+    // };
 
     const require = (
       <li className="config__item config__item--cb">
         <input
           type="checkbox"
-          id="config-require"
-          name="config-require"
-          defaultChecked={item.required}
-          onChange={(e) => updateItem(e)}
+          id="required"
+          name="required"
+          // defaultChecked={item.required}
+          // checked={item.required}
+          checked={item.required}
+          onChange={(e) => {
+            setRequireCB(!requireCB);
+            updateItem(e);
+          }}
         />
-        <label className="item-label" htmlFor="config-require">
-          必要
+        <label className="item-label" htmlFor="required">
+          require
         </label>
       </li>
     );
 
     const name = (
       <li className="config__item">
-        <label className="item-label" htmlFor="config-name">
+        <label className="item-label" htmlFor="nameJA">
           {/* &lt;label&gt;名 */}
           name
         </label>
         <input
           type="text"
-          name="name-name"
-          id="config-name"
+          name="nameJA"
+          id="nameJA"
           className="item-input"
-          defaultValue={item.nameJA}
-          // value={item.nameJA}
+          // defaultValue={item.nameJA}
+          value={item.nameJA}
           // placeholder={item.nameJA}
           onChange={(e) => updateItem(e)}
         />
@@ -81,15 +78,16 @@ export default function Config({ func, data }) {
 
     const placeholder = (
       <li className="config__item">
-        <label className="item-label" htmlFor="config-placeholder">
+        <label className="item-label" htmlFor="inputPlaceholder">
           placeholder
         </label>
         <input
           type="text"
-          name="config-placeholder"
-          id="config-placeholder"
+          name="inputPlaceholder"
+          id="inputPlaceholder"
           className="item-input"
-          defaultValue={item.inputPlaceholder}
+          // defaultValue={item.inputPlaceholder}
+          value={item.inputPlaceholder}
           // placeholder={config.inputPlaceholder}
           onChange={(e) => updateItem(e)}
         />
@@ -98,15 +96,16 @@ export default function Config({ func, data }) {
 
     const note = (
       <li className="config__item">
-        <label className="item-label" htmlFor="config-note">
+        <label className="item-label" htmlFor="inputNote">
           memo
         </label>
         <input
           type="text"
-          id="config-note"
-          name="config-note"
+          id="inputNote"
+          name="inputNote"
           className="item-input"
-          defaultValue={item.inputNote}
+          // defaultValue={item.inputNote}
+          value={item.inputNote}
           // placeholder={config.inputNote}
           onChange={(e) => updateItem(e)}
         />
@@ -114,33 +113,37 @@ export default function Config({ func, data }) {
       </li>
     );
 
+    const divider = <hr className="divider" />;
+
     return (
       <section className="config">
         <div className="config__box">
-          <span className="config__icon material-symbols-outlined">
+          {/* <span className="config__icon material-symbols-outlined">
             settings
-          </span>
-          <h3 className="config__title">Item Setting</h3>
+          </span> */}
+          <h3 className="config__title">{item.nameJA} 設定</h3>
         </div>
         <p className="config__title-note">
           <small>
             &lt;label&gt;名、&lt;input&gt; 要素の属性などの設定をこちらで変更
           </small>
         </p>
-        {inputSetting(item.type)}
-        <form onSubmit={(e) => submitItem(e)} autoComplete="off">
+        {/* {inputSetting(item.type)} */}
+        <form onSubmit={(e) => func.handleSubmitItem(e)} autoComplete="off">
+          {divider}
           <ul className="config__List">
             {require}
             {name}
-            {placeholder}
+            {![4].includes(item.type) ? placeholder : ''}
             {note}
           </ul>
-          {/* <button
+          <button
             className="config__button"
             // disabled={!itemChange}
           >
-            Save
-          </button> */}
+            保存
+          </button>
+          {/* <p className="test">{JSON.stringify(item)}</p> */}
         </form>
       </section>
     );

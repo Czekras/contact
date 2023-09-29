@@ -124,7 +124,7 @@
     "inputNote": ""
   },
   {
-    "nameEN": "content",
+    "nameEN": "comment area",
     "nameJA": "お問い合わせ内容",
     "icon": "chat",
     "type": 2,
@@ -136,6 +136,18 @@
     "inputCols": 45,
     "inpuRows": 10,
     "inputPlaceholder": "お問い合わせ内容を入力してください",
+    "inputNote": ""
+  },
+  {
+    "nameEN": "privacy policy",
+    "nameJA": "プライバシーポリシー",
+    "icon": "admin_panel_settings",
+    "type": 4,
+    "labelFor": "agree",
+    "required": true,
+    "inputType": "checkbox",
+    "inputcomment": "agree",
+    "inputId": "agree",
     "inputNote": ""
   }
 ]

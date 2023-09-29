@@ -60,12 +60,6 @@ a {
   scrollbar-gutter: stable;
   width: 245px;
 }
-.main__main-l {
-  border-right: 1px solid #d1d1d1;
-}
-.main__main-r {
-  border-left: 1px solid #d1d1d1;
-}
 .main__main-m {
   flex-grow: 1;
   display: flex;
@@ -75,6 +69,7 @@ a {
   position: relative;
   width: 560px;
   background-color: #f1f1f1;
+  border-inline: 1px solid #d1d1d1;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -149,21 +144,20 @@ a {
 .display-form {
   flex-grow: 1;
   width: 100%;
-  margin-top: 50px;
 }
 .display-form input,
 .display-form textarea {
   font-family: "Kosugi Maru", sans-serif;
 }
 .display-form__content {
-  border-radius: 8px;
+  border-radius: 0px;
   margin: 20px;
 }
 .display-form__header {
   background-color: #ffffff;
   text-align: center;
   padding-block: 25px 12px;
-  border-radius: 8px 8px 0 0;
+  border-radius: 0px 0px 0 0;
   border: 1px solid #d1d1d1;
   border-bottom: none;
 }
@@ -193,7 +187,7 @@ a {
 .display-form__footer {
   height: 35px;
   background-color: #ffffff;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 0px 0px;
   border: 1px solid #d1d1d1;
   border-top: none;
 }
@@ -264,7 +258,7 @@ a {
   margin-bottom: 4px;
 }
 .display-form__item-require {
-  margin: 0 5px 4px 5px;
+  margin-inline: 5px;
   color: #adadad;
 }
 .display-form__item-note {
@@ -291,6 +285,16 @@ a {
   flex-flow: row nowrap;
   gap: 5px;
   margin-bottom: 10px;
+}
+.display-form__item .privacy-input-box {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 5px;
+}
+.display-form__item .privacy-input-box label {
+  font-size: 13px;
 }
 .display-form__item--active {
   background-color: #f9f9f9;
@@ -337,7 +341,7 @@ a {
 /*                                Configuration                               */
 /* -------------------------------------------------------------------------- */
 .config {
-  padding: 15px 0 15px 10px;
+  padding: 15px 0 15px 15px;
 }
 .config__box {
   display: flex;
@@ -349,6 +353,10 @@ a {
 }
 .config__icon {
   font-size: 24px;
+}
+.config__title {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .config__title-note {
   color: #adadad;
@@ -391,6 +399,22 @@ a {
 }
 .config__button {
   width: 100%;
+}
+.config__button:hover {
+  cursor: pointer;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Divider                                  */
+/* -------------------------------------------------------------------------- */
+.divider {
+  border: 0;
+  border-top: 1px dotted #d1d1d1;
+  margin-block: 10px;
+}
+
+.test {
+  overflow-wrap: break-word;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -47,11 +47,11 @@ export default function FormDisplay({ func, data }) {
 
     const displayHeader = (
       <div className="display-form__item-header">
-        <label
-          className="display-form__item-title"
-          htmlFor={item.labelFor}
-        >
-          {item.nameJA}
+        <label className="display-form__item-title" htmlFor={item.labelFor}>
+          {/* {item.nameJA} */}
+          {item.nameEN === 'privacy policy'
+            ? `${item.nameJA}への同意`
+            : item.nameJA}
         </label>
         {displayRequire}
       </div>
@@ -69,8 +69,9 @@ export default function FormDisplay({ func, data }) {
       //   'fax number',
       //   'url',
       // ];
-      // const inputType2 = ['content'];
+      // const inputType2 = ['comment area'];
       // const inputType3 = ['address'];
+      // const inputType4 = ['privacy policy']
 
       if (type === 1) {
         return (
@@ -123,6 +124,20 @@ export default function FormDisplay({ func, data }) {
               placeholder={item.placeholder}
               name={item.inputName}
             />
+          </div>
+        );
+      }
+
+      if (type === 4) {
+        return (
+          <div className="privacy-input-box">
+            <input
+              id={item.inputId}
+              type={item.inputType}
+            />
+            <label htmlFor={item.labelFor} name={item.inputName}>
+              プライバシーポリシーに同意する
+            </label>
           </div>
         );
       }
@@ -181,6 +196,9 @@ export default function FormDisplay({ func, data }) {
         <header className="display-form__header">
           <h2 className="display-form__title">お問い合わせ</h2>
           {/* <p className="display-form__subtitle">並び替え・追加してください</p> */}
+          <p className="display-form__subtitle">
+            アイテム数：{data.userFormList.length}コ
+          </p>
         </header>
         <div className="display-form__option">
           {/* <div className="display-form__option-item">
@@ -193,10 +211,10 @@ export default function FormDisplay({ func, data }) {
             <label htmlFor="option-show-error">
               エラーメッセージを表示する
             </label>
-          </div> */}
+          </div>
           <p className="display-form__note">
             アイテム数：{data.userFormList.length}コ
-          </p>
+          </p> */}
         </div>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId="droppable">
@@ -248,7 +266,7 @@ export default function FormDisplay({ func, data }) {
                                     )
                                   }
                                   data-tooltip-id="form-icon-tooltip"
-                                  data-tooltip-content="アイテム設定"
+                                  data-tooltip-content="設定"
                                   data-tooltip-place="left"
                                 >
                                   <span className="material-symbols-outlined">
@@ -261,7 +279,7 @@ export default function FormDisplay({ func, data }) {
                                     func.handleDeleteItem(item.id, index)
                                   }
                                   data-tooltip-id="form-icon-tooltip"
-                                  data-tooltip-content="アイテム消す"
+                                  data-tooltip-content="消す"
                                   data-tooltip-place="left"
                                 >
                                   <span className="material-symbols-outlined">

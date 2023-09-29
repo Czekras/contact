@@ -101,26 +101,35 @@ export default function Main() {
     setActiveItem(item);
     setActiveItemID([id, index]);
     setInitialConfig(false);
+    // console.log(index, id);
   };
 
   /* ------------------------------- Update Item ------------------------------ */
-  const findConfigurationKey = (inputID) => {
-    if (inputID === 'config-name') return 'nameJA';
-    if (inputID === 'config-placeholder') return 'inputPlaceholder';
-    if (inputID === 'config-note') return 'inputNote';
-  };
-
   const handleUpdateItem = (inputID, inputValue, formIndex) => {
-    console.log(activeItemID[1], inputID, inputValue, formIndex);
+    // console.log(activeItemID[1], inputID, inputValue, formIndex);
 
-    const configKey = findConfigurationKey(inputID);
     const newItem = {
-      [configKey]: inputValue,
       ...activeItem,
+      [inputID]: inputValue,
     };
-    console.log(newItem);
+    // console.log(newItem);
+    setActiveItem(newItem);
   };
 
+  const handleSubmitItem = (e) => {
+    e.preventDefault();
+    const indexOfItem = userFormList.findIndex(
+      (item) => item.id === activeItemID[0]
+    );
+
+    const newList = [
+      ...userFormList.slice(0, indexOfItem),
+      activeItem,
+      ...userFormList.slice(indexOfItem + 1),
+    ];
+
+    handleUpdateList(newList)
+  };
   /* -------------------------------------------------------------------------- */
   return (
     <div className="main">
@@ -133,7 +142,7 @@ export default function Main() {
         />
       </div>
       <div className="main__main-m">
-        <DisplayOptions />
+        {/* <DisplayOptions /> */}
         <FormDisplay
           func={{
             handleUpdateList: handleUpdateList,
@@ -148,6 +157,7 @@ export default function Main() {
         <Config
           func={{
             handleUpdateItem: handleUpdateItem,
+            handleSubmitItem: handleSubmitItem,
           }}
           data={{
             // activeItemID: activeItemID,
