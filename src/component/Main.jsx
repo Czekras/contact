@@ -135,8 +135,22 @@ export default function Main() {
     setActiveItem(newItem);
   };
 
-  const handleUpdateInnerItem = (inputID, inputValue, itemID) => {
-    console.log(inputID, inputValue, itemID);
+  const handleUpdateInnerItem = (inputID, inputValue, itemID, inputIndex) => {
+    // console.log(inputID, inputValue, itemID, inputIndex);
+    // console.log(...activeItem.itemList);
+    const newItem = {
+      ...activeItem,
+      itemList: {
+        ...activeItem.itemList,
+        [inputIndex]: {
+          id: inputID,
+          label: inputValue,
+        },
+      },
+    };
+
+    // console.log(newItem.itemList);
+    setActiveItem(newItem);
   };
 
   const handleSubmitItem = (e) => {

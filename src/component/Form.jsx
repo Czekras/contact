@@ -141,16 +141,17 @@ export default function FormDisplay({ func, data }) {
       }
 
       if (type === 5) {
-        const items = item.itemList.map((innerItem, index) => {
+        // const items = item.itemList.map((innerItem, index) => {
+        const items = Object.entries(item.itemList).map((innerItem, index) => {
           // const innerItemID = item.inputId + index.toString().padStart(2, '0');
           return (
-            <li key={innerItem.id}>
+            <li key={innerItem[1].id}>
               <input
                 type={item.inputType}
                 name={item.inputId}
-                id={innerItem.id}
+                id={innerItem[1].id}
               />
-              <label htmlFor={innerItem.id}>{innerItem.label}</label>
+              <label htmlFor={innerItem[1].id}>{innerItem[1].label}</label>
             </li>
           );
         });

@@ -18,10 +18,10 @@ export default function Config({ func, data }) {
     func.handleUpdateItem(id, value, formIndex);
   };
 
-  const updateInnerItem = (e, itemID) => {
-    const {id, value } = e.target;
+  const updateInnerItem = (e, itemID, itemIndex) => {
+    const { id, value } = e.target;
     // const formIndex = data.activeItem.formIndex;
-    func.handleUpdateInnerItem( id, value, itemID);
+    func.handleUpdateInnerItem(id, value, itemID, itemIndex);
   };
 
   /* --------------------------------- Initial -------------------------------- */
@@ -121,23 +121,25 @@ export default function Config({ func, data }) {
 
     let radio = '';
     if (item.type === 5) {
-      const radioList = item.itemList.map((innerItem, index) => {
-        return (
-          <div key={innerItem.id} className="config__item">
-            <label className="item-label">
-              {item.inputType} name {index + 1}
-            </label>
-            <input
-              type="text"
-              id={innerItem.id}
-              name={innerItem.id}
-              className="item-input"
-              value={innerItem.label}
-              onChange={(e) => updateInnerItem(e, item.id)}
-            />
-          </div>
-        );
-      });
+      const radioList = Object.entries(item.itemList).map(
+        (innerItem, index) => {
+          return (
+            <div key={innerItem[1].id} className="config__item">
+              <label className="item-label">
+                {item.inputType} name {index + 1}
+              </label>
+              <input
+                type="text"
+                id={innerItem[1].id}
+                name={innerItem[1].id}
+                className="item-input"
+                value={innerItem[1].label}
+                onChange={(e) => updateInnerItem(e, innerItem[1].id, index)}
+              />
+            </div>
+          );
+        }
+      );
 
       radio = <li className="config__item">{radioList}</li>;
     }
@@ -174,7 +176,7 @@ export default function Config({ func, data }) {
           >
             保存
           </button>
-          <p className="test">{JSON.stringify(item)}</p>
+          {/* <p className="test">{JSON.stringify(item)}</p> */}
         </form>
       </section>
     );
