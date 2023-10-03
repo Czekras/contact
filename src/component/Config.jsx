@@ -152,6 +152,8 @@ export default function Config({ func, data }) {
       innerItems = <li className="config__item">{innerItemList}</li>;
     }
 
+    // TODO: Cretae item for type 8 
+
     const divider = <hr className="divider" />;
 
     return (

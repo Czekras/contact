@@ -188,6 +188,8 @@ export default function FormDisplay({ func, data }) {
 
         return <ul className="date-input-box">{items}</ul>;
       }
+
+      // TODO: Create item for type 8
     };
 
     /* ------------------------------- Final Item ------------------------------- */
