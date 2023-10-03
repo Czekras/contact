@@ -158,6 +158,36 @@ export default function FormDisplay({ func, data }) {
 
         return <ul className="radio-input-box">{items}</ul>;
       }
+
+      if (type === 6) {
+        const items = Object.entries(item.itemList).map((innerItem, index) => {
+          return (
+            <option value={innerItem[1].label}>{innerItem[1].label}</option>
+          );
+        });
+
+        return (
+          <select
+            className="select-input-box"
+            name={item.inputId}
+            id={item.inputId}
+          >
+            <option value="未選択">未選択</option>
+            {items}
+          </select>
+        );
+      }
+
+      if (type === 7) {
+        const items = Object.entries(item.itemList).map((innerItem, index) => {
+          return <li className='date-input-box__item' key={innerItem[1].id}>
+            <p>{innerItem[1].label}</p>
+            <input type="datetime-local"/>
+          </li>;
+        });
+
+        return <ul className="date-input-box">{items}</ul>;
+      }
     };
 
     /* ------------------------------- Final Item ------------------------------- */

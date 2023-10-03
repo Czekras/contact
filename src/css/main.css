@@ -301,12 +301,24 @@ a {
 .display-form__item .privacy-input-box label {
   font-size: 13px;
 }
-.display-form__item .radio-input-box {
+.display-form__item .radio-input-box,
+.display-form__item .date-input-box,
+.display-form__item .date-input-box__item {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-flow: row wrap;
   gap: 5px;
+}
+.display-form__item .select-input-box {
+  width: 100%;
+  border-color: #d1d1d1;
+}
+.display-form__item .date-input-box {
+  gap: 10px;
+}
+.display-form__item .date-input-box__item {
+  gap: 10px;
 }
 .display-form__item--active {
   background-color: #f9f9f9;

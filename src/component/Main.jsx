@@ -13,6 +13,9 @@ export default function Main() {
   const [activeItem, setActiveItem] = useState(Object);
   const [initialConfig, setInitialConfig] = useState(true);
 
+  const typeWithInnerItems = [5, 6, 7];
+  const typeWithoutPlaceholders = [4, 5, 6, 7];
+
   const initalList = [
     'name',
     'furigana',
@@ -48,7 +51,7 @@ export default function Main() {
   const addUniqueID = (item, index) => {
     const newID = crypto.randomUUID();
 
-    if ([5].includes(item.type)) {
+    if (typeWithInnerItems.includes(item.type)) {
       const updatedInnerItem = item.itemList.map((innerItem, index) => {
         // return { id: nanoid(), ...innerItem };
         const newIndex = index + 1;
@@ -201,6 +204,8 @@ export default function Main() {
             // activeItemID: activeItemID,
             activeItem: activeItem,
             initialConfig: initialConfig,
+            typeWithInnerItems: typeWithInnerItems,
+            typeWithoutPlaceholders: typeWithoutPlaceholders
           }}
         />
       </div>

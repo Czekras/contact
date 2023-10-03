@@ -103,6 +103,7 @@ a {
     width: calc(1050px - (245px + 260px));
     // margin-top:73px;
     // background-color: darken($bgc-accent, 10%);
+    // background-color: $bgc-main;
     background-color: $bgc-accent;
     border-inline: 1px solid $bdc;
   }
@@ -400,12 +401,27 @@ a {
       }
     }
 
-    .radio-input-box {
+    .radio-input-box,
+    .date-input-box,
+    .date-input-box__item {
       display: flex;
       justify-content: flex-start;
       align-items: center;
       flex-flow: row wrap;
       gap: 5px;
+    }
+
+    .select-input-box {
+      width: 100%;
+      border-color: $bdc;
+    }
+
+    .date-input-box {
+      gap: 10px;
+
+      &__item {
+        gap: 10px;
+      }
     }
 
     &--active {

@@ -79,6 +79,7 @@ export default function Config({ func, data }) {
           // placeholder={item.nameJA}
           onChange={(e) => updateItem(e)}
         />
+        {/* <p className="item-memo">&lt;th&gt;の&lt;label&gt;</p> */}
       </li>
     );
 
@@ -119,14 +120,21 @@ export default function Config({ func, data }) {
       </li>
     );
 
-    let radio = '';
-    if (item.type === 5) {
-      const radioList = Object.entries(item.itemList).map(
+    let innerItems = '';
+    if (data.typeWithInnerItems.includes(item.type)) {
+      // console.log(item.itemList);
+      const innerItemList = Object.entries(item.itemList).map(
         (innerItem, index) => {
+          let itemTitle = ''
+          if (item.type === 5) itemTitle = 'label';
+          if (item.type === 6) itemTitle = 'option';
+
           return (
             <div key={innerItem[1].id} className="config__item">
               <label className="item-label">
-                {item.inputType} name {index + 1}
+                {/* {item.inputType} name {index + 1} */}
+                {item.inputId}
+                {(index + 1).toString().padStart(2, '0')} {itemTitle}
               </label>
               <input
                 type="text"
@@ -141,7 +149,7 @@ export default function Config({ func, data }) {
         }
       );
 
-      radio = <li className="config__item">{radioList}</li>;
+      innerItems = <li className="config__item">{innerItemList}</li>;
     }
 
     const divider = <hr className="divider" />;
@@ -165,10 +173,12 @@ export default function Config({ func, data }) {
           <ul className="config__List">
             {require}
             {name}
-            {![4, 5].includes(item.type) ? placeholder : ''}
+            {!data.typeWithoutPlaceholders.includes(item.type)
+              ? placeholder
+              : ''}
             {note}
             {divider}
-            {item.type === 5 ? radio : ''}
+            {data.typeWithInnerItems.includes(item.type) ? innerItems : ''}
           </ul>
           <button
             className="config__button"

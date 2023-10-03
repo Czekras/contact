@@ -163,5 +163,64 @@
       { "label": "ラジオ２" },
       { "label": "ラジオ３" }
     ]
+  },
+  {
+    "nameEN": "checkbox sample",
+    "nameJA": "チェックボックスサンプル",
+    "icon": "check_circle",
+    "type": 5,
+    "labelFor": "",
+    "required": true,
+    "inputType": "checkbox",
+    "inputId": "checkboxsample",
+    "inputNote": "",
+    "itemList": [
+      { "label": "チェック１" },
+      { "label": "チェック２" },
+      { "label": "チェック３" }
+    ]
+  },
+  {
+    "nameEN": "select sample",
+    "nameJA": "セレクトサンプル",
+    "icon": "playlist_add_check",
+    "type": 6,
+    "labelFor": "",
+    "required": true,
+    "inputType": "select",
+    "inputId": "selectsample",
+    "inputNote": "",
+    "itemList": [
+      { "label": "セレクト１" },
+      { "label": "セレクト２" },
+      { "label": "セレクト３" }
+    ]
+  },
+  {
+    "nameEN": "datetime picker",
+    "nameJA": "希望日時",
+    "icon": "calendar_month",
+    "type": 7,
+    "labelFor": "",
+    "required": true,
+    "inputType": "datetime-local",
+    "inputId": "date",
+    "inputNote": "",
+    "itemList": [
+      { "label": "第一希望日時" },
+      { "label": "第二希望日時" },
+      { "label": "第三希望日時" }
+    ]
+  },
+  {
+    "nameEN": "file upload",
+    "nameJA": "ファイル",
+    "icon": "upload_file",
+    "type": 8,
+    "labelFor": "",
+    "required": true,
+    "inputType": "file",
+    "inputId": "file",
+    "inputNote": ""
   }
 ]
