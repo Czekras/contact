@@ -24,10 +24,15 @@ export default function FormDisplay({ func, data }) {
 
   const displayItem = data.userFormList.map((item, index) => {
     /* ----------------------------- Display Options ---------------------------- */
-    const displayRequire = item.required ? (
-      <p className="display-form__item-require">必要</p>
-    ) : (
-      ''
+    const itemRequired =
+      item.required === 'option1'
+        ? '必要'
+        : item.required === 'option2'
+        ? '任意'
+        : '';
+
+    const displayRequire = (
+      <p className="display-form__item-require">{itemRequired}</p>
     );
 
     const displayNote = item.inputNote ? (
@@ -46,13 +51,15 @@ export default function FormDisplay({ func, data }) {
 
     /* ------------------------------ Header Style ------------------------------ */
 
+    let itemLabel = item.nameJA;
+    if (item.nameEN === 'privacy policy') itemLabel = `${item.nameJA}への同意`;
+    if (item.nameEN === 'file upload')
+      itemLabel = `${item.nameJA}${(itemRequired ? ` (${itemRequired})` : '')}`;
+
     const displayHeader = (
       <div className="display-form__item-header">
         <label className="display-form__item-title" htmlFor={item.labelFor}>
-          {/* {item.nameJA} */}
-          {item.nameEN === 'privacy policy'
-            ? `${item.nameJA}への同意`
-            : item.nameJA}
+          {itemLabel}
         </label>
         {displayRequire}
       </div>
@@ -180,16 +187,29 @@ export default function FormDisplay({ func, data }) {
 
       if (type === 7) {
         const items = Object.entries(item.itemList).map((innerItem, index) => {
-          return <li className='date-input-box__item' key={innerItem[1].id}>
-            <p>{innerItem[1].label}</p>
-            <input type="datetime-local"/>
-          </li>;
+          return (
+            <li className="date-input-box__item" key={innerItem[1].id}>
+              <p>{innerItem[1].label}</p>
+              <input type="datetime-local" />
+            </li>
+          );
         });
 
         return <ul className="date-input-box">{items}</ul>;
       }
 
-      // TODO: Create item for type 8
+      if (type === 8) {
+        return (
+          <div className="file-input-box">
+            <p>※1ファイルの最大容量... ※添付可能ファイル...</p>
+            <div className="file-input-box__box">
+              <span className="material-symbols-outlined">image</span>
+              <div className="file-input-box__button">ファイルを選択</div>
+              <div className="file-input-box__button">ファイルを削除</div>
+            </div>
+          </div>
+        );
+      }
     };
 
     /* ------------------------------- Final Item ------------------------------- */
@@ -215,12 +235,13 @@ export default function FormDisplay({ func, data }) {
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
-    background: isDragging ? '#f9f9f9' : '',
+    background: isDragging ? '#f1f1f1' : '',
+    borderBlock: isDragging ? '1px dashed #d1d1d1' : '',
     ...draggableStyle,
   });
 
   const getListStyle = (isDraggingOver) => ({
-    background: isDraggingOver ? '#e9e9e9' : '#e9e9e9',
+    // background: isDraggingOver ? '#f1f1f1' : '#ffffff',
   });
 
   const handleOnDragEnd = (result) => {

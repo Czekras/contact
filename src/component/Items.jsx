@@ -1,4 +1,4 @@
-// import { Tooltip } from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 import form from '../data/form.json';
 
 export default function Formlist({ func, data }) {
@@ -13,8 +13,10 @@ export default function Formlist({ func, data }) {
             ? 'form-list__item form-list__item--active'
             : 'form-list__item'
         }
-        // data-tooltip-id='item-tooltip'
-        // data-tooltip-content={`${item.nameJA}を追加する`}
+        data-tooltip-id="item-tooltip"
+        data-tooltip-content={`追加`}
+        data-tooltip-place="right"
+        data-tooltip-position-strategy="fixed"
       >
         <button
           className="form-list__button"
@@ -24,7 +26,7 @@ export default function Formlist({ func, data }) {
             {item.icon}
           </span>
           <div className="form-list__box">
-            <small className="form-list__subtitle">{item.nameEN}</small>
+            {/* <small className="form-list__subtitle">{item.nameEN}</small> */}
             <h3 className="form-list__title">{item.nameJA}</h3>
           </div>
         </button>
@@ -35,7 +37,7 @@ export default function Formlist({ func, data }) {
   return (
     <ul className="form-list">
       {generatedList}
-      {/* <Tooltip id="item-tooltip"/> */}
+      <Tooltip id="item-tooltip" />
     </ul>
   );
 }

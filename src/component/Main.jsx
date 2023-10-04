@@ -11,6 +11,7 @@ export default function Main() {
   const [userFormList, setUserFormList] = useState([]);
   const [activeItemID, setActiveItemID] = useState(['initialID', -1]);
   const [activeItem, setActiveItem] = useState(Object);
+  const [activeDefault, setActiveDefault] = useState(Object);
   const [initialConfig, setInitialConfig] = useState(true);
 
   const typeWithInnerItems = [5, 6, 7];
@@ -18,10 +19,10 @@ export default function Main() {
 
   const initalList = [
     'name',
-    'furigana',
     'mail address',
     'phone number',
     'comment area',
+    'privacy policy',
   ];
 
   useEffect(() => {
@@ -30,9 +31,8 @@ export default function Main() {
   }, []);
 
   const loadInitialList = (localData, list) => {
+    const initialLocalList = [];
     if (!localData) {
-      const initialLocalList = [];
-
       list.map((item, index) => {
         if (initalList.includes(item.nameEN)) {
           const updatedItem = addUniqueID(item, index);
@@ -45,6 +45,7 @@ export default function Main() {
 
     const userLocalList = JSON.parse(localStorage.getItem('userFormList'));
     setUserFormList(userLocalList);
+    return initialLocalList;
   };
 
   /* ------------------------------ Add Unique ID ----------------------------- */
@@ -53,7 +54,6 @@ export default function Main() {
 
     if (typeWithInnerItems.includes(item.type)) {
       const updatedInnerItem = item.itemList.map((innerItem, index) => {
-        // return { id: nanoid(), ...innerItem };
         const newIndex = index + 1;
         const innerItemID = item.inputId + newIndex.toString().padStart(2, '0');
         return { id: innerItemID, ...innerItem };
@@ -106,20 +106,22 @@ export default function Main() {
 
   /* -------------------------- Generate Initial List ------------------------- */
   const generateInitList = () => {
-    const initialLocalList = [];
+    // const initialLocalList = [];
 
-    form.map((item) => {
-      if (initalList.includes(item.nameEN)) {
-        const updatedItem = addUniqueID(item);
-        initialLocalList.push(updatedItem);
-      }
-    });
+    // form.map((item) => {
+    //   if (initalList.includes(item.nameEN)) {
+    //     const updatedItem = addUniqueID(item);
+    //     initialLocalList.push(updatedItem);
+    //   }
+    // });
 
-    handleUpdateList(initialLocalList);
+    const newList = loadInitialList(null, form);
+    handleUpdateList(newList);
   };
 
   /* -------------------------- Click to Show Config -------------------------- */
   const handleActivateItem = (index, id, item) => {
+    setActiveDefault(form[item.formIndex]);
     setActiveItem(item);
     setActiveItemID([id, index]);
     setInitialConfig(false);
@@ -127,13 +129,22 @@ export default function Main() {
   };
 
   /* ------------------------------- Update Item ------------------------------ */
-  const handleUpdateItem = (inputID, inputValue, formIndex) => {
-    // console.log(activeItemID[1], inputID, inputValue, formIndex);
+  const handleUpdateItem = (inputName, inputID, inputValue, formIndex) => {
+    // console.log(inputName, activeItemID[1], inputID, inputValue, formIndex);
 
-    const newItem = {
-      ...activeItem,
-      [inputID]: inputValue,
-    };
+    let newItem = {};
+    if (['required'].includes(inputName)) {
+      newItem = {
+        ...activeItem,
+        [inputName]: inputValue,
+      };
+    } else {
+      newItem = {
+        ...activeItem,
+        [inputID]: inputValue,
+      };
+    }
+
     // console.log(newItem);
     setActiveItem(newItem);
   };
@@ -203,9 +214,10 @@ export default function Main() {
           data={{
             // activeItemID: activeItemID,
             activeItem: activeItem,
+            activeDefault: activeDefault,
             initialConfig: initialConfig,
             typeWithInnerItems: typeWithInnerItems,
-            typeWithoutPlaceholders: typeWithoutPlaceholders
+            typeWithoutPlaceholders: typeWithoutPlaceholders,
           }}
         />
       </div>

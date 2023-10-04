@@ -80,7 +80,8 @@ a {
     display: flex;
     flex-flow: column nowrap;
     transition: $transition;
-    scrollbar-gutter: stable;
+    // scrollbar-gutter: stable;
+    z-index: 20;
   }
 
   &__main-l {
@@ -104,8 +105,9 @@ a {
     // margin-top:73px;
     // background-color: darken($bgc-accent, 10%);
     // background-color: $bgc-main;
-    background-color: $bgc-accent;
+    // background-color: $bgc-accent;
     border-inline: 1px solid $bdc;
+    z-index: 10;
   }
 }
 
@@ -159,7 +161,8 @@ a {
   &__button {
     all: unset;
     width: 100%;
-    padding: 13px 0;
+    // padding: 13px 0;
+    padding-block: 13px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -190,7 +193,8 @@ a {
   }
 
   &__icon {
-    margin-bottom: 5px;
+    // margin-bottom: 5px;
+    font-size: 18px;
   }
 }
 
@@ -198,7 +202,6 @@ a {
 /*                                Form Display                                */
 /* -------------------------------------------------------------------------- */
 .display-form {
-  // $bdr: 8px;
   $bdr: 0px;
 
   flex-grow: 1;
@@ -272,11 +275,13 @@ a {
     background-color: $bgc-main;
     border-inline: 1px solid $bdc;
     border-bottom: 1px dashed $bdc;
-    transition: $transition;
+    // transition: $transition;
 
     &:hover {
       background-color: $bgc-accent;
-      background-color: #f9f9f9;
+      background-color: lighten($bgc-accent, 2.5%);
+      background-color: #f7f7f7;
+      // background-color: $bgc-sub;
 
       #{$this}-icon:nth-child(1) {
         color: $clr-main;
@@ -403,7 +408,8 @@ a {
 
     .radio-input-box,
     .date-input-box,
-    .date-input-box__item {
+    .date-input-box__item,
+    .file-input-box__box {
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -424,8 +430,24 @@ a {
       }
     }
 
+    .file-input-box {
+      p {
+        font-size: 12px;
+        color: $clr-sub;
+        margin-bottom: 7px;
+      }
+
+      &__button {
+        font-size: 12px;
+        padding: 3px 10px;
+        border-radius: 5px;
+        background-color: $bgc-sub;
+      }
+    }
+
     &--active {
-      background-color: #f9f9f9;
+      background-color: #f7f7f7;
+      // background-color: $bgc-accent;
 
       #{$this}-icon {
         color: $clr-main;
@@ -512,9 +534,10 @@ a {
     &--cb {
       display: flex;
       justify-content: flex-start;
+      // justify-content: space-between;
       align-items: center;
       flex-flow: row nowrap;
-      gap: 4px;
+      gap: 15px;
     }
 
     .item-label {
@@ -522,6 +545,8 @@ a {
       font-weight: 700;
       letter-spacing: 1px;
       // margin-bottom: 4px;
+      text-transform: capitalize;
+      font-size: 13px;
     }
 
     .item-input {

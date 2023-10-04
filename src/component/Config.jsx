@@ -2,7 +2,10 @@ import { useState } from 'react';
 
 export default function Config({ func, data }) {
   // const [itemChange, setItemChange] = useState(false);
-  const [requireCB, setRequireCB] = useState(data.activeItem.required);
+  // const [requireCB, setRequireCB] = useState(data.activeItem.required);
+  const [requireRadio, setRequireRadio] = useState(data.activeItem.required);
+
+  // setRequireRadio(data.activeItem.required)
 
   // const [itemID, itemIndex] = data.activeItemID;
   // console.log(itemID, itemIndex);
@@ -13,9 +16,9 @@ export default function Config({ func, data }) {
     let { name, id, value } = e.target;
     const formIndex = data.activeItem.formIndex;
 
-    if (name === 'required') value = requireCB;
+    // if (name === 'required') value = requireCB;
 
-    func.handleUpdateItem(id, value, formIndex);
+    func.handleUpdateItem(name, id, value, formIndex);
   };
 
   const updateInnerItem = (e, itemID, itemIndex) => {
@@ -32,6 +35,7 @@ export default function Config({ func, data }) {
   /* --------------------------------- Updated -------------------------------- */
   const loadDisplay = () => {
     const item = data.activeItem;
+    const itemDefault = data.activeDefault;
 
     // const inputSetting = (type) => {
     //   if ([1, 2, 3].includes(type)) {
@@ -45,6 +49,9 @@ export default function Config({ func, data }) {
 
     const require = (
       <li className="config__item config__item--cb">
+        {/* <label className="item-label" htmlFor="required">
+          require
+        </label>
         <input
           type="checkbox"
           id="required"
@@ -56,10 +63,49 @@ export default function Config({ func, data }) {
             setRequireCB(!requireCB);
             updateItem(e);
           }}
-        />
-        <label className="item-label" htmlFor="required">
-          require
-        </label>
+        /> */}
+        <div className="condfig__item-item">
+          <input
+            type="radio"
+            name="required"
+            id="option1"
+            value="option1"
+            onChange={(e) => {
+              updateItem(e);
+              setRequireRadio('option1');
+            }}
+            checked={item.required === 'option1'}
+          />
+          <label htmlFor="option1">必要</label>
+        </div>
+        <div className="condfig__item-item">
+          <input
+            type="radio"
+            name="required"
+            id="option2"
+            value="option2"
+            onChange={(e) => {
+              updateItem(e);
+              setRequireRadio('option2');
+            }}
+            checked={item.required === 'option2'}
+          />
+          <label htmlFor="option2">任意</label>
+        </div>
+        <div className="condfig__item-item">
+          <input
+            type="radio"
+            name="required"
+            id="option3"
+            value="option3"
+            onChange={(e) => {
+              updateItem(e);
+              setRequireRadio('option3');
+            }}
+            checked={item.required === 'option3'}
+          />
+          <label htmlFor="option3">なし</label>
+        </div>
       </li>
     );
 
@@ -76,7 +122,7 @@ export default function Config({ func, data }) {
           className="item-input"
           // defaultValue={item.nameJA}
           value={item.nameJA}
-          // placeholder={item.nameJA}
+          placeholder={itemDefault.nameJA}
           onChange={(e) => updateItem(e)}
         />
         {/* <p className="item-memo">&lt;th&gt;の&lt;label&gt;</p> */}
@@ -95,7 +141,7 @@ export default function Config({ func, data }) {
           className="item-input"
           // defaultValue={item.inputPlaceholder}
           value={item.inputPlaceholder}
-          // placeholder={config.inputPlaceholder}
+          placeholder={itemDefault.inputPlaceholder}
           onChange={(e) => updateItem(e)}
         />
       </li>
@@ -113,7 +159,7 @@ export default function Config({ func, data }) {
           className="item-input"
           // defaultValue={item.inputNote}
           value={item.inputNote}
-          // placeholder={config.inputNote}
+          placeholder={itemDefault.inputNote}
           onChange={(e) => updateItem(e)}
         />
         <p className="item-memo">&lt;input&gt;の下に表示するメモ</p>
@@ -125,7 +171,7 @@ export default function Config({ func, data }) {
       // console.log(item.itemList);
       const innerItemList = Object.entries(item.itemList).map(
         (innerItem, index) => {
-          let itemTitle = ''
+          let itemTitle = '';
           if (item.type === 5) itemTitle = 'label';
           if (item.type === 6) itemTitle = 'option';
 
@@ -142,6 +188,7 @@ export default function Config({ func, data }) {
                 name={innerItem[1].id}
                 className="item-input"
                 value={innerItem[1].label}
+                placeholder={itemDefault.itemList[index].label}
                 onChange={(e) => updateInnerItem(e, innerItem[1].id, index)}
               />
             </div>
@@ -151,8 +198,6 @@ export default function Config({ func, data }) {
 
       innerItems = <li className="config__item">{innerItemList}</li>;
     }
-
-    // TODO: Cretae item for type 8 
 
     const divider = <hr className="divider" />;
 
@@ -164,11 +209,11 @@ export default function Config({ func, data }) {
           </span> */}
           <h3 className="config__title">{item.nameJA} 設定</h3>
         </div>
-        <p className="config__title-note">
+        {/* <p className="config__title-note">
           <small>
-            &lt;label&gt;名、&lt;input&gt; 要素の属性などの設定をこちらで変更
+            &lt;label&gt;名、&lt;input&gt; 要素の属性などの設定
           </small>
-        </p>
+        </p> */}
         {/* {inputSetting(item.type)} */}
         <form onSubmit={(e) => func.handleSubmitItem(e)} autoComplete="off">
           {divider}
