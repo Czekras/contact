@@ -2,6 +2,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Tooltip } from 'react-tooltip';
 // import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import Output from '../component/Output';
 
 export default function FormDisplay({ func, data }) {
   // const [userFormListData, setUserFormListData] = useState([]);
@@ -54,7 +55,7 @@ export default function FormDisplay({ func, data }) {
     let itemLabel = item.nameJA;
     if (item.nameEN === 'privacy policy') itemLabel = `${item.nameJA}への同意`;
     if (item.nameEN === 'file upload')
-      itemLabel = `${item.nameJA}${(itemRequired ? ` (${itemRequired})` : '')}`;
+      itemLabel = `${item.nameJA}${itemRequired ? ` (${itemRequired})` : ''}`;
 
     const displayHeader = (
       <div className="display-form__item-header">
@@ -263,13 +264,16 @@ export default function FormDisplay({ func, data }) {
   return (
     <div className="display-form">
       <div className="display-form__content">
-        <header className="display-form__header">
-          <h2 className="display-form__title">お問い合わせ</h2>
-          {/* <p className="display-form__subtitle">並び替え・追加してください</p> */}
-          <p className="display-form__subtitle">
-            アイテム数：{data.userFormList.length}コ
-          </p>
-        </header>
+        <div className="display-form__top">
+          <header className="display-form__header">
+            <h2 className="display-form__title">お問い合わせ</h2>
+            {/* <p className="display-form__subtitle">並び替え・追加してください</p> */}
+            <p className="display-form__subtitle">
+              アイテム数：{data.userFormList.length}コ
+            </p>
+          </header>
+          <Output />
+        </div>
         <div className="display-form__option">
           {/* <div className="display-form__option-item">
             <input

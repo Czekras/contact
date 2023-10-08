@@ -92,6 +92,7 @@ a {
   &__main-r {
     width: 260px;
     // border-left: 1px solid $bdc;
+    border-right: 1px solid $bdc;
   }
 
   &__main-m {
@@ -220,13 +221,20 @@ a {
     // width: min(100%, 605px);
   }
 
-  &__header {
-    background-color: $bgc-main;
-    text-align: center;
-    padding-block: 25px 12px;
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    padding: 25px 25px 12px 25px;
     border-radius: $bdr $bdr 0 0;
     border: 1px solid $bdc;
     border-bottom: none;
+  }
+
+  &__header {
+    // background-color: $bgc-main;
+    text-align: left;
   }
 
   &__subtitle,
@@ -482,6 +490,7 @@ a {
 
 /* -------------------------------------------------------------------------- */
 /*                                   Options                                  */
+
 /* -------------------------------------------------------------------------- */
 .display-options {
   background-color: $bgc-main;
@@ -490,6 +499,76 @@ a {
   position: fixed;
   width: calc(1050px - 490px);
   height: 50px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Output                                   */
+/* -------------------------------------------------------------------------- */
+.output {
+  &__button {
+    all: unset;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--close {
+      color: $clr-sub;
+      transition: $transition;
+
+      &:hover {
+        color: $clr-red;
+      }
+    }
+  }
+
+  &__modal {
+    inset: 0;
+    position: absolute;
+    background-color: $bgc-main;
+    margin: auto;
+    width: min(90%, 800px);
+    height: 80dvh;
+    border: 1px solid $bdc;
+    border-radius: 5px;
+    // padding: 20px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    // justify-content: flex-end;
+    align-items: flex-start   ;
+    // margin-bottom: 20px;
+    border-bottom: 1px solid $bdc;
+    padding: 5px 10px 0px;
+    // background-color: $bgc-accent;
+    border-radius: 5px 5px 0 0;
+  }
+
+  &__title {
+    color: $clr-sub;
+  }
+
+  &__content {
+    padding: 30px;
+  }
+
+  &__item {
+
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-flow: row nowrap;
+    }
+
+    &-pre {
+      // border: 1px solid $bdc;
+      padding: 10px;
+      background-color: $clr-accent;
+    }
+  }
 }
 
 /* -------------------------------------------------------------------------- */

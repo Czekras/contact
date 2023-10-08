@@ -172,7 +172,7 @@ export default function Config({ func, data }) {
       const innerItemList = Object.entries(item.itemList).map(
         (innerItem, index) => {
           let itemTitle = '';
-          if (item.type === 5) itemTitle = 'label';
+          if ([5, 7].includes(item.type)) itemTitle = 'label';
           if (item.type === 6) itemTitle = 'option';
 
           return (
