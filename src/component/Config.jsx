@@ -29,7 +29,12 @@ export default function Config({ func, data }) {
 
   /* --------------------------------- Initial -------------------------------- */
   const initialDisplay = () => {
-    return <div className="config-start">{/* <p>START PAGE</p> */}</div>;
+    return (
+      <div className="config-start">
+        <span className="config-start__icon material-symbols-outlined">settings</span>
+        <p>Setting</p>
+      </div>
+    );
   };
 
   /* --------------------------------- Updated -------------------------------- */

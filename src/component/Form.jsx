@@ -1,6 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Tooltip } from 'react-tooltip';
-// import { nanoid } from 'nanoid';
+// import { Tooltip } from 'react-tooltip';
 import { useState } from 'react';
 import Output from '../component/Output';
 
@@ -272,7 +271,7 @@ export default function FormDisplay({ func, data }) {
               アイテム数：{data.userFormList.length}コ
             </p>
           </header>
-          <Output />
+          <Output data={{ userFormList: data.userFormList }} />
         </div>
         <div className="display-form__option">
           {/* <div className="display-form__option-item">
@@ -339,9 +338,9 @@ export default function FormDisplay({ func, data }) {
                                       item
                                     )
                                   }
-                                  data-tooltip-id="form-icon-tooltip"
-                                  data-tooltip-content="設定"
-                                  data-tooltip-place="left"
+                                  // data-tooltip-id="form-icon-tooltip"
+                                  // data-tooltip-content="設定"
+                                  // data-tooltip-place="left"
                                 >
                                   <span className="material-symbols-outlined">
                                     settings
@@ -352,9 +351,9 @@ export default function FormDisplay({ func, data }) {
                                   onClick={() =>
                                     func.handleDeleteItem(item.id, index)
                                   }
-                                  data-tooltip-id="form-icon-tooltip"
-                                  data-tooltip-content="消す"
-                                  data-tooltip-place="left"
+                                  // data-tooltip-id="form-icon-tooltip"
+                                  // data-tooltip-content="削除"
+                                  // data-tooltip-place="left"
                                 >
                                   <span className="material-symbols-outlined">
                                     delete
@@ -368,7 +367,7 @@ export default function FormDisplay({ func, data }) {
                     })
                   : generateButton}
                 {provided.placeholder}
-                <Tooltip id="form-icon-tooltip" />
+                {/* <Tooltip id="form-icon-tooltip" /> */}
               </ul>
             )}
           </Droppable>

@@ -489,19 +489,6 @@ a {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                   Options                                  */
-
-/* -------------------------------------------------------------------------- */
-.display-options {
-  background-color: $bgc-main;
-  border-bottom: 1px solid $bdc;
-  padding: clamp(10px, 2.5vw, 15px);
-  position: fixed;
-  width: calc(1050px - 490px);
-  height: 50px;
-}
-
-/* -------------------------------------------------------------------------- */
 /*                                   Output                                   */
 /* -------------------------------------------------------------------------- */
 .output {
@@ -520,6 +507,22 @@ a {
         color: $clr-red;
       }
     }
+
+    &--word {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column nowrap;
+
+      p {
+        color: $clr-sub;
+        transition: $transition;
+      }
+
+      &:hover p {
+        color: $clr-main;
+      }
+    }
   }
 
   &__modal {
@@ -530,7 +533,7 @@ a {
     width: min(90%, 800px);
     height: 80dvh;
     border: 1px solid $bdc;
-    border-radius: 5px;
+    // border-radius: 5px;
     // padding: 20px;
   }
 
@@ -538,12 +541,13 @@ a {
     display: flex;
     justify-content: space-between;
     // justify-content: flex-end;
-    align-items: flex-start   ;
+    align-items: flex-start;
     // margin-bottom: 20px;
     border-bottom: 1px solid $bdc;
     padding: 5px 10px 0px;
     // background-color: $bgc-accent;
     border-radius: 5px 5px 0 0;
+    text-transform: capitalize;
   }
 
   &__title {
@@ -555,19 +559,36 @@ a {
   }
 
   &__item {
+    margin-bottom: 20px;
 
     &-top {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
       flex-flow: row nowrap;
+      margin-bottom: 10px;
     }
 
-    &-pre {
+    &-code {
+      // text-align: justify;
       // border: 1px solid $bdc;
+      font-family: $ff-mono;
       padding: 10px;
       background-color: $clr-accent;
+      overflow: auto;
+      height: fit-content;
+      max-height: 200px;
+
+      white-space: nowrap;
+
+      p {
+        margin-left: 2ch;
+      }
     }
+  }
+
+  &__note {
+    color: $clr-sub;
   }
 }
 
@@ -576,6 +597,19 @@ a {
 /* -------------------------------------------------------------------------- */
 .config {
   padding: 15px;
+
+  &-start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    height: 55%;
+    color: $clr-sub;
+
+    &__icon {
+      margin-bottom: 5px;
+    }
+  }
 
   &__box {
     display: flex;

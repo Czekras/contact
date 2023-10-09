@@ -368,18 +368,6 @@ a {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                   Options                                  */
-/* -------------------------------------------------------------------------- */
-.display-options {
-  background-color: #ffffff;
-  border-bottom: 1px solid #d1d1d1;
-  padding: clamp(10px, 2.5vw, 15px);
-  position: fixed;
-  width: 560px;
-  height: 50px;
-}
-
-/* -------------------------------------------------------------------------- */
 /*                                   Output                                   */
 /* -------------------------------------------------------------------------- */
 .output__button {
@@ -395,6 +383,19 @@ a {
 .output__button--close:hover {
   color: #e06c75;
 }
+.output__button--word {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+.output__button--word p {
+  color: #adadad;
+  transition: all 0.3s;
+}
+.output__button--word:hover p {
+  color: #464646;
+}
 .output__modal {
   inset: 0;
   position: absolute;
@@ -403,7 +404,6 @@ a {
   width: min(90%, 800px);
   height: 80dvh;
   border: 1px solid #d1d1d1;
-  border-radius: 5px;
 }
 .output__top {
   display: flex;
@@ -412,6 +412,7 @@ a {
   border-bottom: 1px solid #d1d1d1;
   padding: 5px 10px 0px;
   border-radius: 5px 5px 0 0;
+  text-transform: capitalize;
 }
 .output__title {
   color: #adadad;
@@ -419,15 +420,30 @@ a {
 .output__content {
   padding: 30px;
 }
+.output__item {
+  margin-bottom: 20px;
+}
 .output__item-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   flex-flow: row nowrap;
+  margin-bottom: 10px;
 }
-.output__item-pre {
+.output__item-code {
+  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
   padding: 10px;
   background-color: #f1f1f1;
+  overflow: auto;
+  height: fit-content;
+  max-height: 200px;
+  white-space: nowrap;
+}
+.output__item-code p {
+  margin-left: 2ch;
+}
+.output__note {
+  color: #adadad;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -435,6 +451,17 @@ a {
 /* -------------------------------------------------------------------------- */
 .config {
   padding: 15px;
+}
+.config-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  height: 55%;
+  color: #adadad;
+}
+.config-start__icon {
+  margin-bottom: 5px;
 }
 .config__box {
   display: flex;

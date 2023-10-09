@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-// import { nanoid } from 'nanoid';
-
 import Formlist from './Items';
 import FormDisplay from './Form';
-// import DisplayOptions from './Option';
 import Config from './Config';
 import form from '../data/form.json';
 
