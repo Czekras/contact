@@ -372,13 +372,19 @@ a {
 /* -------------------------------------------------------------------------- */
 .output__button {
   all: unset;
+  transition: all 0.3s;
 }
 .output__button:hover {
   cursor: pointer;
 }
+.output__button--copy {
+  color: #adadad;
+}
+.output__button--copy:hover {
+  color: #464646;
+}
 .output__button--close {
   color: #adadad;
-  transition: all 0.3s;
 }
 .output__button--close:hover {
   color: #e06c75;
@@ -401,7 +407,7 @@ a {
   position: absolute;
   background-color: #ffffff;
   margin: auto;
-  width: min(90%, 800px);
+  width: min(95%, 880px);
   height: 80dvh;
   border: 1px solid #d1d1d1;
 }
@@ -416,12 +422,14 @@ a {
 }
 .output__title {
   color: #adadad;
+  font-weight: 400;
+  font-size: 14px;
 }
 .output__content {
-  padding: 30px;
+  padding: 15px 20px;
 }
 .output__item {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 .output__item-top {
   display: flex;
@@ -430,17 +438,8 @@ a {
   flex-flow: row nowrap;
   margin-bottom: 10px;
 }
-.output__item-code {
-  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
-  padding: 10px;
-  background-color: #f1f1f1;
-  overflow: auto;
-  height: fit-content;
-  max-height: 200px;
-  white-space: nowrap;
-}
-.output__item-code p {
-  margin-left: 2ch;
+.output__item-code pre {
+  height: 230px;
 }
 .output__note {
   color: #adadad;
@@ -475,8 +474,14 @@ a {
   font-size: 24px;
 }
 .config__title {
+  color: #adadad;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-size: clamp(15px, 2.5vw, 14px);
+}
+.config__title em {
+  font-style: normal;
+  color: #464646;
 }
 .config__title-note {
   color: #adadad;
@@ -526,17 +531,10 @@ a {
   cursor: pointer;
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                   Divider                                  */
-/* -------------------------------------------------------------------------- */
 .divider {
   border: 0;
   border-top: 1px dotted #d1d1d1;
   margin-block: 10px;
-}
-
-.test {
-  overflow-wrap: break-word;
 }
 
 /* -------------------------------------------------------------------------- */

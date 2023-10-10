@@ -26,7 +26,7 @@ export default function FormDisplay({ func, data }) {
     /* ----------------------------- Display Options ---------------------------- */
     const itemRequired =
       item.required === 'option1'
-        ? '必要'
+        ? '必須'
         : item.required === 'option2'
         ? '任意'
         : '';

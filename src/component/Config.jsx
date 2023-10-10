@@ -31,7 +31,9 @@ export default function Config({ func, data }) {
   const initialDisplay = () => {
     return (
       <div className="config-start">
-        <span className="config-start__icon material-symbols-outlined">settings</span>
+        <span className="config-start__icon material-symbols-outlined">
+          settings
+        </span>
         <p>Setting</p>
       </div>
     );
@@ -42,33 +44,8 @@ export default function Config({ func, data }) {
     const item = data.activeItem;
     const itemDefault = data.activeDefault;
 
-    // const inputSetting = (type) => {
-    //   if ([1, 2, 3].includes(type)) {
-    //     return (
-    //       <p className="config__title-note">
-    //         &lt;input&gt;タイプ: {item.inputType}
-    //       </p>
-    //     );
-    //   }
-    // };
-
     const require = (
       <li className="config__item config__item--cb">
-        {/* <label className="item-label" htmlFor="required">
-          require
-        </label>
-        <input
-          type="checkbox"
-          id="required"
-          name="required"
-          // defaultChecked={item.required}
-          // checked={item.required}
-          checked={item.required}
-          onChange={(e) => {
-            setRequireCB(!requireCB);
-            updateItem(e);
-          }}
-        /> */}
         <div className="condfig__item-item">
           <input
             type="radio"
@@ -81,7 +58,7 @@ export default function Config({ func, data }) {
             }}
             checked={item.required === 'option1'}
           />
-          <label htmlFor="option1">必要</label>
+          <label htmlFor="option1">必須</label>
         </div>
         <div className="condfig__item-item">
           <input
@@ -108,6 +85,7 @@ export default function Config({ func, data }) {
               setRequireRadio('option3');
             }}
             checked={item.required === 'option3'}
+            disabled={[8].includes(item.type)}
           />
           <label htmlFor="option3">なし</label>
         </div>
@@ -212,7 +190,7 @@ export default function Config({ func, data }) {
           {/* <span className="config__icon material-symbols-outlined">
             settings
           </span> */}
-          <h3 className="config__title">{item.nameJA} 設定</h3>
+          <h3 className="config__title"><em>{item.nameJA}</em> 設定</h3>
         </div>
         {/* <p className="config__title-note">
           <small>

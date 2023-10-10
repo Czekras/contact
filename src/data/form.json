@@ -1,7 +1,7 @@
 [
   {
     "nameEN": "name",
-    "nameJA": "名前",
+    "nameJA": "お名前",
     "icon": "person",
     "type": 1,
     "labelFor": "name",
@@ -34,7 +34,7 @@
     "type": 1,
     "labelFor": "mail",
     "required": "option1",
-    "inputType": "text",
+    "inputType": "email",
     "inputName": "mail",
     "inputId": "mail",
     "inputSize": 60,
@@ -48,7 +48,7 @@
     "type": 1,
     "labelFor": "mail_conf",
     "required": "option1",
-    "inputType": "text",
+    "inputType": "email",
     "inputName": "mail_conf",
     "inputId": "mail_conf",
     "inputSize": 60,
@@ -62,7 +62,7 @@
     "type": 1,
     "labelFor": "tel",
     "required": "option1",
-    "inputType": "text",
+    "inputType": "tel",
     "inputName": "tel",
     "inputId": "tel",
     "inputSize": 60,
@@ -121,9 +121,9 @@
     "inputId": "radiosample",
     "inputNote": "",
     "itemList": [
-      { "label": "ラジオ１" },
-      { "label": "ラジオ２" },
-      { "label": "ラジオ３" }
+      { "label": "ラジオ1" },
+      { "label": "ラジオ2" },
+      { "label": "ラジオ3" }
     ]
   },
   {
@@ -138,9 +138,9 @@
     "inputId": "checkboxsample",
     "inputNote": "",
     "itemList": [
-      { "label": "チェック１" },
-      { "label": "チェック２" },
-      { "label": "チェック３" }
+      { "label": "チェック1" },
+      { "label": "チェック2" },
+      { "label": "チェック3" }
     ]
   },
   {
@@ -155,9 +155,9 @@
     "inputId": "selectsample",
     "inputNote": "",
     "itemList": [
-      { "label": "セレクト１" },
-      { "label": "セレクト２" },
-      { "label": "セレクト３" }
+      { "label": "セレクト1" },
+      { "label": "セレクト2" },
+      { "label": "セレクト3" }
     ]
   },
   {
@@ -167,7 +167,8 @@
     "type": 1,
     "labelFor": "url",
     "required": "option1",
-    "inputType": "text",
+    "inputName": "url",
+    "inputType": "url",
     "inputurl": "url",
     "inputId": "url",
     "inputSize": 60,
@@ -223,7 +224,7 @@
     "type": 4,
     "labelFor": "",
     "required": "option1",
-    "inputName": "address",
+    "inputName": "agree",
     "inputType": "checkbox",
     "inputId": "agree",
     "inputNote": ""

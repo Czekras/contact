@@ -10,6 +10,8 @@ $clr-code-bg: #ffffff;
 $clr-config-bg: #ffffff;
 $bdc: #d1d1d1;
 
+$ff: #adadad38;
+
 $ff-sans: 'Noto Sans JP', sans-serif;
 $ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
 $ff-maru: 'Kosugi Maru', sans-serif;
@@ -494,14 +496,22 @@ a {
 .output {
   &__button {
     all: unset;
+    transition: $transition;
 
     &:hover {
       cursor: pointer;
     }
 
+    &--copy {
+      color: $clr-sub;
+
+      &:hover {
+        color: $clr-main;
+      }
+    }
+
     &--close {
       color: $clr-sub;
-      transition: $transition;
 
       &:hover {
         color: $clr-red;
@@ -530,7 +540,8 @@ a {
     position: absolute;
     background-color: $bgc-main;
     margin: auto;
-    width: min(90%, 800px);
+    width: min(95%, 880px);
+    // width: min(95%, 1000px);
     height: 80dvh;
     border: 1px solid $bdc;
     // border-radius: 5px;
@@ -552,14 +563,16 @@ a {
 
   &__title {
     color: $clr-sub;
+    font-weight: 400;
+    font-size: 14px;
   }
 
   &__content {
-    padding: 30px;
+    padding: 15px 20px;
   }
 
   &__item {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 
     &-top {
       display: flex;
@@ -572,17 +585,20 @@ a {
     &-code {
       // text-align: justify;
       // border: 1px solid $bdc;
-      font-family: $ff-mono;
-      padding: 10px;
-      background-color: $clr-accent;
-      overflow: auto;
-      height: fit-content;
-      max-height: 200px;
+      // font-family: $ff-mono;
+      // padding: 10px;
+      // background-color: $clr-accent;
+      // overflow: auto;
+      // white-space: nowrap;
 
-      white-space: nowrap;
+      // p {
+      //   margin-left: 2ch;
+      // }
 
-      p {
-        margin-left: 2ch;
+      pre {
+        height: 230px;
+        // overflow-x: hidden !important;
+        // border: 1px solid $bdc;
       }
     }
   }
@@ -626,8 +642,15 @@ a {
 
   &__title {
     // white-space: nowrap;
+    color: $clr-sub;
     text-overflow: ellipsis;
     overflow: hidden;
+    font-size: clamp(15px, 2.5vw, 14px);
+
+    em {
+      font-style: normal;
+      color: $clr-main;
+    }
 
     &-note {
       color: $clr-sub;
@@ -693,18 +716,10 @@ a {
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/*                                   Divider                                  */
-/* -------------------------------------------------------------------------- */
 .divider {
   border: 0;
   border-top: 1px dotted $bdc;
   margin-block: 10px;
-}
-
-// TODO: Delete!
-.test {
-  overflow-wrap: break-word;
 }
 
 /* -------------------------------------------------------------------------- */

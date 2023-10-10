@@ -12,7 +12,7 @@ export default function Main() {
   const [initialConfig, setInitialConfig] = useState(true);
 
   const typeWithInnerItems = [5, 6, 7];
-  const typeWithoutPlaceholders = [4, 5, 6, 7];
+  const typeWithoutPlaceholders = [3, 4, 5, 6, 7];
 
   const initalList = [
     'name',
@@ -127,7 +127,7 @@ export default function Main() {
 
   /* ------------------------------- Update Item ------------------------------ */
   const handleUpdateItem = (inputName, inputID, inputValue, formIndex) => {
-    // console.log(inputName, activeItemID[1], inputID, inputValue, formIndex);
+    console.log(inputName, activeItemID[1], inputID, inputValue, formIndex);
 
     let newItem = {};
     if (['required'].includes(inputName)) {
