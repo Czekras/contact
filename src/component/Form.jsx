@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// import { Tooltip } from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 import { useState } from 'react';
 import Output from '../component/Output';
 
@@ -259,7 +259,11 @@ export default function FormDisplay({ func, data }) {
   };
 
   /* -------------------------------------------------------------------------- */
+  const activeSettingIcon = data.initialConfig
+    ? 'output__button--active'
+    : 'output__button';
 
+  /* -------------------------------------------------------------------------- */
   return (
     <div className="display-form">
       <div className="display-form__content">
@@ -271,7 +275,26 @@ export default function FormDisplay({ func, data }) {
               アイテム数：{data.userFormList.length}コ
             </p>
           </header>
-          <Output data={{ userFormList: data.userFormList }} />
+          <div className="display-form__box">
+            <Output
+              data={{
+                userFormList: data.userFormList,
+                userSettingList: data.userSettingList,
+              }}
+            />
+            <button
+              onClick={() => func.handleOpenSettings()}
+              // className="output__button output__button--word"
+              className={`output__button ${activeSettingIcon}`}
+              data-tooltip-id="option-tooltip"
+              data-tooltip-content={'Settings'}
+              // data-tooltip-place="left"
+            >
+              <span className="material-symbols-outlined">manage_accounts</span>
+              {/* <p>Config</p> */}
+            </button>
+            <Tooltip id="option-tooltip" />
+          </div>
         </div>
         <div className="display-form__option">
           {/* <div className="display-form__option-item">

@@ -1,40 +1,60 @@
 import { useState } from 'react';
 
 export default function Config({ func, data }) {
-  // const [itemChange, setItemChange] = useState(false);
-  // const [requireCB, setRequireCB] = useState(data.activeItem.required);
-  const [requireRadio, setRequireRadio] = useState(data.activeItem.required);
-
-  // setRequireRadio(data.activeItem.required)
-
-  // const [itemID, itemIndex] = data.activeItemID;
-  // console.log(itemID, itemIndex);
+  const [_, setRequireRadio] = useState(data.activeItem.required);
 
   const updateItem = (e) => {
-    // setItemChange(true)
-    // e.preventDefault();
     let { name, id, value } = e.target;
     const formIndex = data.activeItem.formIndex;
-
-    // if (name === 'required') value = requireCB;
-
     func.handleUpdateItem(name, id, value, formIndex);
   };
 
   const updateInnerItem = (e, itemID, itemIndex) => {
     const { id, value } = e.target;
-    // const formIndex = data.activeItem.formIndex;
-    func.handleUpdateInnerItem(id, value, itemID, itemIndex);
+    const formIndex = data.activeItem.formIndex;
+    func.handleUpdateInnerItem(id, value, itemID, itemIndex, formIndex);
   };
 
   /* --------------------------------- Initial -------------------------------- */
   const initialDisplay = () => {
+    const settingItems = Object.entries(data.userSettingList).map(
+      (itemList) => {
+        const item = itemList[1];
+        return (
+          <li key={item.id} className="config__item">
+            <label className="item-label" htmlFor={item.id}>
+              {item.name}
+            </label>
+            <input
+              type="text"
+              id={item.id}
+              name={item.id}
+              className="item-input"
+              value={item.value}
+              placeholder={item.placeholder}
+              onChange={(e) => func.handleSettingOnChange(e)}
+            />
+          </li>
+        );
+      }
+    );
+
     return (
       <div className="config-start">
-        <span className="config-start__icon material-symbols-outlined">
-          settings
-        </span>
-        <p>Setting</p>
+        <h3 className="config__title">
+          <em>SETTINGS</em>
+        </h3>
+        <div className="config-start__box">
+          クラス名
+          <button
+            className="output__button"
+            onClick={(e) => func.handleResetSetting(e)}
+          >
+            <span className="material-symbols-outlined">restart_alt</span>
+          </button>
+        </div>
+        <hr className="divider" />
+        <ul className="config__List">{settingItems}</ul>
       </div>
     );
   };
@@ -145,7 +165,7 @@ export default function Config({ func, data }) {
           placeholder={itemDefault.inputNote}
           onChange={(e) => updateItem(e)}
         />
-        <p className="item-memo">&lt;input&gt;の下に表示するメモ</p>
+        <p className="item-memo">&lt;{item.inputType}&gt;の下に表示するメモ</p>
       </li>
     );
 
@@ -190,7 +210,9 @@ export default function Config({ func, data }) {
           {/* <span className="config__icon material-symbols-outlined">
             settings
           </span> */}
-          <h3 className="config__title"><em>{item.nameJA}</em> 設定</h3>
+          <h3 className="config__title">
+            <em>{item.nameJA}</em> 設定
+          </h3>
         </div>
         {/* <p className="config__title-note">
           <small>
@@ -206,7 +228,7 @@ export default function Config({ func, data }) {
             {!data.typeWithoutPlaceholders.includes(item.type)
               ? placeholder
               : ''}
-            {note}
+            {!data.typeWithoutMemo.includes(item.type) ? note : ''}
             {divider}
             {data.typeWithInnerItems.includes(item.type) ? innerItems : ''}
           </ul>

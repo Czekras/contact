@@ -14,7 +14,7 @@ export default function Formlist({ func, data }) {
             : 'form-list__item'
         }
         data-tooltip-id="item-tooltip"
-        data-tooltip-content={`追加`}
+        data-tooltip-content={`Add Item`}
         data-tooltip-place="right"
         data-tooltip-position-strategy="fixed"
       >

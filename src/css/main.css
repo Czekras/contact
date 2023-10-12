@@ -195,6 +195,13 @@ a {
 .display-form__option-item input[type=checkbox] {
   margin-right: 5px;
 }
+.display-form__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  gap: 18px;
+}
 .display-form__footer {
   height: 35px;
   background-color: #ffffff;
@@ -213,9 +220,7 @@ a {
   border-bottom: 1px dashed #d1d1d1;
 }
 .display-form__item:hover {
-  background-color: #f1f1f1;
-  background-color: #f7f7f7;
-  background-color: #f7f7f7;
+  background-color: #eef1f5;
 }
 .display-form__item:hover .display-form__item-icon:nth-child(1) {
   color: #464646;
@@ -339,7 +344,7 @@ a {
   background-color: #dfdfdf;
 }
 .display-form__item--active {
-  background-color: #f7f7f7;
+  background-color: #eef1f5;
 }
 .display-form__item--active .display-form__item-icon {
   color: #464646;
@@ -373,14 +378,16 @@ a {
 .output__button {
   all: unset;
   transition: all 0.3s;
+  color: #adadad;
 }
 .output__button:hover {
   cursor: pointer;
+  color: #464646;
 }
-.output__button--copy {
+.output__button--copy, .output__button--active {
   color: #adadad;
 }
-.output__button--copy:hover {
+.output__button--copy:hover, .output__button--active:hover {
   color: #464646;
 }
 .output__button--close {
@@ -389,17 +396,7 @@ a {
 .output__button--close:hover {
   color: #e06c75;
 }
-.output__button--word {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-}
-.output__button--word p {
-  color: #adadad;
-  transition: all 0.3s;
-}
-.output__button--word:hover p {
+.output__button--active {
   color: #464646;
 }
 .output__modal {
@@ -408,7 +405,7 @@ a {
   background-color: #ffffff;
   margin: auto;
   width: min(95%, 880px);
-  height: 80dvh;
+  height: fit-content;
   border: 1px solid #d1d1d1;
 }
 .output__top {
@@ -439,7 +436,9 @@ a {
   margin-bottom: 10px;
 }
 .output__item-code pre {
-  height: 230px;
+  max-height: 230px;
+  margin-block: 0;
+  border: 1px dashed #d1d1d1;
 }
 .output__note {
   color: #adadad;
@@ -450,17 +449,17 @@ a {
 /* -------------------------------------------------------------------------- */
 .config {
   padding: 15px;
+  /* ----------------------------- Initial display ---------------------------- */
+  /* -------------------------------------------------------------------------- */
 }
 .config-start {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-flow: column nowrap;
-  height: 55%;
-  color: #adadad;
+  padding: 15px;
 }
-.config-start__icon {
-  margin-bottom: 5px;
+.config-start__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-flow: row nowrap;
 }
 .config__box {
   display: flex;
@@ -504,7 +503,7 @@ a {
   display: block;
   font-weight: 700;
   letter-spacing: 1px;
-  text-transform: capitalize;
+  margin-bottom: 3px;
   font-size: 13px;
 }
 .config__item .item-input {

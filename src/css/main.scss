@@ -267,6 +267,14 @@ a {
     }
   }
 
+  &__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 18px;
+  }
+
   &__footer {
     height: 35px;
     background-color: $bgc-main;
@@ -288,9 +296,10 @@ a {
     // transition: $transition;
 
     &:hover {
-      background-color: $bgc-accent;
-      background-color: lighten($bgc-accent, 2.5%);
-      background-color: #f7f7f7;
+      // background-color: $bgc-accent;
+      // background-color: lighten($bgc-accent, 2.5%);
+      // background-color: #f7f7f7;
+      background-color: #eef1f5;
       // background-color: $bgc-sub;
 
       #{$this}-icon:nth-child(1) {
@@ -456,7 +465,8 @@ a {
     }
 
     &--active {
-      background-color: #f7f7f7;
+      // background-color: #f7f7f7;
+      background-color: #eef1f5;
       // background-color: $bgc-accent;
 
       #{$this}-icon {
@@ -497,12 +507,15 @@ a {
   &__button {
     all: unset;
     transition: $transition;
+    color: $clr-sub;
 
     &:hover {
       cursor: pointer;
+      color: $clr-main;
     }
 
-    &--copy {
+    &--copy,
+    &--active {
       color: $clr-sub;
 
       &:hover {
@@ -518,20 +531,8 @@ a {
       }
     }
 
-    &--word {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-flow: column nowrap;
-
-      p {
-        color: $clr-sub;
-        transition: $transition;
-      }
-
-      &:hover p {
-        color: $clr-main;
-      }
+    &--active {
+      color: $clr-main;
     }
   }
 
@@ -542,7 +543,8 @@ a {
     margin: auto;
     width: min(95%, 880px);
     // width: min(95%, 1000px);
-    height: 80dvh;
+    // height: 80dvh;
+    height: fit-content;
     border: 1px solid $bdc;
     // border-radius: 5px;
     // padding: 20px;
@@ -584,7 +586,6 @@ a {
 
     &-code {
       // text-align: justify;
-      // border: 1px solid $bdc;
       // font-family: $ff-mono;
       // padding: 10px;
       // background-color: $clr-accent;
@@ -596,9 +597,11 @@ a {
       // }
 
       pre {
-        height: 230px;
+        // height: 230px;
+        max-height: 230px;
+        margin-block: 0;
         // overflow-x: hidden !important;
-        // border: 1px solid $bdc;
+        border: 1px dashed $bdc;
       }
     }
   }
@@ -614,19 +617,19 @@ a {
 .config {
   padding: 15px;
 
+  /* ----------------------------- Initial display ---------------------------- */
   &-start {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: column nowrap;
-    height: 55%;
-    color: $clr-sub;
+    padding: 15px;
 
-    &__icon {
-      margin-bottom: 5px;
+    &__box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-flow: row nowrap;
     }
   }
 
+  /* -------------------------------------------------------------------------- */
   &__box {
     display: flex;
     justify-content: flex-start;
@@ -680,8 +683,8 @@ a {
       display: block;
       font-weight: 700;
       letter-spacing: 1px;
-      // margin-bottom: 4px;
-      text-transform: capitalize;
+      margin-bottom: 3px;
+      // text-transform: capitalize;
       font-size: 13px;
     }
 

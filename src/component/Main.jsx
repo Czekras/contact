@@ -3,9 +3,12 @@ import Formlist from './Items';
 import FormDisplay from './Form';
 import Config from './Config';
 import form from '../data/form.json';
+import settings from '../data/settings.json';
 
 export default function Main() {
   const [userFormList, setUserFormList] = useState([]);
+  const [userSettingList, setUserSettingList] = useState([]);
+
   const [activeItemID, setActiveItemID] = useState(['initialID', -1]);
   const [activeItem, setActiveItem] = useState(Object);
   const [activeDefault, setActiveDefault] = useState(Object);
@@ -13,6 +16,7 @@ export default function Main() {
 
   const typeWithInnerItems = [5, 6, 7];
   const typeWithoutPlaceholders = [3, 4, 5, 6, 7];
+  const typeWithoutMemo = [4];
 
   const initalList = [
     'name',
@@ -27,10 +31,10 @@ export default function Main() {
     loadInitialList(localData, form);
   }, []);
 
-  const loadInitialList = (localData, list) => {
+  const loadInitialList = (localData, formList) => {
     const initialLocalList = [];
     if (!localData) {
-      list.map((item, index) => {
+      formList.map((item, index) => {
         if (initalList.includes(item.nameEN)) {
           const updatedItem = addUniqueID(item, index);
           initialLocalList.push(updatedItem);
@@ -38,10 +42,17 @@ export default function Main() {
       });
 
       localStorage.setItem('userFormList', JSON.stringify(initialLocalList));
+
+      const initialData = settings.initialData;
+      localStorage.setItem('userSettingList', JSON.stringify(initialData));
     }
 
     const userLocalList = JSON.parse(localStorage.getItem('userFormList'));
+    const userSettingList = JSON.parse(localStorage.getItem('userSettingList'));
+
     setUserFormList(userLocalList);
+    setUserSettingList(userSettingList);
+
     return initialLocalList;
   };
 
@@ -178,7 +189,41 @@ export default function Main() {
 
     handleUpdateList(newList);
   };
+
+  /* ---------------------------- Setting Functions --------------------------- */
+  const handleOpenSettings = () => {
+    setActiveItem([]);
+    setActiveItemID(['initialID', -1]);
+    setInitialConfig(true);
+  };
+
+  const handleSettingOnChange = (event) => {
+    const { id, value } = event.target;
+    const indexOfItem = userSettingList.findIndex((item) => item.id === id);
+
+    const newItem = {
+      ...userSettingList[indexOfItem],
+      value: value,
+    };
+
+    const newList = [
+      ...userSettingList.slice(0, indexOfItem),
+      newItem,
+      ...userSettingList.slice(indexOfItem + 1),
+    ];
+
+    setUserSettingList(newList);
+    localStorage.setItem('userSettingList', JSON.stringify(newList));
+  };
+
+  const handleResetSetting = (e) => {
+    const initialData = settings.initialData;
+    setUserSettingList(initialData);
+    localStorage.setItem('userSettingList', JSON.stringify(initialData));
+  };
+
   /* -------------------------------------------------------------------------- */
+
   return (
     <div className="main">
       <div className="main__main-l">
@@ -190,15 +235,20 @@ export default function Main() {
         />
       </div>
       <div className="main__main-m">
-        {/* <DisplayOptions /> */}
         <FormDisplay
           func={{
             handleUpdateList: handleUpdateList,
             handleDeleteItem: handleDeleteItem,
             generateInitList: generateInitList,
             handleActivateItem: handleActivateItem,
+            handleOpenSettings: handleOpenSettings,
           }}
-          data={{ userFormList: userFormList, activeItemID: activeItemID }}
+          data={{
+            userFormList: userFormList,
+            userSettingList: userSettingList,
+            activeItemID: activeItemID,
+            initialConfig: initialConfig,
+          }}
         />
       </div>
       <div className="main__main-r">
@@ -207,14 +257,18 @@ export default function Main() {
             handleUpdateItem: handleUpdateItem,
             handleSubmitItem: handleSubmitItem,
             handleUpdateInnerItem: handleUpdateInnerItem,
+            handleSettingOnChange: handleSettingOnChange,
+            handleResetSetting: handleResetSetting,
           }}
           data={{
+            userSettingList: userSettingList,
             // activeItemID: activeItemID,
             activeItem: activeItem,
             activeDefault: activeDefault,
             initialConfig: initialConfig,
             typeWithInnerItems: typeWithInnerItems,
             typeWithoutPlaceholders: typeWithoutPlaceholders,
+            typeWithoutMemo: typeWithoutMemo,
           }}
         />
       </div>

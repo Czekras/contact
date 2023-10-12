@@ -2,7 +2,7 @@ import ReactModal from 'react-modal';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
-import { github as style } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { githubGist as style } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const customStyles = {
   content: {
@@ -34,12 +34,22 @@ export default function Output({ data }) {
     setIsOpen(false);
   }
 
+  /* ------------------------------ User Settings ----------------------------- */
+  const userData = data.userSettingList;
+
+  const userTable = userData[0] ? ` class="${userData[0].value}"` : '';
+  const userTbody = userData[1] ? ` class="${userData[1].value}"` : '';
+  const userTr = userData[2] ? ` class="${userData[2].value}"` : '';
+  const userTh = userData[3] ? ` class="${userData[3].value}"` : '';
+  const userTd = userData[4] ? ` class="${userData[4].value}"` : '';
+  const userRequire = userData[5] ? ` class="${userData[5].value}"` : '';
+  const userOption = userData[6] ? ` class="${userData[6].value}"` : '';
+  const userMemo = userData[7] ? ` class="${userData[7].value}"` : '';
+
+  /* -------------------------------------------------------------------------- */
+
   const copytToClipboard = (tableName, copy) => {
-    const copySet = [
-      '<table class="contact-form-table">',
-      copy.join('\n'),
-      '</table>',
-    ];
+    const copySet = [`<table${userTable}>`, copy.join('\n'), '</table>'];
     navigator.clipboard.writeText(copySet.join('\n'));
 
     if (tableName === 'main') {
@@ -63,16 +73,16 @@ export default function Output({ data }) {
     const requiredList =
       item.required === 'option1'
         ? [
-            `<span class="required-mark">必須</span>`,
+            `<span${userRequire}>必須</span>`,
             `<?php if (isset($error['${item.inputName}'])) echo '<p class="error-text">' . $error['${item.inputName}'] . '</p>'; ?>`,
           ]
         : item.required === 'option2'
         ? [
-            `<span class="optional-mark">任意</span>`,
+            `<span${userOption}>任意</span>`,
             `<?php // if (isset($error['${item.inputName}'])) echo '<p class="error-text">' . $error['${item.inputName}'] . '</p>'; ?>`,
           ]
         : [
-            `<?php // <span class="required-mark">必須</span> ?>`,
+            `<?php // <span${userRequire}>必須</span> ?>`,
             `<?php // if (isset($error['${item.inputName}'])) echo '<p class="error-text">' . $error['${item.inputName}'] . '</p>'; ?>`,
           ];
 
@@ -82,12 +92,12 @@ export default function Output({ data }) {
 
     if (item.type === 1) {
       mainList.push(
-        `  <tr>
-    <th>
+        `  <tr${userTr}>
+    <th${userTh}>
       <label for="${item.labelFor}">${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       ${requiredList[1] || ''}
       <input type="${item.inputType}" name="items[${item.inputName}]" id="${
           item.inputId
@@ -103,12 +113,12 @@ export default function Output({ data }) {
 
     if (item.type === 2) {
       mainList.push(
-        `  <tr>
-    <th>
+        `  <tr${userTr}>
+    <th${userTh}>
       <label for="${item.labelFor}">${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       ${requiredList[1] || ''}
       <textarea name="items[${item.inputName}]" id="${item.inputId}" cols="${
           item.inputCols
@@ -124,8 +134,8 @@ export default function Output({ data }) {
 
     if (item.type === 3) {
       mainList.push(
-        `  <tr>
-    <th>
+        `  <tr${userTr}>
+    <th${userTh}>
       <label for="${item.inputPostalName1}">${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
@@ -170,12 +180,12 @@ export default function Output({ data }) {
 
     if (item.type === 4) {
       mainList.push(
-        `  <tr>
-    <th>
+        `  <tr${userTr}>
+    <th${userTh}>
       <label>${item.nameJA}への同意</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       ${requiredList[1] || ''}
       <input type="hidden" name="items[${item.inputName}]" value="">
       <input type="${item.inputType}" name="items[${item.inputName}]" id="${
@@ -223,12 +233,12 @@ export default function Output({ data }) {
           : [];
 
         mainList.push(
-          `  <tr> 
-    <th>
+          `  <tr${userTr}> 
+    <th${userTh}>
       <label>${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       ${requiredList[1] || ''}
 ${innerItemList.join('\n')}
     </td>
@@ -245,12 +255,12 @@ ${innerItemList.join('\n')}
           : [];
 
         mainList.push(
-          `  <tr>
-    <th>
+          `  <tr${userTr}>
+    <th${userTh}>
       <label>${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       ${requiredList[1] || ''}
 ${innerItemList.join('\n')}
     </td>
@@ -268,12 +278,12 @@ ${innerItemList.join('\n')}
         : [];
 
       mainList.push(
-        `  <tr>
-    <th>
+        `  <tr${userTr}>
+    <th${userTh}>
       <label for="${item.labelFor}">${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       ${requiredList[1] || ''}
       <select name="items[${item.inputName}]" id="${item.inputId}">
         <option value="未選択" <?php if (isset($items['${
@@ -309,12 +319,12 @@ ${innerItemList.join('\n')}
           })
         : [];
 
-      mainList.push(`  <tr>
-    <th>
+      mainList.push(`  <tr${userTr}>
+    <th${userTh}>
       <label>${item.nameJA}</label>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       <ul class="date-list">
 ${innerItemList.join('\n')}
       </ul>
@@ -331,8 +341,8 @@ ${innerItemList.join('\n')}
         itemIdRequired = 'file_opt';
       }
 
-      mainList.push(`  <tr>
-    <th>
+      mainList.push(`  <tr${userTr}>
+    <th${userTh}>
       ${item.nameJA}${itemNameRequired}<br>
       <small class="upload-notice">
         <?php // サーバーの1ファイルあたりの最大許容サイズを取得して表示しています。?>
@@ -342,7 +352,7 @@ ${innerItemList.join('\n')}
       </small>
       ${requiredList[0] || ''}
     </th>
-    <td>
+    <td${userTd}>
       <?php if (isset($error_postsize)) echo '<p class="error-text">' . $error_postsize . '</p>'; ?>
       <?php if (isset($error['${itemIdRequired}'])) echo '<p class="error-text">' . $error['${itemIdRequired}'] . '</p>'; ?>
       <div class="upload-item-wrap">
@@ -372,16 +382,16 @@ ${innerItemList.join('\n')}
     const confirmList = [];
 
     if ([1, 2, 6].includes(item.type)) {
-      confirmList.push(`  <tr>
-    <th>${item.nameJA}</th>
-    <td><?php if (isset($items['${item.inputName}'])) echo h($items['${item.inputName}']); ?></td>
+      confirmList.push(`  <tr${userTr}>
+    <th${userTh}>${item.nameJA}</th>
+    <td${userTd}><?php if (isset($items['${item.inputName}'])) echo h($items['${item.inputName}']); ?></td>
   </tr>`);
     }
 
     if (item.type == 3) {
-      confirmList.push(`  <tr>
-    <th>${item.nameJA}</th>
-    <td>
+      confirmList.push(`  <tr${userTr}>
+    <th${userTh}>${item.nameJA}</th>
+    <td${userTd}>
       〒 <?php if (isset($items['${item.inputPostalName1}'])) echo h($items['${item.inputPostalName1}']); ?> - <?php if (isset($items['${item.inputPostalName2}'])) echo h($items['${item.inputPostalName2}']); ?><br>
       <?php if (isset($items['${item.inputName}'])) echo h($items['${item.inputName}']); ?>
     </td>
@@ -390,18 +400,18 @@ ${innerItemList.join('\n')}
 
     if (item.type === 5) {
       if (item.inputType === 'checkbox') {
-        confirmList.push(`  <tr>
-    <th>${item.nameJA}</th>
-    <td>
+        confirmList.push(`  <tr${userTr}>
+    <th${userTh}>${item.nameJA}</th>
+    <td${userTd}>
       <?php echo join('<br>', array_filter($items['${item.inputName}'], 'strlen')); ?>
     </td>
   </tr>`);
       }
 
       if (item.inputType === 'radio') {
-        confirmList.push(`  <tr>
-    <th>${item.nameJA}</th>
-    <td><?php if (isset($items['${item.inputName}'])) echo h($items['${item.inputName}']); ?></td>
+        confirmList.push(`  <tr${userTr}>
+    <th${userTh}>${item.nameJA}</th>
+    <td${userTd}><?php if (isset($items['${item.inputName}'])) echo h($items['${item.inputName}']); ?></td>
   </tr>`);
       }
     }
@@ -419,9 +429,9 @@ ${innerItemList.join('\n')}
           })
         : [];
 
-      confirmList.push(`  <tr>
-    <th>${item.nameJA}</th>
-    <td>
+      confirmList.push(`  <tr${userTr}>
+    <th${userTh}>${item.nameJA}</th>
+    <td${userTd}>
       <ul>
 ${innerItemList.join('\n')}
       </ul>
@@ -438,9 +448,9 @@ ${innerItemList.join('\n')}
         itemIdRequired = 'file_opt';
       }
 
-      confirmList.push(`  <tr>
-    <th>${item.nameJA}${itemNameRequired}</th>
-    <td>
+      confirmList.push(`  <tr${userTr}>
+    <th${userTh}>${item.nameJA}${itemNameRequired}</th>
+    <td${userTd}>
       <?php if ($items['files']['local_name']['${itemIdRequired}']) { ?>
         <?php if (strrchr($items['files']['local_name']['${itemIdRequired}'], '.') === '.pdf') { ?>
           <img src="./img/pdf_image.jpg" alt="" width="220" loading="lazy">
@@ -457,18 +467,26 @@ ${innerItemList.join('\n')}
     return confirmList;
   });
 
+  const updatedConfirmationCode = generatedConfirmationCode.filter(
+    (val) => Object.keys(val).length !== 0
+  );
+
   return (
     <div className="output">
       <button
         className="output__button output__button--word"
         onClick={openModal}
         disabled={!codeAvailable}
+        data-tooltip-id="option-tooltip"
+        data-tooltip-content={'Code Modal'}
+        // data-tooltip-place="left"
       >
         <span className="material-symbols-outlined">
           {codeAvailable ? 'code' : 'code_off'}
         </span>
-        <p>Code</p>
+        {/* <p>Code</p> */}
       </button>
+      <Tooltip id="option-tooltip" />
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -491,7 +509,7 @@ ${innerItemList.join('\n')}
           <div className="output__item">
             <div className="output__item-top">
               <header className="output__item-header">
-                <h3 className="output__item-title">Form Table</h3>
+                <h3 className="output__item-title">1. Form Table</h3>
                 <p className="output__item-description">
                   お問い合わせのフォーム &lt;table&gt; コード
                 </p>
@@ -516,7 +534,7 @@ ${innerItemList.join('\n')}
                 showLineNumbers
               >
                 {[
-                  '<table class="contact-form-table">',
+                  `<table${userTable}>`,
                   generatedMainCode.join('\n'),
                   '</table>',
                 ].join('\n')}
@@ -526,7 +544,9 @@ ${innerItemList.join('\n')}
           <div className="output__item">
             <div className="output__item-top">
               <header className="output__item-header">
-                <h3 className="output__item-title">Input Confirmation Table</h3>
+                <h3 className="output__item-title">
+                  2. Input Confirmation Table
+                </h3>
                 <p className="output__item-description">
                   入力内容を確認 &lt;table&gt; コード
                 </p>
@@ -534,7 +554,7 @@ ${innerItemList.join('\n')}
               <button
                 className="output__button output__button--copy"
                 onClick={() =>
-                  copytToClipboard('confirm', generatedConfirmationCode)
+                  copytToClipboard('confirm', updatedConfirmationCode)
                 }
                 data-tooltip-id="copy-tooltip"
                 data-tooltip-content={'コピー'}
@@ -553,8 +573,8 @@ ${innerItemList.join('\n')}
                 showLineNumbers
               >
                 {[
-                  '<table class="contact-form-table">',
-                  generatedConfirmationCode.join('\n'),
+                  `<table${userTable}>`,
+                  updatedConfirmationCode.join('\n'),
                   '</table>',
                 ].join('\n')}
               </SyntaxHighlighter>

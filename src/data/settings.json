@@ -1,0 +1,53 @@
+{
+  "formVersion": "v1.6.1",
+  "initialData": [
+    {
+      "id": "setting00",
+      "name": "<table>",
+      "value": "contact-form-table",
+      "placeholder": "contact-form-table"
+    },
+    {
+      "id": "setting01",
+      "name": "<tbody>",
+      "value": "",
+      "placeholder": ""
+    },
+    {
+      "id": "setting02",
+      "name": "<tr>",
+      "value": "",
+      "placeholder": ""
+    },
+    {
+      "id": "setting03",
+      "name": "<th>",
+      "value": "",
+      "placeholder": ""
+    },
+    {
+      "id": "setting04",
+      "name": "<td>",
+      "value": "",
+      "placeholder": ""
+    },
+    {
+      "id": "setting05",
+      "name": "必須",
+      "value": "required-mark",
+      "placeholder": "required-mark"
+    },
+    {
+      "id": "setting06",
+      "name": "任意",
+      "value": "optional-mark",
+      "placeholder": "optional-mark"
+    },
+    {
+      "id": "setting07",
+      "name": "メモ",
+      "value": "",
+      "placeholder": ""
+    }
+  ]
+}
