@@ -1,0 +1,42 @@
+@media screen and (width <= 768px) {
+  .sp-none {
+    display: none !important;
+    visibility: visible !important;
+  }
+
+  .pc-none {
+    display: inline !important;
+    visibility: visible !important;
+  }
+
+  * ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .main {
+    padding-right: 0;
+
+    &__main-l {
+      width: 40px;
+    }
+
+    &__main-r {
+      border-right: none;
+    }
+  }
+
+  .ouput {
+    &__modal {
+      inset: 20px 0 auto 0;
+    }
+  }
+}
+
+@media screen and (width <= 430px) {
+  .main {
+    display: none;
+  }
+  .hidden {
+    display: flex;
+  }
+}

@@ -41,7 +41,7 @@ a {
 .main {
   width: min(100%, 1080px);
   margin-inline: auto;
-  padding-inline: 15px;
+  padding-inline: clamp(10px, 2.5vw, 15px);
   background-color: #ffffff;
   display: flex;
   flex-flow: row nowrap;
@@ -116,12 +116,12 @@ a {
 .form-list__button {
   all: unset;
   width: 100%;
-  padding-block: 13px;
+  padding-block: clamp(10px, 2.5vw, 13px);
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
   flex-flow: row nowrap;
-  gap: 15px;
+  gap: clamp(12px, 2.5vw, 15px);
   transition: all 0.3s;
 }
 .form-list__button:hover {
@@ -132,16 +132,18 @@ a {
   color: #464646;
 }
 .form-list__title {
-  font-size: 14px;
+  font-size: clamp(12px, 1vw, 14px);
   color: #adadad;
   transition: all 0.3s;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .form-list__subtitle, .form-list__icon {
   transition: all 0.3s;
   color: #adadad;
 }
 .form-list__icon {
-  font-size: 18px;
+  font-size: clamp(15px, 2.5vw, 18px);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -157,14 +159,15 @@ a {
 }
 .display-form__content {
   border-radius: 0px;
-  margin: 20px;
+  margin: clamp(10px, 2.5vw, 15px);
 }
 .display-form__top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
-  padding: 25px 25px 12px 25px;
+  padding: clamp(12px, 2.5vw, 25px);
+  padding-bottom: clamp(10px, 2.5vw, 12px);
   border-radius: 0px 0px 0 0;
   border: 1px solid #d1d1d1;
   border-bottom: none;
@@ -200,7 +203,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
-  gap: 18px;
+  gap: clamp(15px, 2.5vw, 18px);
 }
 .display-form__footer {
   height: 35px;
@@ -214,7 +217,7 @@ a {
   justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
-  padding: 20px 20px 20px 25px;
+  padding: clamp(8px, 2.5vw, 20px);
   background-color: #ffffff;
   border-inline: 1px solid #d1d1d1;
   border-bottom: 1px dashed #d1d1d1;
@@ -230,7 +233,7 @@ a {
   justify-content: center;
   align-items: center;
   flex-flow: row nowrap;
-  gap: 15px;
+  gap: clamp(5px, 1vw, 15px);
   color: #adadad;
   transition: all 0.3s;
 }
@@ -252,8 +255,9 @@ a {
   color: #464646;
 }
 .display-form__item-main {
-  width: 100%;
-  margin-inline: 25px;
+  flex: 0 1 100%;
+  margin-inline: clamp(5px, 2.5vw, 25px);
+  overflow: hidden;
 }
 .display-form__item-header {
   display: flex;
@@ -265,8 +269,15 @@ a {
 .display-form__item-title {
   font-weight: 700;
   letter-spacing: 1px;
+  flex: 0 1 auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .display-form__item-require, .display-form__item-note, .display-form__item-error {
+  min-width: fit-content;
   font-size: 12px;
 }
 .display-form__item-error {
@@ -274,7 +285,7 @@ a {
   margin-bottom: 4px;
 }
 .display-form__item-require {
-  margin-inline: 5px;
+  margin-inline: 10px 5px;
   color: #adadad;
 }
 .display-form__item-note {
@@ -310,7 +321,7 @@ a {
   gap: 5px;
 }
 .display-form__item .privacy-input-box label {
-  font-size: 13px;
+  font-size: clamp(12px, 2.5vw, 13px);
 }
 .display-form__item .radio-input-box,
 .display-form__item .date-input-box,
@@ -448,12 +459,12 @@ a {
 /*                                Configuration                               */
 /* -------------------------------------------------------------------------- */
 .config {
-  padding: 15px;
+  padding: clamp(10px, 2.5vw, 15px);
   /* ----------------------------- Initial display ---------------------------- */
   /* -------------------------------------------------------------------------- */
 }
 .config-start {
-  padding: 15px;
+  padding: clamp(10px, 2.5vw, 15px);
 }
 .config-start__box {
   display: flex;
@@ -496,15 +507,15 @@ a {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-flow: row nowrap;
-  gap: 15px;
+  flex-flow: row wrap;
+  gap: clamp(5px, 0.5vw, 15px);
 }
 .config__item .item-label {
   display: block;
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 3px;
-  font-size: 13px;
+  font-size: clamp(12px, 2.5vw, 13px);
 }
 .config__item .item-input {
   outline: none;
@@ -551,6 +562,20 @@ a {
 .footer small {
   margin-inline: 15px;
   white-space: nowrap;
+}
+
+/* --------------------------------- Hidden --------------------------------- */
+.hidden {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-inline: auto;
+}
+.hidden h2 {
+  margin-bottom: 5px;
 }
 
 /* -------------------------------------------------------------------------- */

@@ -14,7 +14,7 @@ const customStyles = {
     // transform: 'translate(-50%, -50%)',
   },
   overlay: {
-    zIndex: 90,
+    zIndex: 110,
   },
 };
 
@@ -70,6 +70,8 @@ export default function Output({ data }) {
   const generatedMainCode = data.userFormList.map((item) => {
     const mainList = [];
 
+    const memo = item.inputNote ? `\n     <p${userMemo}>${item.inputNote}</p>` : '';
+
     const requiredList =
       item.required === 'option1'
         ? [
@@ -105,7 +107,7 @@ export default function Output({ data }) {
           item.inputName
         }'])) echo h($items['${item.inputName}']); ?>" placeholder="${
           item.inputPlaceholder
-        }"${inputMaxLength}>
+        }"${inputMaxLength}>${memo}
     </td>
   </tr>`
       );
@@ -126,7 +128,7 @@ export default function Output({ data }) {
           item.inputPlaceholder
         }"><?php if (isset($items['${item.inputName}'])) echo $items['${
           item.inputName
-        }']; ?></textarea>
+        }']; ?></textarea>${memo}
     </td>
   </tr>`
       );
@@ -171,7 +173,7 @@ export default function Output({ data }) {
           item.inputSize
         }" value="<?php if (isset($items['${
           item.inputName
-        }'])) echo h($items['${item.inputName}']); ?>">
+        }'])) echo h($items['${item.inputName}']); ?>">${memo}
       </div>
     </td>
   </tr>`

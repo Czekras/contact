@@ -62,7 +62,7 @@ a {
 .main {
   width: min(100%, 1080px);
   margin-inline: auto;
-  padding-inline: 15px;
+  padding-inline: clamp(10px, 2.5vw, 15px);
   background-color: $bgc-main;
   display: flex;
   flex-flow: row nowrap;
@@ -165,12 +165,12 @@ a {
     all: unset;
     width: 100%;
     // padding: 13px 0;
-    padding-block: 13px;
+    padding-block: clamp(10px, 2.5vw, 13px);
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
     flex-flow: row nowrap;
-    gap: 15px;
+    gap: clamp(12px, 2.5vw, 15px);
     transition: $transition;
 
     &:hover {
@@ -184,9 +184,11 @@ a {
   }
 
   &__title {
-    font-size: 14px;
+    font-size: clamp(12px, 1vw, 14px);
     color: $clr-sub;
     transition: $transition;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   &__subtitle,
@@ -197,7 +199,7 @@ a {
 
   &__icon {
     // margin-bottom: 5px;
-    font-size: 18px;
+    font-size: clamp(15px, 2.5vw, 18px);
   }
 }
 
@@ -219,7 +221,7 @@ a {
 
   &__content {
     border-radius: $bdr;
-    margin: 20px;
+    margin: clamp(10px, 2.5vw, 15px);
     // width: min(100%, 605px);
   }
 
@@ -228,7 +230,9 @@ a {
     justify-content: space-between;
     align-items: center;
     flex-flow: row nowrap;
-    padding: 25px 25px 12px 25px;
+    padding: clamp(12px, 2.5vw, 25px);
+    padding-bottom: clamp(10px, 2.5vw, 12px);
+    // padding: 25px 25px 12px 25px;
     border-radius: $bdr $bdr 0 0;
     border: 1px solid $bdc;
     border-bottom: none;
@@ -272,7 +276,7 @@ a {
     justify-content: center;
     align-items: center;
     flex-flow: row nowrap;
-    gap: 18px;
+    gap: clamp(15px, 2.5vw, 18px);
   }
 
   &__footer {
@@ -289,7 +293,8 @@ a {
     justify-content: space-between;
     align-items: center;
     flex-flow: row nowrap;
-    padding: 20px 20px 20px 25px;
+    // padding: 20px 20px 20px 25px;
+    padding: clamp(8px, 2.5vw, 20px);
     background-color: $bgc-main;
     border-inline: 1px solid $bdc;
     border-bottom: 1px dashed $bdc;
@@ -312,7 +317,7 @@ a {
       justify-content: center;
       align-items: center;
       flex-flow: row nowrap;
-      gap: 15px;
+      gap: clamp(5px, 1vw, 15px);
       color: $clr-sub;
       transition: $transition;
     }
@@ -342,14 +347,17 @@ a {
     }
 
     &-main {
-      // flex: 1 0 auto;
-      width: 100%;
-      margin-inline: 25px;
+      flex: 0 1 100%;
+      // width: 100%;
+      // margin-inline: 25px;
+      margin-inline: clamp(5px, 2.5vw, 25px);
+      overflow: hidden;
     }
 
     &-header {
       display: flex;
       justify-content: space-between;
+      // justify-content: flex-start;
       align-items: center;
       flex-flow: row nowrap;
       margin-bottom: 4px;
@@ -358,11 +366,18 @@ a {
     &-title {
       font-weight: 700;
       letter-spacing: 1px;
+      flex: 0 1 auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
     }
 
     &-require,
     &-note,
     &-error {
+      min-width: fit-content;
       font-size: 12px;
     }
 
@@ -372,9 +387,7 @@ a {
     }
 
     &-require {
-      // margin: 0 5px 4px 5px;
-      margin-inline: 5px;
-      // color: $clr-rrd;
+      margin-inline: 10px 5px;
       color: $clr-sub;
     }
 
@@ -421,7 +434,7 @@ a {
       gap: 5px;
 
       label {
-        font-size: 13px;
+        font-size: clamp(12px, 2.5vw, 13px);
       }
     }
 
@@ -537,6 +550,7 @@ a {
   }
 
   &__modal {
+    // inset: 20px 0 auto 0;
     inset: 0;
     position: absolute;
     background-color: $bgc-main;
@@ -545,6 +559,7 @@ a {
     // width: min(95%, 1000px);
     // height: 80dvh;
     height: fit-content;
+
     border: 1px solid $bdc;
     // border-radius: 5px;
     // padding: 20px;
@@ -615,11 +630,11 @@ a {
 /*                                Configuration                               */
 /* -------------------------------------------------------------------------- */
 .config {
-  padding: 15px;
+  padding: clamp(10px, 2.5vw, 15px);
 
   /* ----------------------------- Initial display ---------------------------- */
   &-start {
-    padding: 15px;
+    padding: clamp(10px, 2.5vw, 15px);
 
     &__box {
       display: flex;
@@ -675,8 +690,8 @@ a {
       justify-content: flex-start;
       // justify-content: space-between;
       align-items: center;
-      flex-flow: row nowrap;
-      gap: 15px;
+      flex-flow: row wrap;
+      gap: clamp(5px, .5vw, 15px);
     }
 
     .item-label {
@@ -685,7 +700,7 @@ a {
       letter-spacing: 1px;
       margin-bottom: 3px;
       // text-transform: capitalize;
-      font-size: 13px;
+      font-size: clamp(12px, 2.5vw, 13px);
     }
 
     .item-input {
@@ -740,6 +755,21 @@ a {
   small {
     margin-inline: 15px;
     white-space: nowrap;
+  }
+}
+
+/* --------------------------------- Hidden --------------------------------- */
+.hidden {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-inline: auto;
+
+  h2 {
+    margin-bottom: 5px;
   }
 }
 

@@ -25,7 +25,7 @@ export default function Formlist({ func, data }) {
           <span className="form-list__icon material-symbols-outlined">
             {item.icon}
           </span>
-          <div className="form-list__box">
+          <div className="form-list__box sp-none">
             {/* <small className="form-list__subtitle">{item.nameEN}</small> */}
             <h3 className="form-list__title">{item.nameJA}</h3>
           </div>
