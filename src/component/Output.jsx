@@ -5,16 +5,9 @@ import { Tooltip } from 'react-tooltip';
 import { githubGist as style } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const customStyles = {
-  content: {
-    // top: '50%',
-    // left: '50%',
-    // right: 'auto',
-    // bottom: 'auto',
-    // marginRight: '-50%',
-    // transform: 'translate(-50%, -50%)',
-  },
   overlay: {
     zIndex: 110,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
 };
 
@@ -37,14 +30,25 @@ export default function Output({ data }) {
   /* ------------------------------ User Settings ----------------------------- */
   const userData = data.userSettingList;
 
-  const userTable = userData[0] ? ` class="${userData[0].value}"` : '';
-  const userTbody = userData[1] ? ` class="${userData[1].value}"` : '';
-  const userTr = userData[2] ? ` class="${userData[2].value}"` : '';
-  const userTh = userData[3] ? ` class="${userData[3].value}"` : '';
-  const userTd = userData[4] ? ` class="${userData[4].value}"` : '';
-  const userRequire = userData[5] ? ` class="${userData[5].value}"` : '';
-  const userOption = userData[6] ? ` class="${userData[6].value}"` : '';
-  const userMemo = userData[7] ? ` class="${userData[7].value}"` : '';
+  let userTable = '';
+  let userTbody = '';
+  let userTr = '';
+  let userTh = '';
+  let userTd = '';
+  let userRequire = '';
+  let userOption = '';
+  let userMemo = '';
+
+  if (userData.length > 0) {
+    userTable = userData[0].value ? ` class="${userData[0].value}"` : '';
+    userTbody = userData[1].value ? ` class="${userData[1].value}"` : '';
+    userTr = userData[2].value ? ` class="${userData[2].value}"` : '';
+    userTh = userData[3].value ? ` class="${userData[3].value}"` : '';
+    userTd = userData[4].value ? ` class="${userData[4].value}"` : '';
+    userRequire = userData[5].value ? ` class="${userData[5].value}"` : '';
+    userOption = userData[6].value ? ` class="${userData[6].value}"` : '';
+    userMemo = userData[7].value ? ` class="${userData[7].value}"` : '';
+  }
 
   /* -------------------------------------------------------------------------- */
 
@@ -70,7 +74,14 @@ export default function Output({ data }) {
   const generatedMainCode = data.userFormList.map((item) => {
     const mainList = [];
 
-    const memo = item.inputNote ? `\n     <p${userMemo}>${item.inputNote}</p>` : '';
+    const memo = (value, multiplier) => {
+      if (value) {
+        const space = ' '.repeat(multiplier);
+        return `\n${space}<p${userMemo}>${value}</p>`;
+      }
+
+      return '';
+    };
 
     const requiredList =
       item.required === 'option1'
@@ -107,7 +118,7 @@ export default function Output({ data }) {
           item.inputName
         }'])) echo h($items['${item.inputName}']); ?>" placeholder="${
           item.inputPlaceholder
-        }"${inputMaxLength}>${memo}
+        }"${inputMaxLength}>${memo(item.inputNote, 6)}
     </td>
   </tr>`
       );
@@ -128,7 +139,7 @@ export default function Output({ data }) {
           item.inputPlaceholder
         }"><?php if (isset($items['${item.inputName}'])) echo $items['${
           item.inputName
-        }']; ?></textarea>${memo}
+        }']; ?></textarea>${memo(item.inputNote, 5)}
     </td>
   </tr>`
       );
@@ -173,8 +184,8 @@ export default function Output({ data }) {
           item.inputSize
         }" value="<?php if (isset($items['${
           item.inputName
-        }'])) echo h($items['${item.inputName}']); ?>">${memo}
-      </div>
+        }'])) echo h($items['${item.inputName}']); ?>">
+      </div>${memo(item.inputNote, 6)}
     </td>
   </tr>`
       );
@@ -242,7 +253,7 @@ export default function Output({ data }) {
     </th>
     <td${userTd}>
       ${requiredList[1] || ''}
-${innerItemList.join('\n')}
+${innerItemList.join('\n')}${memo(item.inputNote, 6)}
     </td>
   </tr>`
         );
@@ -264,7 +275,7 @@ ${innerItemList.join('\n')}
     </th>
     <td${userTd}>
       ${requiredList[1] || ''}
-${innerItemList.join('\n')}
+${innerItemList.join('\n')}${memo(item.inputNote, 6)}
     </td>
   </tr>`
         );
@@ -294,7 +305,7 @@ ${innerItemList.join('\n')}
           item.inputName
         }}'] === '未選択') echo "selected"; ?>>未選択</option>
 ${innerItemList.join('\n')}
-      </select>
+      </select>${memo(item.inputNote, 6)}
     </td>
   </tr>`
       );
@@ -329,7 +340,7 @@ ${innerItemList.join('\n')}
     <td${userTd}>
       <ul class="date-list">
 ${innerItemList.join('\n')}
-      </ul>
+      </ul>${memo(item.inputNote, 6)}
     </td>
   </tr>`);
     }
@@ -372,7 +383,7 @@ ${innerItemList.join('\n')}
           <label for="${itemIdRequired}" class="ancion-btn select-file">ファイルを選択</label>
           <p class="ancion-btn deselect-file">ファイルを削除</p>
         </div>
-      </div>
+      </div>${memo(item.inputNote, 6)}
     </td>
   </tr>`);
     }
@@ -390,7 +401,7 @@ ${innerItemList.join('\n')}
   </tr>`);
     }
 
-    if (item.type == 3) {
+    if (item.type === 3) {
       confirmList.push(`  <tr${userTr}>
     <th${userTh}>${item.nameJA}</th>
     <td${userTd}>

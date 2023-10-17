@@ -56,6 +56,38 @@ a {
   text-decoration: none;
 }
 
+.cmn-button {
+  width: 100%;
+  transition: $transition;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  // border: 1px solid $bdc;
+  padding-block: 3px;
+  border: none;
+  font-family: $ff-maru;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #dfdfdf;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 7px;
+  }
+
+  &:disabled {
+    background-color: #f0f0f0;
+
+    &:hover {
+      cursor: auto;
+    }
+  }
+
+  &--dark {
+    background-color: #e2e2e2;
+  }
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
@@ -294,20 +326,24 @@ a {
     align-items: center;
     flex-flow: row nowrap;
     // padding: 20px 20px 20px 25px;
-    padding: clamp(8px, 2.5vw, 20px);
+    padding-block: 20px;
+    padding-inline: clamp(8px, 2.5vw, 20px);
+    // padding: clamp(8px, 2.5vw, 20px);
     background-color: $bgc-main;
     border-inline: 1px solid $bdc;
     border-bottom: 1px dashed $bdc;
     // transition: $transition;
 
     &:hover {
-      // background-color: $bgc-accent;
-      // background-color: lighten($bgc-accent, 2.5%);
       // background-color: #f7f7f7;
-      background-color: #eef1f5;
-      // background-color: $bgc-sub;
+      // background-color: #eef1f5;
+      // background-color: $clr-accent;
 
-      #{$this}-icon:nth-child(1) {
+      // #{$this}-icon:nth-child(1) {
+      //   color: $clr-main;
+      // }
+
+      #{$this}-icon {
         color: $clr-main;
       }
     }
@@ -319,7 +355,7 @@ a {
       flex-flow: row nowrap;
       gap: clamp(5px, 1vw, 15px);
       color: $clr-sub;
-      transition: $transition;
+      // transition: $transition;
     }
 
     .delete-icon,
@@ -349,8 +385,8 @@ a {
     &-main {
       flex: 0 1 100%;
       // width: 100%;
-      // margin-inline: 25px;
-      margin-inline: clamp(5px, 2.5vw, 25px);
+      margin-inline: clamp(10px, 2.5vw, 25px);
+      // margin-inline: clamp(5px, 2.5vw, 25px);
       overflow: hidden;
     }
 
@@ -478,14 +514,35 @@ a {
     }
 
     &--active {
-      // background-color: #f7f7f7;
-      background-color: #eef1f5;
+      // background-color: $clr-accent;
+      // background-color: #eef1f5;
       // background-color: $bgc-accent;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        // inset: 0 0 0 auto;
+        inset: auto 0 auto auto;
+        // width: 15px;
+        // height: 15px;
+        margin-block: auto;
+        // background-color: $clr-main;
+        transform: translateX(10px);
+
+        border-style: solid;
+        border-color: transparent transparent transparent $clr-sub;
+        border-width: calc(20px/2) 0 calc(20px/2) 15px;
+      }
 
       #{$this}-icon {
         color: $clr-main;
       }
     }
+  }
+
+  .material-symbols-outlined {
+    font-size: clamp(18px, 2.5vw, 24px);
   }
 }
 
@@ -559,8 +616,8 @@ a {
     // width: min(95%, 1000px);
     // height: 80dvh;
     height: fit-content;
-
-    border: 1px solid $bdc;
+    border-radius: 4px;
+    // border: 1px solid $bdc;
     // border-radius: 5px;
     // padding: 20px;
   }
@@ -571,8 +628,8 @@ a {
     // justify-content: flex-end;
     align-items: flex-start;
     // margin-bottom: 20px;
-    border-bottom: 1px solid $bdc;
-    padding: 5px 10px 0px;
+    // border-bottom: 1px solid $bdc;
+    padding: 10px 10px 0;
     // background-color: $bgc-accent;
     border-radius: 5px 5px 0 0;
     text-transform: capitalize;
@@ -653,17 +710,13 @@ a {
     gap: 8px;
     margin-bottom: 4px;
   }
-
-  &__icon {
-    font-size: 24px;
-  }
-
+  
   &__title {
     // white-space: nowrap;
     color: $clr-sub;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-size: clamp(15px, 2.5vw, 14px);
+    font-size: clamp(12px, 2.5vw, 14px);
 
     em {
       font-style: normal;
@@ -678,11 +731,11 @@ a {
 
   &__item {
     &:not(:last-child) {
-      margin-bottom: 15px;
+      margin-bottom: clamp(10px, .5vw, 15px);
     }
 
     &:last-child {
-      margin-bottom: 25px;
+      margin-bottom: clamp(10px, .5vw, 25px);
     }
 
     &--cb {
@@ -691,7 +744,7 @@ a {
       // justify-content: space-between;
       align-items: center;
       flex-flow: row wrap;
-      gap: clamp(5px, .5vw, 15px);
+      gap: clamp(5px, 0.5vw, 15px);
     }
 
     .item-label {
@@ -725,13 +778,13 @@ a {
     }
   }
 
-  &__button {
-    width: 100%;
+  // &__button {
+  //   width: 100%;
 
-    &:hover {
-      cursor: pointer;
-    }
-  }
+  //   &:hover {
+  //     cursor: pointer;
+  //   }
+  // }
 }
 
 .divider {

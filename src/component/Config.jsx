@@ -46,15 +46,22 @@ export default function Config({ func, data }) {
         </h3>
         <div className="config-start__box">
           クラス名
-          <button
+          {/* <button
             className="output__button"
             onClick={(e) => func.handleResetSetting(e)}
           >
             <span className="material-symbols-outlined">restart_alt</span>
-          </button>
+          </button> */}
         </div>
         <hr className="divider" />
         <ul className="config__List">{settingItems}</ul>
+        <button
+          type="button"
+          onClick={(e) => func.handleResetSetting(e)}
+          className="cmn-button"
+        >
+          リセット
+        </button>
       </div>
     );
   };
@@ -169,6 +176,44 @@ export default function Config({ func, data }) {
       </li>
     );
 
+    const inputID = (
+      <li className="config__item">
+        <label className="item-label" htmlFor="inputNote">
+          &lt;{item.inputType}&gt; id
+        </label>
+        <input
+          type="text"
+          id="inputId"
+          name="inputId"
+          className="item-input"
+          // defaultValue={item.inputNote}
+          value={item.inputId}
+          placeholder={itemDefault.inputId}
+          onChange={(e) => updateItem(e)}
+          disabled
+        />
+      </li>
+    );
+
+    const inputName = (
+      <li className="config__item">
+        <label className="item-label" htmlFor="inputNote">
+          &lt;{item.inputType}&gt; name
+        </label>
+        <input
+          type="text"
+          id="inputName"
+          name="inputName"
+          className="item-input"
+          // defaultValue={item.inputNote}
+          value={item.inputName}
+          placeholder={itemDefault.inputName}
+          onChange={(e) => updateItem(e)}
+          disabled
+        />
+      </li>
+    );
+
     let innerItems = '';
     if (data.typeWithInnerItems.includes(item.type)) {
       // console.log(item.itemList);
@@ -220,7 +265,11 @@ export default function Config({ func, data }) {
           </small>
         </p> */}
         {/* {inputSetting(item.type)} */}
-        <form onSubmit={(e) => func.handleSubmitItem(e)} autoComplete="off">
+        <form
+          onSubmit={(e) => func.handleSubmitItem(e)}
+          autoComplete="off"
+          id="config-form"
+        >
           {divider}
           <ul className="config__List">
             {require}
@@ -231,14 +280,23 @@ export default function Config({ func, data }) {
             {!data.typeWithoutMemo.includes(item.type) ? note : ''}
             {divider}
             {data.typeWithInnerItems.includes(item.type) ? innerItems : ''}
+            {!data.typeWithoutNameID.includes(item.type) ? inputID : ''}
+            {!data.typeWithoutNameID.includes(item.type) ? inputName : ''}
           </ul>
           <button
-            className="config__button"
-            // disabled={!itemChange}
+            className="cmn-button"
+            onClick={(e) => func.handleResetConfig(item.id, item.formIndex)}
+            type="button"
           >
-            保存
+            リセット
           </button>
-          {/* <p className="test">{JSON.stringify(item)}</p> */}
+          <button
+            className="cmn-button cmn-button--dark"
+            form="config-form"
+            type="submit"
+          >
+            保存する
+          </button>
         </form>
       </section>
     );

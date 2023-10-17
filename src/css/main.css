@@ -35,6 +35,32 @@ a {
   text-decoration: none;
 }
 
+.cmn-button {
+  width: 100%;
+  transition: all 0.3s;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding-block: 3px;
+  border: none;
+  font-family: "Kosugi Maru", sans-serif;
+}
+.cmn-button:hover {
+  cursor: pointer;
+  background-color: #dfdfdf;
+}
+.cmn-button:not(:last-child) {
+  margin-bottom: 7px;
+}
+.cmn-button:disabled {
+  background-color: #f0f0f0;
+}
+.cmn-button:disabled:hover {
+  cursor: auto;
+}
+.cmn-button--dark {
+  background-color: #e2e2e2;
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                    Main                                    */
 /* -------------------------------------------------------------------------- */
@@ -217,15 +243,13 @@ a {
   justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
-  padding: clamp(8px, 2.5vw, 20px);
+  padding-block: 20px;
+  padding-inline: clamp(8px, 2.5vw, 20px);
   background-color: #ffffff;
   border-inline: 1px solid #d1d1d1;
   border-bottom: 1px dashed #d1d1d1;
 }
-.display-form__item:hover {
-  background-color: #eef1f5;
-}
-.display-form__item:hover .display-form__item-icon:nth-child(1) {
+.display-form__item:hover .display-form__item-icon {
   color: #464646;
 }
 .display-form__item-icon {
@@ -235,7 +259,6 @@ a {
   flex-flow: row nowrap;
   gap: clamp(5px, 1vw, 15px);
   color: #adadad;
-  transition: all 0.3s;
 }
 .display-form__item .delete-icon,
 .display-form__item .setting-icon {
@@ -256,7 +279,7 @@ a {
 }
 .display-form__item-main {
   flex: 0 1 100%;
-  margin-inline: clamp(5px, 2.5vw, 25px);
+  margin-inline: clamp(10px, 2.5vw, 25px);
   overflow: hidden;
 }
 .display-form__item-header {
@@ -355,10 +378,23 @@ a {
   background-color: #dfdfdf;
 }
 .display-form__item--active {
-  background-color: #eef1f5;
+  position: relative;
+}
+.display-form__item--active::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 auto auto;
+  margin-block: auto;
+  transform: translateX(10px);
+  border-style: solid;
+  border-color: transparent transparent transparent #adadad;
+  border-width: 10px 0 10px 15px;
 }
 .display-form__item--active .display-form__item-icon {
   color: #464646;
+}
+.display-form .material-symbols-outlined {
+  font-size: clamp(18px, 2.5vw, 24px);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -417,14 +453,13 @@ a {
   margin: auto;
   width: min(95%, 880px);
   height: fit-content;
-  border: 1px solid #d1d1d1;
+  border-radius: 4px;
 }
 .output__top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid #d1d1d1;
-  padding: 5px 10px 0px;
+  padding: 10px 10px 0;
   border-radius: 5px 5px 0 0;
   text-transform: capitalize;
 }
@@ -480,14 +515,11 @@ a {
   gap: 8px;
   margin-bottom: 4px;
 }
-.config__icon {
-  font-size: 24px;
-}
 .config__title {
   color: #adadad;
   text-overflow: ellipsis;
   overflow: hidden;
-  font-size: clamp(15px, 2.5vw, 14px);
+  font-size: clamp(12px, 2.5vw, 14px);
 }
 .config__title em {
   font-style: normal;
@@ -498,10 +530,10 @@ a {
   margin-bottom: 15px;
 }
 .config__item:not(:last-child) {
-  margin-bottom: 15px;
+  margin-bottom: clamp(10px, 0.5vw, 15px);
 }
 .config__item:last-child {
-  margin-bottom: 25px;
+  margin-bottom: clamp(10px, 0.5vw, 25px);
 }
 .config__item--cb {
   display: flex;
@@ -533,12 +565,6 @@ a {
 .config__item .item-memo {
   color: #adadad;
   font-size: 12px;
-}
-.config__button {
-  width: 100%;
-}
-.config__button:hover {
-  cursor: pointer;
 }
 
 .divider {

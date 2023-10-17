@@ -235,7 +235,7 @@ export default function FormDisplay({ func, data }) {
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
-    background: isDragging ? '#f1f1f1' : '',
+    // background: isDragging ? '#f1f1f1' : '',
     borderBlock: isDragging ? '1px dashed #d1d1d1' : '',
     ...draggableStyle,
   });
@@ -272,7 +272,7 @@ export default function FormDisplay({ func, data }) {
             <h2 className="display-form__title">お問い合わせ</h2>
             {/* <p className="display-form__subtitle">並び替え・追加してください</p> */}
             <p className="display-form__subtitle">
-              アイテム数：{data.userFormList.length}コ
+              アイテム：{data.userFormList.length}コ
             </p>
           </header>
           <div className="display-form__box">

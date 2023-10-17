@@ -1,10 +1,38 @@
 import { Tooltip } from 'react-tooltip';
 import form from '../data/form.json';
+import { useState, useLayoutEffect } from 'react';
 
 export default function Formlist({ func, data }) {
+  function getWindowDimensions() {
+    const { innerWidth: width } = window;
+    return {
+      width,
+    };
+  }
+
+  const useWindowDimensions = () => {
+    const [windowDimensions, setWindowDimensions] = useState(
+      getWindowDimensions()
+    );
+
+    useLayoutEffect(() => {
+      function handleResize() {
+        setWindowDimensions(getWindowDimensions());
+      }
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+  };
+
+  const { width } = useWindowDimensions();
   const usedItem = data.userFormList.map((item) => item.nameEN);
 
   const generatedList = form.map((item, index) => {
+    const tooltipString = width <= 768 ? `Add ${item.nameJA}` : 'Add Item';
+
     return (
       <li
         key={index}
@@ -14,7 +42,7 @@ export default function Formlist({ func, data }) {
             : 'form-list__item'
         }
         data-tooltip-id="item-tooltip"
-        data-tooltip-content={`Add Item`}
+        data-tooltip-content={tooltipString}
         data-tooltip-place="right"
         data-tooltip-position-strategy="fixed"
       >

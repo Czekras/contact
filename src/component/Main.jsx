@@ -15,8 +15,9 @@ export default function Main() {
   const [initialConfig, setInitialConfig] = useState(true);
 
   const typeWithInnerItems = [5, 6, 7];
-  const typeWithoutPlaceholders = [3, 4, 5, 6, 7];
+  const typeWithoutPlaceholders = [3, 4, 5, 6, 7, 8];
   const typeWithoutMemo = [4];
+  const typeWithoutNameID = [7, 8];
 
   const initalList = [
     'name',
@@ -138,7 +139,7 @@ export default function Main() {
 
   /* ------------------------------- Update Item ------------------------------ */
   const handleUpdateItem = (inputName, inputID, inputValue, formIndex) => {
-    console.log(inputName, activeItemID[1], inputID, inputValue, formIndex);
+    // console.log(inputName, activeItemID[1], inputID, inputValue, formIndex);
 
     let newItem = {};
     if (['required'].includes(inputName)) {
@@ -188,6 +189,16 @@ export default function Main() {
     ];
 
     handleUpdateList(newList);
+  };
+
+  const handleResetConfig = (itemID, itemFormIndex) => {
+    const item = {
+      ...activeDefault,
+      id: itemID,
+      formIndex: itemFormIndex,
+    };
+
+    setActiveItem(item);
   };
 
   /* ---------------------------- Setting Functions --------------------------- */
@@ -259,6 +270,7 @@ export default function Main() {
             handleUpdateInnerItem: handleUpdateInnerItem,
             handleSettingOnChange: handleSettingOnChange,
             handleResetSetting: handleResetSetting,
+            handleResetConfig: handleResetConfig,
           }}
           data={{
             userSettingList: userSettingList,
@@ -269,6 +281,7 @@ export default function Main() {
             typeWithInnerItems: typeWithInnerItems,
             typeWithoutPlaceholders: typeWithoutPlaceholders,
             typeWithoutMemo: typeWithoutMemo,
+            typeWithoutNameID: typeWithoutNameID,
           }}
         />
       </div>
