@@ -17,6 +17,8 @@ export default function Config({ func, data }) {
 
   /* --------------------------------- Initial -------------------------------- */
   const initialDisplay = () => {
+    const tbodyOption = data.userOptions.tbodyOption;
+
     const settingItems = Object.entries(data.userSettingList).map(
       (itemList) => {
         const item = itemList[1];
@@ -33,6 +35,7 @@ export default function Config({ func, data }) {
               value={item.value}
               placeholder={item.placeholder}
               onChange={(e) => func.handleSettingOnChange(e)}
+              disabled={item.id === 'setting01' ? !tbodyOption : false}
             />
           </li>
         );
@@ -42,19 +45,27 @@ export default function Config({ func, data }) {
     return (
       <div className="config-start">
         <h3 className="config__title">
-          <em>SETTINGS</em>
+          <em>MY SETTINGS</em>
         </h3>
         <div className="config-start__box">
-          クラス名
-          {/* <button
-            className="output__button"
-            onClick={(e) => func.handleResetSetting(e)}
-          >
-            <span className="material-symbols-outlined">restart_alt</span>
-          </button> */}
+          <small>オプション</small>
         </div>
         <hr className="divider" />
-        <ul className="config__List">{settingItems}</ul>
+        <div className="config__option">
+          <input
+            type="checkbox"
+            name="tbodyOption"
+            id="tbodyOption"
+            defaultChecked={tbodyOption}
+            onChange={(e) => func.handleCheckboxOption(e)}
+          />
+          <label htmlFor="tbody_option">&lt;tbody&gt;あり</label>
+        </div>
+        <div className="config-start__box">
+          <small>クラス名</small>
+        </div>
+        <hr className="divider" />
+        <ul className="config__list">{settingItems}</ul>
         <button
           type="button"
           onClick={(e) => func.handleResetSetting(e)}
@@ -271,7 +282,7 @@ export default function Config({ func, data }) {
           id="config-form"
         >
           {divider}
-          <ul className="config__List">
+          <ul className="config__list">
             {require}
             {name}
             {!data.typeWithoutPlaceholders.includes(item.type)

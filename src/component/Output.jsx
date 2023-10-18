@@ -52,8 +52,29 @@ export default function Output({ data }) {
 
   /* -------------------------------------------------------------------------- */
 
+  const mainOuputList = (item) => {
+    const tableString = [`<table${userTable}>`, '</table>'];
+    const tbodystring = [`  <tbody${userTbody}>`, '  </tbody>'];
+    const tbodyOption = data.userOptions.tbodyOption;
+
+    let outputList = [tableString[0], item.join('\n'), tableString[1]];
+
+    if (tbodyOption) {
+      outputList = [
+        tableString[0],
+        tbodystring[0],
+        item.join('\n'),
+        tbodystring[1],
+        tableString[1],
+      ];
+    }
+
+    return outputList;
+  };
+
   const copytToClipboard = (tableName, copy) => {
-    const copySet = [`<table${userTable}>`, copy.join('\n'), '</table>'];
+    // const copySet = [`<table${userTable}>`, copy.join('\n'), '</table>'];
+    const copySet = mainOuputList(copy);
     navigator.clipboard.writeText(copySet.join('\n'));
 
     if (tableName === 'main') {
@@ -492,12 +513,10 @@ ${innerItemList.join('\n')}
         disabled={!codeAvailable}
         data-tooltip-id="option-tooltip"
         data-tooltip-content={'Code Modal'}
-        // data-tooltip-place="left"
       >
         <span className="material-symbols-outlined">
           {codeAvailable ? 'code' : 'code_off'}
         </span>
-        {/* <p>Code</p> */}
       </button>
       <Tooltip id="option-tooltip" />
       <ReactModal
@@ -524,7 +543,7 @@ ${innerItemList.join('\n')}
               <header className="output__item-header">
                 <h3 className="output__item-title">1. Form Table</h3>
                 <p className="output__item-description">
-                  お問い合わせのフォーム &lt;table&gt; コード
+                  お問い合わせフォーム &lt;table&gt; コード
                 </p>
               </header>
               <button
@@ -546,11 +565,7 @@ ${innerItemList.join('\n')}
                 style={style}
                 showLineNumbers
               >
-                {[
-                  `<table${userTable}>`,
-                  generatedMainCode.join('\n'),
-                  '</table>',
-                ].join('\n')}
+                {mainOuputList(generatedMainCode).join('\n')}
               </SyntaxHighlighter>
             </div>
           </div>
@@ -561,7 +576,7 @@ ${innerItemList.join('\n')}
                   2. Input Confirmation Table
                 </h3>
                 <p className="output__item-description">
-                  入力内容を確認 &lt;table&gt; コード
+                  入力内容の確認 &lt;table&gt; コード
                 </p>
               </header>
               <button
@@ -585,11 +600,7 @@ ${innerItemList.join('\n')}
                 style={style}
                 showLineNumbers
               >
-                {[
-                  `<table${userTable}>`,
-                  updatedConfirmationCode.join('\n'),
-                  '</table>',
-                ].join('\n')}
+                {mainOuputList(updatedConfirmationCode).join('\n')}
               </SyntaxHighlighter>
             </div>
           </div>

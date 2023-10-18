@@ -1,5 +1,8 @@
 {
   "formVersion": "v1.6.1",
+  "initialOptions": {
+    "tbodyOption": false
+  },
   "initialData": [
     {
       "id": "setting00",

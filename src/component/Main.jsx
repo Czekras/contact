@@ -8,6 +8,7 @@ import settings from '../data/settings.json';
 export default function Main() {
   const [userFormList, setUserFormList] = useState([]);
   const [userSettingList, setUserSettingList] = useState([]);
+  const [userOptions, setUserOptions] = useState([]);
 
   const [activeItemID, setActiveItemID] = useState(['initialID', -1]);
   const [activeItem, setActiveItem] = useState(Object);
@@ -44,15 +45,20 @@ export default function Main() {
 
       localStorage.setItem('userFormList', JSON.stringify(initialLocalList));
 
+      const initialOptions = settings.initialOptions;
+      localStorage.setItem('userOptions', JSON.stringify(initialOptions));
+
       const initialData = settings.initialData;
       localStorage.setItem('userSettingList', JSON.stringify(initialData));
     }
 
     const userLocalList = JSON.parse(localStorage.getItem('userFormList'));
     const userSettingList = JSON.parse(localStorage.getItem('userSettingList'));
+    const userOptions = JSON.parse(localStorage.getItem('userOptions'));
 
     setUserFormList(userLocalList);
     setUserSettingList(userSettingList);
+    setUserOptions(userOptions);
 
     return initialLocalList;
   };
@@ -233,6 +239,19 @@ export default function Main() {
     localStorage.setItem('userSettingList', JSON.stringify(initialData));
   };
 
+  /* ---------------------------- Options Function ---------------------------- */
+  const handleCheckboxOption = (event) => {
+    const { id, checked } = event.target;
+
+    const newItem = {
+      ...userOptions,
+      [id]: checked,
+    };
+
+    setUserOptions(newItem);
+    localStorage.setItem('userOptions', JSON.stringify(newItem));
+  };
+
   /* -------------------------------------------------------------------------- */
 
   return (
@@ -255,6 +274,7 @@ export default function Main() {
             handleOpenSettings: handleOpenSettings,
           }}
           data={{
+            userOptions: userOptions,
             userFormList: userFormList,
             userSettingList: userSettingList,
             activeItemID: activeItemID,
@@ -271,8 +291,10 @@ export default function Main() {
             handleSettingOnChange: handleSettingOnChange,
             handleResetSetting: handleResetSetting,
             handleResetConfig: handleResetConfig,
+            handleCheckboxOption: handleCheckboxOption,
           }}
           data={{
+            userOptions: userOptions,
             userSettingList: userSettingList,
             // activeItemID: activeItemID,
             activeItem: activeItem,

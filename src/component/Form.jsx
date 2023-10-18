@@ -278,6 +278,7 @@ export default function FormDisplay({ func, data }) {
           <div className="display-form__box">
             <Output
               data={{
+                userOptions: data.userOptions,
                 userFormList: data.userFormList,
                 userSettingList: data.userSettingList,
               }}
@@ -287,10 +288,12 @@ export default function FormDisplay({ func, data }) {
               // className="output__button output__button--word"
               className={`output__button ${activeSettingIcon}`}
               data-tooltip-id="option-tooltip"
-              data-tooltip-content={'Settings'}
+              data-tooltip-content={'My Settings'}
               // data-tooltip-place="left"
             >
-              <span className="material-symbols-outlined">manage_accounts</span>
+              <span className="material-symbols-outlined">
+                settings_account_box
+              </span>
               {/* <p>Config</p> */}
             </button>
             <Tooltip id="option-tooltip" />
@@ -366,7 +369,7 @@ export default function FormDisplay({ func, data }) {
                                   // data-tooltip-place="left"
                                 >
                                   <span className="material-symbols-outlined">
-                                    settings
+                                    draw
                                   </span>
                                 </button>
                                 <button
