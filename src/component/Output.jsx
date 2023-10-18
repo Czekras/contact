@@ -98,7 +98,7 @@ export default function Output({ data }) {
     const memo = (value, multiplier) => {
       if (value) {
         const space = ' '.repeat(multiplier);
-        return `\n${space}<p${userMemo}>${value}</p>`;
+        return `\n${space}<p${userMemo}>※${value}</p>`;
       }
 
       return '';
