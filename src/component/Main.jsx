@@ -29,7 +29,7 @@ export default function Main() {
   ];
 
   useEffect(() => {
-    const localData = localStorage.getItem('userFormList');
+    const localData = localStorage.getItem('contactArrays');
     loadInitialList(localData, form);
   }, []);
 
@@ -43,18 +43,18 @@ export default function Main() {
         }
       });
 
-      localStorage.setItem('userFormList', JSON.stringify(initialLocalList));
+      localStorage.setItem('contactArrays', JSON.stringify(initialLocalList));
 
       const initialOptions = settings.initialOptions;
-      localStorage.setItem('userOptions', JSON.stringify(initialOptions));
+      localStorage.setItem('contactOptions', JSON.stringify(initialOptions));
 
       const initialData = settings.initialData;
-      localStorage.setItem('userSettingList', JSON.stringify(initialData));
+      localStorage.setItem('contactSettings', JSON.stringify(initialData));
     }
 
-    const userLocalList = JSON.parse(localStorage.getItem('userFormList'));
-    const userSettingList = JSON.parse(localStorage.getItem('userSettingList'));
-    const userOptions = JSON.parse(localStorage.getItem('userOptions'));
+    const userLocalList = JSON.parse(localStorage.getItem('contactArrays'));
+    const userSettingList = JSON.parse(localStorage.getItem('contactSettings'));
+    const userOptions = JSON.parse(localStorage.getItem('contactOptions'));
 
     setUserFormList(userLocalList);
     setUserSettingList(userSettingList);
@@ -89,10 +89,10 @@ export default function Main() {
     e.preventDefault();
     const updatedItem = addUniqueID(item, index);
 
-    const localData = JSON.parse(localStorage.getItem('userFormList'));
+    const localData = JSON.parse(localStorage.getItem('contactArrays'));
 
     const updatedUserFormList = [...localData, updatedItem];
-    localStorage.setItem('userFormList', JSON.stringify(updatedUserFormList));
+    localStorage.setItem('contactArrays', JSON.stringify(updatedUserFormList));
 
     console.log(`Add: ${item.nameEN}`);
     setUserFormList((current) => {
@@ -105,7 +105,7 @@ export default function Main() {
     console.log('Update: List');
     setUserFormList(list);
     const newList = JSON.stringify(list);
-    localStorage.setItem('userFormList', newList);
+    localStorage.setItem('contactArrays', newList);
   };
 
   /* -------------------------- Delete Item from List ------------------------- */
@@ -230,13 +230,13 @@ export default function Main() {
     ];
 
     setUserSettingList(newList);
-    localStorage.setItem('userSettingList', JSON.stringify(newList));
+    localStorage.setItem('contactSettings', JSON.stringify(newList));
   };
 
   const handleResetSetting = (e) => {
     const initialData = settings.initialData;
     setUserSettingList(initialData);
-    localStorage.setItem('userSettingList', JSON.stringify(initialData));
+    localStorage.setItem('contactSettings', JSON.stringify(initialData));
   };
 
   /* ---------------------------- Options Function ---------------------------- */
@@ -249,7 +249,7 @@ export default function Main() {
     };
 
     setUserOptions(newItem);
-    localStorage.setItem('userOptions', JSON.stringify(newItem));
+    localStorage.setItem('contactOptions', JSON.stringify(newItem));
   };
 
   /* -------------------------------------------------------------------------- */
