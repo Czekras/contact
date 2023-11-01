@@ -69,7 +69,7 @@ export default function Config({ func, data }) {
         <hr className="divider" /> */}
         <div className="config__item">
           <label className="item-label" htmlFor="requireLabel">
-            必須 &lt;label&gt;
+            必須 &lt;span&gt;
           </label>
           <input
             type="text"
@@ -85,7 +85,7 @@ export default function Config({ func, data }) {
         </div>
         <div className="config__item">
           <label className="item-label" htmlFor="optionalLabel">
-            任意 &lt;label&gt;
+            任意 &lt;span&gt;
           </label>
           <input
             type="text"
