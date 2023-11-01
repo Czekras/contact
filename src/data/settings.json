@@ -1,7 +1,9 @@
 {
   "formVersion": "v1.6.1",
   "initialOptions": {
-    "tbodyOption": false
+    "tbodyOption": false,
+    "requireLabel": "必須",
+    "optionalLabel": "任意"
   },
   "initialData": [
     {

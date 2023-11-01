@@ -18,6 +18,7 @@ export default function Output({ data }) {
   const [copyConfirm, setCopyConfirm] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const codeAvailable = data.userFormList.length > 0;
+  const userOptions = data.userOptions;
 
   function openModal() {
     setIsOpen(true);
@@ -107,16 +108,16 @@ export default function Output({ data }) {
     const requiredList =
       item.required === 'option1'
         ? [
-            `<span${userRequire}>必須</span>`,
+            `<span${userRequire}>${userOptions.requireLabel}</span>`,
             `<?php if (isset($error['${item.inputName}'])) echo '<p class="error-text">' . $error['${item.inputName}'] . '</p>'; ?>`,
           ]
         : item.required === 'option2'
         ? [
-            `<span${userOption}>任意</span>`,
+            `<span${userOption}>${userOptions.optionalLabel}</span>`,
             `<?php // if (isset($error['${item.inputName}'])) echo '<p class="error-text">' . $error['${item.inputName}'] . '</p>'; ?>`,
           ]
         : [
-            `<?php // <span${userRequire}>必須</span> ?>`,
+            `<?php // <span${userRequire}>${userOptions.requireLabel}</span> ?>`,
             `<?php // if (isset($error['${item.inputName}'])) echo '<p class="error-text">' . $error['${item.inputName}'] . '</p>'; ?>`,
           ];
 

@@ -17,7 +17,7 @@ export default function Config({ func, data }) {
 
   /* --------------------------------- Initial -------------------------------- */
   const initialDisplay = () => {
-    const tbodyOption = data.userOptions.tbodyOption;
+    const userOptions = data.userOptions;
 
     const settingItems = Object.entries(data.userSettingList).map(
       (itemList) => {
@@ -35,7 +35,9 @@ export default function Config({ func, data }) {
               value={item.value}
               placeholder={item.placeholder}
               onChange={(e) => func.handleSettingOnChange(e)}
-              disabled={item.id === 'setting01' ? !tbodyOption : false}
+              disabled={
+                item.id === 'setting01' ? !userOptions.tbodyOption : false
+              }
             />
           </li>
         );
@@ -56,10 +58,46 @@ export default function Config({ func, data }) {
             type="checkbox"
             name="tbodyOption"
             id="tbodyOption"
-            defaultChecked={tbodyOption}
+            defaultChecked={userOptions.tbodyOption}
             onChange={(e) => func.handleCheckboxOption(e)}
           />
           <label htmlFor="tbody_option">&lt;tbody&gt;あり</label>
+        </div>
+        {/* <div className="config-start__box">
+          <small>カスタム&lt;label&gt;名</small>
+        </div>
+        <hr className="divider" /> */}
+        <div className="config__item">
+          <label className="item-label" htmlFor="requireLabel">
+            必須 &lt;label&gt;
+          </label>
+          <input
+            type="text"
+            name="requireLabel"
+            id="requireLabel"
+            className="item-input"
+            // defaultValue={userOptions.requireLabel}
+            value={userOptions.requireLabel || ''}
+            placeholder="必須、＊"
+            onChange={(e) => func.handleInputOption(e)}
+          />
+          {/* <p className="item-memo">&lt;th&gt;の&lt;label&gt;</p> */}
+        </div>
+        <div className="config__item">
+          <label className="item-label" htmlFor="optionalLabel">
+            任意 &lt;label&gt;
+          </label>
+          <input
+            type="text"
+            name="optionalLabel"
+            id="optionalLabel"
+            className="item-input"
+            // defaultValue={userOptions.optionalLabel}
+            value={userOptions.optionalLabel || ''}
+            placeholder="任意、△"
+            onChange={(e) => func.handleInputOption(e)}
+          />
+          {/* <p className="item-memo">&lt;th&gt;の&lt;label&gt;</p> */}
         </div>
         <div className="config-start__box">
           <small>クラス名</small>

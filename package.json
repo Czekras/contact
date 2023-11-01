@@ -1,6 +1,6 @@
 {
   "name": "contact",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://czekras.github.io/contact",
   "private": true,
   "dependencies": {

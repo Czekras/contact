@@ -6,6 +6,7 @@ import Output from '../component/Output';
 export default function FormDisplay({ func, data }) {
   // const [userFormListData, setUserFormListData] = useState([]);
   const [showError, setShowError] = useState(false);
+  const userOptions = data.userOptions;
 
   const handleShowError = () => {
     setShowError(!showError);
@@ -26,9 +27,9 @@ export default function FormDisplay({ func, data }) {
     /* ----------------------------- Display Options ---------------------------- */
     const itemRequired =
       item.required === 'option1'
-        ? '必須'
+        ? userOptions.requireLabel
         : item.required === 'option2'
-        ? '任意'
+        ? userOptions.optionalLabel
         : '';
 
     const displayRequire = (
@@ -54,7 +55,14 @@ export default function FormDisplay({ func, data }) {
     let itemLabel = item.nameJA;
     if (item.nameEN === 'privacy policy') itemLabel = `${item.nameJA}への同意`;
     if (item.nameEN === 'file upload')
-      itemLabel = `${item.nameJA}${itemRequired ? ` (${itemRequired})` : ''}`;
+      // itemLabel = `${item.nameJA}${itemRequired ? ` (${itemRequired})` : ''}`;
+      itemLabel = `${item.nameJA}${
+        item.required === 'option1'
+          ? '（必須）'
+          : item.required === 'option2'
+          ? '（任意）'
+          : ''
+      }`;
 
     const displayHeader = (
       <div className="display-form__item-header">

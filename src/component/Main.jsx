@@ -33,7 +33,7 @@ export default function Main() {
     loadInitialList(localData, form);
   }, []);
 
-  const loadInitialList = (localData, formList) => {
+  const loadInitialList = (localData, formList, includeOptions = true) => {
     const initialLocalList = [];
     if (!localData) {
       formList.map((item, index) => {
@@ -45,8 +45,10 @@ export default function Main() {
 
       localStorage.setItem('contactArrays', JSON.stringify(initialLocalList));
 
-      const initialOptions = settings.initialOptions;
-      localStorage.setItem('contactOptions', JSON.stringify(initialOptions));
+      if (includeOptions) {
+        const initialOptions = settings.initialOptions;
+        localStorage.setItem('contactOptions', JSON.stringify(initialOptions));
+      }
 
       const initialData = settings.initialData;
       localStorage.setItem('contactSettings', JSON.stringify(initialData));
@@ -130,7 +132,7 @@ export default function Main() {
     //   }
     // });
 
-    const newList = loadInitialList(null, form);
+    const newList = loadInitialList(null, form, false);
     handleUpdateList(newList);
   };
 
@@ -235,8 +237,13 @@ export default function Main() {
 
   const handleResetSetting = (e) => {
     const initialData = settings.initialData;
+    const initialOptions = settings.initialOptions;
+
     setUserSettingList(initialData);
+    setUserOptions(initialOptions);
+
     localStorage.setItem('contactSettings', JSON.stringify(initialData));
+    localStorage.setItem('contactOptions', JSON.stringify(initialOptions));
   };
 
   /* ---------------------------- Options Function ---------------------------- */
@@ -246,6 +253,18 @@ export default function Main() {
     const newItem = {
       ...userOptions,
       [id]: checked,
+    };
+
+    setUserOptions(newItem);
+    localStorage.setItem('contactOptions', JSON.stringify(newItem));
+  };
+
+  const handleInputOption = (event) => {
+    const { id, value } = event.target;
+
+    const newItem = {
+      ...userOptions,
+      [id]: value,
     };
 
     setUserOptions(newItem);
@@ -292,6 +311,7 @@ export default function Main() {
             handleResetSetting: handleResetSetting,
             handleResetConfig: handleResetConfig,
             handleCheckboxOption: handleCheckboxOption,
+            handleInputOption: handleInputOption,
           }}
           data={{
             userOptions: userOptions,
