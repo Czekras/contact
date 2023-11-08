@@ -550,15 +550,15 @@ ${innerItemList.join('\n')}
               <button
                 className="output__button output__button--copy"
                 onClick={() => copytToClipboard('main', generatedMainCode)}
-                data-tooltip-id="copy-tooltip"
-                data-tooltip-content={'コピー'}
-                data-tooltip-place="left"
+                // data-tooltip-id="copy-tooltip"
+                // data-tooltip-content={'コピー'}
+                // data-tooltip-place="left"
               >
                 <span className="material-symbols-outlined">
-                  {copyMain ? 'inventory' : 'integration_instructions'}
+                  {copyMain ? 'done' : 'content_copy'}
                 </span>
               </button>
-              <Tooltip id="copy-tooltip" />
+              {/* <Tooltip id="copy-tooltip" /> */}
             </div>
             <div className="output__item-code">
               <SyntaxHighlighter
@@ -585,15 +585,15 @@ ${innerItemList.join('\n')}
                 onClick={() =>
                   copytToClipboard('confirm', updatedConfirmationCode)
                 }
-                data-tooltip-id="copy-tooltip"
-                data-tooltip-content={'コピー'}
-                data-tooltip-place="left"
+                // data-tooltip-id="copy-tooltip"
+                // data-tooltip-content={'コピー'}
+                // data-tooltip-place="left"
               >
                 <span className="material-symbols-outlined">
-                  {copyConfirm ? 'inventory' : 'integration_instructions'}
+                  {copyConfirm ? 'done ' : 'content_copy'}
                 </span>
               </button>
-              <Tooltip id="copy-tooltip" />
+              {/* <Tooltip id="copy-tooltip" /> */}
             </div>
             <div className="output__item-code">
               <SyntaxHighlighter

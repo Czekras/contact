@@ -466,10 +466,10 @@ a {
 .output__title {
   color: #adadad;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
 }
 .output__content {
-  padding: 15px 20px;
+  padding: 5px 20px;
 }
 .output__item {
   margin-bottom: 25px;
