@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* -------------------------------------------------------------------------- */
 /*                                    Base                                    */
 /* -------------------------------------------------------------------------- */
@@ -42,7 +43,7 @@ a {
   border-radius: 3px;
   padding-block: 3px;
   border: none;
-  font-family: "Kosugi Maru", sans-serif;
+  font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
 }
 .cmn-button:hover {
   cursor: pointer;
@@ -138,11 +139,12 @@ a {
 .form-list__item--active .form-list__title,
 .form-list__item--active .form-list__icon {
   color: #464646;
+  font-weight: 500;
 }
 .form-list__button {
   all: unset;
   width: 100%;
-  padding-block: clamp(10px, 2.5vw, 13px);
+  padding-block: clamp(10px, 3.5vw, 13px);
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
@@ -156,6 +158,7 @@ a {
 .form-list__button:hover .form-list__title,
 .form-list__button:hover .form-list__icon {
   color: #464646;
+  font-weight: 500;
 }
 .form-list__title {
   font-size: clamp(12px, 1vw, 14px);
@@ -163,6 +166,7 @@ a {
   transition: all 0.3s;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 400;
 }
 .form-list__subtitle, .form-list__icon {
   transition: all 0.3s;
@@ -181,7 +185,7 @@ a {
 }
 .display-form input,
 .display-form textarea {
-  font-family: "Kosugi Maru", sans-serif;
+  font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
 }
 .display-form__content {
   border-radius: 0px;
@@ -290,7 +294,7 @@ a {
   margin-bottom: 4px;
 }
 .display-form__item-title {
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 1px;
   flex: 0 1 auto;
   text-overflow: ellipsis;
@@ -407,7 +411,7 @@ a {
   padding: 5px 0;
   color: #adadad;
   transition: all 0.3s;
-  font-family: "Source Code Pro", "M PLUS 1 Code", monospace;
+  font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -486,6 +490,9 @@ a {
   margin-block: 0;
   border: 1px dashed #e0e0e0;
 }
+.output__item-code code {
+  font-family: "游ゴシック", "YuGothic", "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+}
 .output__note {
   color: #adadad;
 }
@@ -554,7 +561,7 @@ a {
 }
 .config__item .item-label {
   display: block;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 1px;
   margin-bottom: 3px;
   font-size: clamp(12px, 2.5vw, 13px);

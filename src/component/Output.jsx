@@ -519,7 +519,6 @@ ${innerItemList.join('\n')}
           {codeAvailable ? 'code' : 'code_off'}
         </span>
       </button>
-      <Tooltip id="option-tooltip" />
       <ReactModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

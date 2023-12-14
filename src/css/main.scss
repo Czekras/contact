@@ -13,8 +13,9 @@ $bdc: #e0e0e0;
 $ff: #adadad38;
 
 $ff-sans: 'Noto Sans JP', sans-serif;
-$ff-mono: 'Source Code Pro', 'M PLUS 1 Code', monospace;
-$ff-maru: 'Kosugi Maru', sans-serif;
+$ff-mono: '游ゴシック', 'YuGothic', 'Hiragino Kaku Gothic ProN',
+  'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+// $ff-maru: 'Kosugi Maru', sans-serif;
 
 $transition: all 0.3s;
 
@@ -64,7 +65,7 @@ a {
   // border: 1px solid $bdc;
   padding-block: 3px;
   border: none;
-  font-family: $ff-maru;
+  font-family: $ff-mono;
 
   &:hover {
     cursor: pointer;
@@ -189,6 +190,7 @@ a {
       #{$this}__title,
       #{$this}__icon {
         color: $clr-main;
+        font-weight: 500;
       }
     }
   }
@@ -196,8 +198,7 @@ a {
   &__button {
     all: unset;
     width: 100%;
-    // padding: 13px 0;
-    padding-block: clamp(10px, 2.5vw, 13px);
+    padding-block: clamp(10px, 3.5vw, 13px);
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -211,6 +212,7 @@ a {
       #{$this}__title,
       #{$this}__icon {
         color: $clr-main;
+        font-weight: 500;
       }
     }
   }
@@ -221,6 +223,7 @@ a {
     transition: $transition;
     text-overflow: ellipsis;
     overflow: hidden;
+    font-weight: 400;
   }
 
   &__subtitle,
@@ -248,7 +251,7 @@ a {
 
   input,
   textarea {
-    font-family: $ff-maru;
+    font-family: $ff-mono;
   }
 
   &__content {
@@ -400,7 +403,7 @@ a {
     }
 
     &-title {
-      font-weight: 700;
+      font-weight: 500;
       letter-spacing: 1px;
       flex: 0 1 auto;
       text-overflow: ellipsis;
@@ -532,7 +535,7 @@ a {
 
         border-style: solid;
         border-color: transparent transparent transparent $clr-sub;
-        border-width: calc(20px/2) 0 calc(20px/2) 15px;
+        border-width: calc(20px / 2) 0 calc(20px / 2) 15px;
       }
 
       #{$this}-icon {
@@ -658,7 +661,6 @@ a {
 
     &-code {
       // text-align: justify;
-      // font-family: $ff-mono;
       // padding: 10px;
       // background-color: $clr-accent;
       // overflow: auto;
@@ -674,6 +676,10 @@ a {
         margin-block: 0;
         // overflow-x: hidden !important;
         border: 1px dashed $bdc;
+      }
+
+      code {
+        font-family: $ff-mono;
       }
     }
   }
@@ -725,7 +731,7 @@ a {
     gap: 8px;
     margin-bottom: 4px;
   }
-  
+
   &__title {
     // white-space: nowrap;
     color: $clr-sub;
@@ -747,11 +753,11 @@ a {
 
   &__item {
     &:not(:last-child) {
-      margin-bottom: clamp(10px, .5vw, 15px);
+      margin-bottom: clamp(10px, 0.5vw, 15px);
     }
 
     &:last-child {
-      margin-bottom: clamp(15px, .5vw, 25px);
+      margin-bottom: clamp(15px, 0.5vw, 25px);
     }
 
     &--cb {
@@ -765,7 +771,7 @@ a {
 
     .item-label {
       display: block;
-      font-weight: 700;
+      font-weight: 500;
       letter-spacing: 1px;
       margin-bottom: 3px;
       // text-transform: capitalize;
