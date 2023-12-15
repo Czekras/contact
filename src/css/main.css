@@ -205,6 +205,9 @@ a {
 .display-form__header {
   text-align: left;
 }
+.display-form__title {
+  font-size: 18px;
+}
 .display-form__subtitle, .display-form__option {
   color: #adadad;
 }

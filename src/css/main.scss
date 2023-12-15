@@ -278,6 +278,10 @@ a {
     text-align: left;
   }
 
+  &__title {
+    font-size: 18px;
+  }
+
   &__subtitle,
   &__option {
     color: $clr-sub;
