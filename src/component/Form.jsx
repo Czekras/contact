@@ -1,5 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Tooltip } from 'react-tooltip';
+// import { Tooltip } from 'react-tooltip';
 import { useState } from 'react';
 import Output from '../component/Output';
 
@@ -295,16 +295,14 @@ export default function FormDisplay({ func, data }) {
               onClick={() => func.handleOpenSettings()}
               // className="output__button output__button--word"
               className={`output__button ${activeSettingIcon}`}
-              data-tooltip-id="option-tooltip"
-              data-tooltip-content={'My Settings'}
+              // data-tooltip-id="option-tooltip"
+              // data-tooltip-content={'Settings'}
               // data-tooltip-place="left"
             >
-              <span className="material-symbols-outlined">
-                settings_account_box
-              </span>
+              <span className="material-symbols-outlined">settings</span>
               {/* <p>Config</p> */}
             </button>
-            <Tooltip id="option-tooltip" />
+            {/* <Tooltip id="option-tooltip" /> */}
           </div>
         </div>
         <div className="display-form__option">
@@ -377,7 +375,7 @@ export default function FormDisplay({ func, data }) {
                                   // data-tooltip-place="left"
                                 >
                                   <span className="material-symbols-outlined">
-                                    draw
+                                    edit
                                   </span>
                                 </button>
                                 <button

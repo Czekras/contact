@@ -1,7 +1,7 @@
 import ReactModal from 'react-modal';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { useState } from 'react';
-import { Tooltip } from 'react-tooltip';
+// import { Tooltip } from 'react-tooltip';
 import { githubGist as style } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const customStyles = {
@@ -512,8 +512,8 @@ ${innerItemList.join('\n')}
         className="output__button output__button--word"
         onClick={openModal}
         disabled={!codeAvailable}
-        data-tooltip-id="option-tooltip"
-        data-tooltip-content={'Code Modal'}
+        // data-tooltip-id="option-tooltip"
+        // data-tooltip-content={'Code Modal'}
       >
         <span className="material-symbols-outlined">
           {codeAvailable ? 'code' : 'code_off'}
