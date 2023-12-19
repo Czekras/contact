@@ -324,6 +324,16 @@ a {
     border-radius: 0 0 $bdr $bdr;
     border: 1px solid $bdc;
     border-top: none;
+    display: flex;
+    padding-inline: 10px;
+    justify-content: flex-start;
+    align-items: center;
+
+    p {
+      display: none;
+      font-size: clamp(10px, 2.5vw, 12px);
+      color: $clr-sub;
+    }
   }
 
   &__item {
@@ -724,6 +734,13 @@ a {
     flex-flow: row nowrap;
     margin-bottom: 10px;
     gap: 5px;
+
+    input,
+    label {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   /* -------------------------------------------------------------------------- */
@@ -771,6 +788,13 @@ a {
       align-items: center;
       flex-flow: row wrap;
       gap: clamp(5px, 0.5vw, 15px);
+
+      input,
+      label {
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .item-label {

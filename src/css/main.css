@@ -244,6 +244,15 @@ a {
   border-radius: 0 0 0px 0px;
   border: 1px solid #e0e0e0;
   border-top: none;
+  display: flex;
+  padding-inline: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.display-form__footer p {
+  display: none;
+  font-size: clamp(10px, 2.5vw, 12px);
+  color: #adadad;
 }
 .display-form__item {
   display: flex;
@@ -526,6 +535,10 @@ a {
   margin-bottom: 10px;
   gap: 5px;
 }
+.config__option input:hover,
+.config__option label:hover {
+  cursor: pointer;
+}
 .config__box {
   display: flex;
   justify-content: flex-start;
@@ -561,6 +574,10 @@ a {
   align-items: center;
   flex-flow: row wrap;
   gap: clamp(5px, 0.5vw, 15px);
+}
+.config__item--cb input:hover,
+.config__item--cb label:hover {
+  cursor: pointer;
 }
 .config__item .item-label {
   display: block;

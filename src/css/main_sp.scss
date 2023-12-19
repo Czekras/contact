@@ -1,3 +1,5 @@
+$bdc: #e0e0e0;
+
 @media screen and (width <= 768px) {
   .sp-none {
     display: none !important;
@@ -32,8 +34,33 @@
   }
 }
 
-@media screen and (width <= 430px) {
+@media screen and (width <= 490px) {
   .main {
+    &__main-r {
+      display: none;
+    }
+  }
+
+  .display-form__item {
+    .setting-icon {
+      display: none;
+    }
+  }
+
+  .display-form__footer {
+    p {
+      display: block;
+    }
+  }
+
+  .form-setting {
+    display: none;
+  }
+}
+
+@media screen and (width <= 360px) {
+  .main,
+  .output__modal {
     display: none;
   }
   .hidden {

@@ -61,7 +61,7 @@ export default function Config({ func, data }) {
             defaultChecked={userOptions.tbodyOption}
             onChange={(e) => func.handleCheckboxOption(e)}
           />
-          <label htmlFor="tbody_option">&lt;tbody&gt;あり</label>
+          <label htmlFor="tbodyOption">&lt;tbody&gt;あり</label>
         </div>
         {/* <div className="config-start__box">
           <small>カスタム&lt;label&gt;名</small>

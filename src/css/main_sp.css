@@ -23,8 +23,23 @@
     inset: 20px 0 auto 0;
   }
 }
-@media screen and (width <= 430px) {
-  .main {
+@media screen and (width <= 490px) {
+  .main__main-r {
+    display: none;
+  }
+  .display-form__item .setting-icon {
+    display: none;
+  }
+  .display-form__footer p {
+    display: block;
+  }
+  .form-setting {
+    display: none;
+  }
+}
+@media screen and (width <= 360px) {
+  .main,
+  .output__modal {
     display: none;
   }
   .hidden {

@@ -294,7 +294,7 @@ export default function FormDisplay({ func, data }) {
             <button
               onClick={() => func.handleOpenSettings()}
               // className="output__button output__button--word"
-              className={`output__button ${activeSettingIcon}`}
+              className={`output__button ${activeSettingIcon} form-setting`}
               // data-tooltip-id="option-tooltip"
               // data-tooltip-content={'Settings'}
               // data-tooltip-place="left"
@@ -404,7 +404,11 @@ export default function FormDisplay({ func, data }) {
             )}
           </Droppable>
         </DragDropContext>
-        <div className="display-form__footer"></div>
+        <div className="display-form__footer">
+          <p className="mobile-show">
+            Some features are disabled on mobile view.
+          </p>
+        </div>
       </div>
     </div>
   );
