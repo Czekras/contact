@@ -55,7 +55,7 @@ export default function Formlist({ func, data }) {
           </span>
           <div className="form-list__box sp-none">
             {/* <small className="form-list__subtitle">{item.nameEN}</small> */}
-            <h3 className="form-list__title">{item.nameJA}</h3>
+            <p className="form-list__title">{item.nameJA}</p>
           </div>
         </button>
       </li>

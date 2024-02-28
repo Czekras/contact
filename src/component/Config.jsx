@@ -46,9 +46,9 @@ export default function Config({ func, data }) {
 
     return (
       <div className="config-start">
-        <h3 className="config__title">
+        <h2 className="config__title">
           <em>Settings</em>
-        </h3>
+        </h2>
         <div className="config-start__box">
           <small>オプション</small>
         </div>
